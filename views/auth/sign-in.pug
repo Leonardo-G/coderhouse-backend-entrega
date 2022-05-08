@@ -4,12 +4,29 @@ html(lang="en")
         meta(charset="UTF-8")
         meta(http-equiv="X-UA-Compatible", content="IE=edge")
         meta(name="viewport", content="width=device-width, initial-scale=1.0")
-        link(rel="preconnect", href="https://fonts.gstatic.com" crossorigin)
-        link(href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700&display=swap" rel="stylesheet")
+        link(href="http://fonts.cdnfonts.com/css/proxima-nova-2?styles=44819,44817,44821,44813,44815", rel="stylesheet")
         link(rel="stylesheet", href="../css/sign-in.css")
         title Regístrese
     body 
         main
             div(class="box-color")
+            form(class="form")
+                legend(class="form__title") Hola! Complete los datos para registrarse
+                div(class="form__campo")
+                    label(for="username") Nombre de usuario
+                    input(type="text" name="username")   
+                div(class="form__campo")
+                    label(for="email") e-mail
+                    input(type="text" name="email")   
+                div(class="form__campo")
+                    label(for="password") Contraseña
+                    input(type="text" name="password")   
+                div(class="form__campo")
+                    label(for="password-repeat") Repetir contraseña
+                    input(type="text" name="password-repeat")   
+                div(class="form__campo")
+                    label(for="password-repeat") Repetir contraseña
+                    input(type="text" name="password-repeat")  
+                input(type="submit", value="Continuar") 
             
     
