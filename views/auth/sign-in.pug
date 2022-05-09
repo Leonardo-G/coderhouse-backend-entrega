@@ -8,25 +8,35 @@ html(lang="en")
         link(rel="stylesheet", href="../css/sign-in.css")
         title Regístrese
     body 
+        header 
+            nav 
+                a(href="#")
+                    img(src="../img/logo__small.png", alt="logo-mercado libre")
         main
             div(class="box-color")
-            form(class="form")
-                legend(class="form__title") Hola! Complete los datos para registrarse
-                div(class="form__campo")
-                    label(for="username") Nombre de usuario
-                    input(type="text" name="username")   
-                div(class="form__campo")
-                    label(for="email") e-mail
-                    input(type="text" name="email")   
-                div(class="form__campo")
-                    label(for="password") Contraseña
-                    input(type="text" name="password")   
-                div(class="form__campo")
-                    label(for="password-repeat") Repetir contraseña
-                    input(type="text" name="password-repeat")   
-                div(class="form__campo")
-                    label(for="password-repeat") Repetir contraseña
-                    input(type="text" name="password-repeat")  
-                input(type="submit", value="Continuar") 
+            div(class="box-form")
+                form(class="form")
+                    legend(class="form__title") Hola! Complete los datos para registrarse
+                    div(class="form__campo")
+                        label(for="username") Nombre de usuario
+                        input(type="text" name="username")   
+                    div(class="form__campo")
+                        label(for="email") e-mail
+                        input(type="text" name="email")   
+                    div(class="form__campo")
+                        label(for="password") Contraseña
+                        input(type="password" name="password")   
+                    div(class="form__campo")
+                        label(for="password-repeat") Repetir contraseña
+                        input(type="password" name="password-repeat")   
+                    div(class="form__campo")
+                        label(for="password-repeat") Repetir contraseña
+                        input(type="text" name="password-repeat")  
+                    input(type="submit", value="Continuar" class="btn--auth") 
+                hr(class="line")
+                div(class="form-help")
+                    p Necesito ayuda para ingresar
+        footer 
+            p Entrega del curso de desarrollo Backend - Guanuco, Leonardo
             
     

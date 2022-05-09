@@ -2,7 +2,25 @@
 @import "../base/base.scss";
 
 body{
-    background-color: rgba(0,0,0,.1);
+    background-color: $col-back-grey;
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
+    height: auto;
+}
+
+main{
+    flex-grow: 1;
+}
+
+nav{
+    position: absolute;
+    top: 1rem;
+    left: 1rem;
+    img{
+        width: 4.4rem;
+    }
 }
 
 .box-color{
@@ -11,21 +29,29 @@ body{
     height: 23rem;
 }
 
-.form{
-    background-color: #fff;
-    width: min(90%, 44rem);
+.box-form{
     margin: 0 auto;
+    box-shadow:0 1px 2px 0 rgb(0 0 0 / 12%);
+    background-color: #fff;
+    width: min(90%, 44.5rem);
+    transform: translateY(-10rem);
+}
+
+.form{
     font-weight: 500;
-    padding: 4rem 5rem;
+    padding: 4rem 6rem;
     display: flex;
     flex-direction: column;
-    row-gap: 2.5rem;
+    row-gap: 1.5rem;
     border-radius: 0.6rem;
     .form__title{
         font-size: 2.5rem;
         font-weight: 600;
     }
     .form__campo{
+        &:first-of-type{
+            margin-top: 2rem;
+        }
         label{
             display: block;
             font-weight: 400;
@@ -42,9 +68,44 @@ body{
             border-radius: 8px;
             margin-top: 0.2rem;
             &:focus{
-                border: 1px solid #3483fa;
-                box-shadow: 0 0 0 1px #3483fa;
+                border: 1px solid $col-blue;
+                box-shadow: 0 0 0 1px $col-blue;
             }
         }
+    }
+    .btn--auth{
+        background-color: $col-blue;
+        padding: 1.5rem;
+        border: none;
+        font-size: 1.6rem;
+        color: #fff;
+        border-radius: 0.6rem;
+        font-weight: 700;
+        margin-top: 2rem;
+    }
+}
+
+.form-help{
+    text-align: center;
+    padding: 1.6rem;
+    p{
+        color: $col-blue;
+        font-size: 1.4rem;
+        font-weight: 600;
+    }
+}
+
+.line{
+    border: 0.5px solid rgba(0,0,0,0.07);
+}
+
+footer{
+    background-color: #fff;
+    width: 100%;
+    text-align: center;
+    padding: 2rem;
+    p{
+        font-size: 1.4rem;
+        color: #0000008c;
     }
 }
