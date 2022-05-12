@@ -34,6 +34,11 @@ const loginUser = async ( req = request, res = response ) => {
     const { email, password } = req.body;
 
     const getPassword = await Usuario.findOne({ email });
+    console.log(getPassword)
+    if( !getPassword ){
+        res.render("auth/login", { error: true, type: "No hay un usuario registrado con este email"});
+        return;
+    }
     const comparePassword = bcrypt.compareSync( password, getPassword.password );
 
     if(!comparePassword){

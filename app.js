@@ -12,7 +12,7 @@ const port = process.env.PORT || 8000;
 connectMongo();
 
 app.use(session({
-    store: MongoStore.create({ mongoUrl: process.env.MONGO_URL_DATABASE, ttl: ( 60 * 60 ) * 24}),
+    store: MongoStore.create({ mongoUrl: process.env.MONGO_URL_DATABASE, ttl: 60 * 10}),
     secret: "SECRET",
     resave: true,
     saveUninitialized: false
