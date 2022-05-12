@@ -1,5 +1,7 @@
 const { response } = require("express");
 const { request } = require("express");
+
+const bcrypt = require("bcryptjs");
 const Usuario = require("../models/Usuario");
 
 const signInVista = ( req = request, res = response ) => {
@@ -10,9 +12,13 @@ const createUser = async ( req = request, res = response ) => {
 
     const { username, password, email } = req.body;
 
-    const usuario = new Usuario({ username, password, email });
+    const salt = bcrypt.genSaltSync(10);
+    const hashPassword = bcrypt.hashSync(password, salt);
+
+    console.log(hashPassword);
     
-    await usuario.save()
+    const usuario = new Usuario({ username, password, email });
+    await usuario.save();
 
     res.redirect("../home");
 }
