@@ -1,4 +1,6 @@
 const express = require("express");
+const session = require("express-session");
+const MongoStore = require("connect-mongo");
 const path = require("path");
 const connectMongo = require("./db/config");
 const app = express();
@@ -8,6 +10,13 @@ require("dotenv").config();
 const port = process.env.PORT || 8000;
 
 connectMongo();
+
+app.use(session({
+    store: MongoStore.create({ mongoUrl: process.env.MONGO_URL_DATABASE, ttl: ( 60 * 60 ) * 24}),
+    secret: "SECRET",
+    resave: true,
+    saveUninitialized: false
+}))
 
 app.use(bodyParser.urlencoded());
 

@@ -5,7 +5,7 @@ html(lang="en")
         meta(http-equiv="X-UA-Compatible", content="IE=edge")
         meta(name="viewport", content="width=device-width, initial-scale=1.0")
         link(href="http://fonts.cdnfonts.com/css/proxima-nova-2?styles=44819,44817,44821,44813,44815", rel="stylesheet")
-        link(rel="stylesheet", href="../css/sign-in.css")
+        link(rel="stylesheet", href="../css/auth.css")
         title Regístro
     body 
         header 
@@ -16,13 +16,15 @@ html(lang="en")
             div(class="box-color")
             div(class="box-form")
                 form(class="form" method="POST" action="http://localhost:8000/auth/login")
-                    legend(class="form__title") Hola! Complete los datos para loguearse   
+                    legend(class="form__title") Hola! Complete los datos para ingresar   
                     div(class="form__campo")
                         label(for="email") email
                         input(type="text" name="email")   
                     div(class="form__campo")
                         label(for="password") Contraseña
                         input(type="password" name="password")   
+                    if ( error )
+                        p()=type
                     input(type="submit", value="Continuar", class="btn--auth") 
                 hr(class="line")
                 div(class="form-help")

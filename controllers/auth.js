@@ -22,6 +22,11 @@ const createUser = async ( req = request, res = response ) => {
     const usuario = new Usuario({ username, password: hashPassword, email });
     await usuario.save();
 
+    req.session.user = {
+        isLogged: true,
+        name: email
+    };
+
     res.redirect("../home");
 }
 
@@ -31,6 +36,15 @@ const loginUser = async ( req = request, res = response ) => {
     const getPassword = await Usuario.findOne({ email });
     const comparePassword = bcrypt.compareSync( password, getPassword.password );
 
+    if(!comparePassword){
+        res.render("auth/login", { error: true, type: "Email/Contraseña Incorrecta"});
+        return;
+    }
+
+    req.session.user = {
+        isLogged: true,
+        name: email
+    };
 
     res.redirect("../home");
 }
