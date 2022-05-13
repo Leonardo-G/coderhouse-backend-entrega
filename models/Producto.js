@@ -18,6 +18,10 @@ const ProductoSchema = new Schema({
         required: true,
         enum: ["Tecnologia, Herramientas"]
     },
+    subtype: {
+        type: String,
+        required: true
+    },
     characteristics: {
         type: [ String ],
         default: []

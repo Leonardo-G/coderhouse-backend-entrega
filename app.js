@@ -28,6 +28,10 @@ app.set("view engine", "pug");
 app.use("/", require("./routes/view"));
 app.use("/auth", require("./routes/auth"));
 
+//API
+app.use( "/api/products", require("./routes/api/products"));
+app.use( "/api/category", require("./routes/api/category"));
+
 app.listen(port, () => {
     console.log("Servidor iniciado en", port);
 });
