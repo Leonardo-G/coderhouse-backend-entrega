@@ -9,7 +9,8 @@ html(lang="en")
         title Document
     body 
     include components/nav.pug
-    form(action="http://localhost:8000/api/category", method="POST", enctype="multipart/form-data")
-        input(type="file" name="myFile" id="myFile")
-        input(type="text" name="type" id="type")
-        input(type="submit")
+    form()
+        input(type="file" name="imgSubCategory" id="myFile")
+        input(type="text" name="category" id="type")
+        input(type="button", class="form")
+    script(src="js/home.js") 

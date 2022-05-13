@@ -1,4 +1,4 @@
-const validateSubtype = ( req, res, next ) => {
+const validateSubCategory = ( req, res, next ) => {
 
     let subtypeValidate = []
 
@@ -16,4 +16,4 @@ const validateSubtype = ( req, res, next ) => {
 
 }
 
-module.exports = validateSubtype;
+module.exports = validateSubCategory;

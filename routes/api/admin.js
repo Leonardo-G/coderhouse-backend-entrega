@@ -1,9 +1,8 @@
 const { Router } = require("express");
 const { check } = require("express-validator");
-const { newCategory } = require("../../controllers/api/admin");
+const { newCategory, newSubcategory } = require("../../controllers/api/admin");
+const validateCategory = require("../../middlewares/validateCategory");
 const { validationBody } = require("../../middlewares/validationBody");
-// const multer = require("multer");
-// const upload = multer({ dest: 'uploads/' })
 
 const router = Router();
 
@@ -13,10 +12,11 @@ router.post( "/category", [
 ], newCategory );
 
 router.post( "/subcategory", [
-    check("subCatergory").notEmpty(),
-    check("category").notEmpty(),
-    
-] )
+    check("subCategory", "Se requiere la 'subCategory'").notEmpty(),
+    check("category", "Se require una 'category").notEmpty(),
+    validationBody,
+    validateCategory
+], newSubcategory )
 
 
 module.exports = router;

@@ -12,11 +12,6 @@ const port = process.env.PORT || 8000;
 
 connectMongo();
 
-app.use(fileUpload({
-    useTempFiles : true,
-    tempFileDir : '/tmp/'
-}));
-
 app.use(session({
     store: MongoStore.create({ mongoUrl: process.env.MONGO_URL_DATABASE, ttl: 60 * 10}),
     secret: "SECRET",
@@ -25,8 +20,14 @@ app.use(session({
 }));
 
 app.use(express.json())
-app.use(bodyParser.urlencoded({ extended: true }));
-app.use(express.static("public"))
+app.use(bodyParser.urlencoded({ extended: false }));
+app.use(express.static("public"));
+
+app.use(fileUpload({
+    useTempFiles : true,
+    tempFileDir : '/tmp/'
+}));
+
 
 app.set("views", path.join("./views"));
 app.set("view engine", "pug");
