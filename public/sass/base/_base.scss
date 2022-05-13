@@ -8,6 +8,11 @@ html{
     box-sizing: border-box;
 }
 
-legend, input, label, p{
+legend, input, label, p, a{
     font-family: "Proxima Nova", sans-serif;
+}
+
+a{
+    font-size: 1.4rem;
+    text-decoration: none;
 }

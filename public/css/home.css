@@ -1,0 +1,87 @@
+*, *::before, *::after {
+  margin: 0;
+  box-sizing: inherit;
+}
+
+html {
+  font-size: 62.5%;
+  box-sizing: border-box;
+}
+
+legend, input, label, p, a {
+  font-family: "Proxima Nova", sans-serif;
+}
+
+a {
+  font-size: 1.4rem;
+  text-decoration: none;
+}
+
+.navegacion {
+  width: 100%;
+  height: 10rem;
+  background-color: #fff059;
+}
+.navegacion .contenedor {
+  width: min(120rem, 98%);
+  margin: 0 auto;
+}
+.navegacion .navegacion__superior {
+  display: flex;
+  justify-content: space-around;
+  column-gap: 5.5rem;
+  padding: 0.8rem 0.25rem;
+  align-items: center;
+}
+.navegacion .navegacion__superior .imgHeight {
+  max-height: 4rem;
+}
+.navegacion .busqueda {
+  width: 100%;
+  display: flex;
+  background-color: #fff;
+  border-radius: 2.5px;
+  box-shadow: 0 1px 2px 0 rgba(0, 0, 0, 0.2);
+}
+.navegacion .busqueda input {
+  width: 100%;
+  padding: 1rem 1.6rem;
+  outline: none;
+  border: 0.5px solid #eee;
+  border-radius: 2.5px;
+  font-size: 1.6rem;
+  letter-spacing: 0.2px;
+}
+.navegacion .busqueda input::placeholder {
+  color: rgb(221, 215, 215);
+}
+.navegacion .navegacion__inferior {
+  display: flex;
+  justify-content: space-between;
+  background-color: #fff059;
+}
+.navegacion .inferior--menu, .navegacion .inferior--cuenta {
+  display: flex;
+  align-items: center;
+  column-gap: 2rem;
+  padding-top: 1.5rem;
+}
+.navegacion .inferior--menu a, .navegacion .inferior--cuenta a {
+  color: rgba(51, 51, 51, 0.6);
+}
+.navegacion .inferior--menu a:hover, .navegacion .inferior--cuenta a:hover {
+  color: #333;
+}
+.navegacion .inferior--cuenta a {
+  color: #333;
+}
+.navegacion .iconKart {
+  font-size: 1.6rem;
+}
+
+.iconInput {
+  margin: 1.2rem;
+  font-size: 1.5rem;
+}
+
+/*# sourceMappingURL=home.css.map */
