@@ -1,7 +1,9 @@
-const { response } = require("express");
-const { request } = require("express");
-
+const { response, request } = require("express");
 const bcrypt = require("bcryptjs");
+const cloudinary = require("cloudinary").v2;
+cloudinary.config( process.env.CLOUDINARY_URL );
+const transporter = require("../helpers/configNodemailer");
+
 const Usuario = require("../models/Usuario");
 
 const signInVista = ( req = request, res = response ) => {
@@ -18,9 +20,32 @@ const createUser = async ( req = request, res = response ) => {
 
     const salt = bcrypt.genSaltSync(10);
     const hashPassword = bcrypt.hashSync(password, salt);
+
+    const obj = {
+        username,
+        password: hashPassword, 
+        email,
+        imgUrl: "https://res.cloudinary.com/dyxqlscek/image/upload/v1652413276/mercado-libre/general/perfil-vacio_tnctto.webp"
+    }
     
-    const usuario = new Usuario({ username, password: hashPassword, email });
+    const usuario = new Usuario( obj );
     await usuario.save();
+
+    //Envío de correo de bienvenida
+    await transporter.sendMail({
+        from: ' Bienvenido a MercadoLibre <foo@example.com>', // sender address
+        to: email, // list of receivers
+        subject: "Se ha registrado MercadoLibre | clon ✔", // Subject line
+        html: "<h1>Bienvenido a nuesto sitio</h1>", // html body
+    });
+
+    //Requisito del ejercicio del curso - enviar email al administrador cuando un usuario se registra
+    await transporter.sendMail({
+        from: `Nuevo usuario registrado <${email}>`, // sender address
+        to: process.env.EMAIL_NODEMAILER_GMAIL, // list of receivers
+        subject: `Se registro ${ username }`, // Subject line
+        html: "<h1>Nuevo usuario registrado</h1>", // html body
+    });
 
     req.session.user = {
         isLogged: true,

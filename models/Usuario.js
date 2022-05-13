@@ -18,6 +18,10 @@ const UsuarioSchema = new mongoose.Schema({
     password: {
         type: String,
         required: true
+    },
+    imgUrl: {
+        type: String,
+        required: true
     }
 })
 
