@@ -1,19 +1,10 @@
 const { Schema, model } = require("mongoose");
 
 const CategorySchema = new Schema({
-    type: {
-        required: true,
-        enum: ["Herramientas", "Tecnologia"]
-    },
-    subtype: {
+    category: {
         type: String,
-        required: true,
-    },
-    imgUrl: {
-        required: true,
-        type: String
+        required: true
     }
 })
 
-module.exports = model( "Category", CategorySchema );
-
+module.exports = model("Category", CategorySchema);
