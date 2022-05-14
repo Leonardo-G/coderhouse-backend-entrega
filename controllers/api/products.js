@@ -5,11 +5,53 @@ cloudinary.config(process.env.CLOUDINARY_URL);
 
 const Product = require("../../models/Producto");
 
-const getProductsByCategory = ( req = request, res = response ) => {
-    const { subcategory } = req.params;
+const getProducts = async ( req = request, res = response ) => {
+    const { skip, limit } = req.params;
     
-    console.log(subcategory);
+    const [total, products] = await Promise.all([ 
+        Product.find({}).count(),
+        Product.find({})
+            .skip( Number(skip) || 0 )
+            .limit( Number(limit) || 6 )
+        ]);
 
+    res.status(200).json({
+        totalProducts: total,
+        products
+    })
+}
+
+const getProductsByCategory = async ( req = request, res = response ) => {
+    const { category } = req.params;
+    const { skip, limit } = req.query; 
+    
+    const [total, products] = await Promise.all([ 
+                        Product.find({category}).count(),
+                        Product.find({ category })
+                            .skip( Number(skip) || 0 )
+                            .limit( Number(limit) || 6 )
+                        ]);
+    res.status(200).json({
+        totalProductsOfCategory: total,
+        products
+    })
+}
+
+const getProductsBySubCategory = async ( req = request, res = response ) => {
+    const { subcategory, category } = req.params;
+    const { skip, limit } = req.params;
+    
+    const [total, products] = await Promise.all([ 
+        Product.find({ category, subCategory: subcategory }).count(),
+        Product.find({ category, subCategory: subcategory })
+            .skip( Number(skip) || 0 )
+            .limit( Number(limit) || 6 )
+        ]);
+
+    res.status(200).json({
+        totalProductsOfSubCategory: total,
+        products
+    })
 }
 
 const newProduct = async ( req = request, res = response ) => {
@@ -35,6 +77,8 @@ const newProduct = async ( req = request, res = response ) => {
 }
 
 module.exports = {
+    getProducts,
     getProductsByCategory,
-    newProduct
+    getProductsBySubCategory,
+    newProduct,
 }

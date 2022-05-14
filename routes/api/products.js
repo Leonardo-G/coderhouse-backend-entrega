@@ -1,14 +1,18 @@
 const { Router } = require("express");
 const { check } = require("express-validator");
 
-const { getProductsByCategory, newProduct } = require("../../controllers/api/products");
+const { getProductsByCategory, newProduct, getProductsBySubCategory, getProducts } = require("../../controllers/api/products");
 const validateCategory = require("../../middlewares/validateCategory");
 const validateSubCategory = require("../../middlewares/validateSubCategory");
 const { validateBody } = require("../../middlewares/validateBody");
 
 const router = Router();
 
+router.get( "/", getProducts );
+
 router.get( "/:category", getProductsByCategory );
+
+router.get( "/:category/:subcategory", getProductsBySubCategory );
 
 router.post( "/", [
     check("title", "La propiedad 'title' es requerido").notEmpty(),
