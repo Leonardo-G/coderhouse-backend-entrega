@@ -1,18 +1,17 @@
-const validateSubCategory = ( req, res, next ) => {
+const Category = require("../models/Category");
 
-    let subtypeValidate = []
-
-    switch (req.body.type) {
-        case "Tecnologia":
-            subtype = [ "Celulares y Smartphones", "Accesorios para los celulares"]
-            break;
-        case "Herramientas":
-            subtype = [ "Electricas", "Manual" ];
-        default:
-            return res.status(401).json({
-                msg: "No existe ese TYPE"
-            })
+const validateSubCategory = async ( req = request, res = response, next ) => {
+    const { category, subCategory } = req.body;
+    
+    const getSubCategories = await Category.findOne({ category });
+    
+    if(!getSubCategories.subCategory.includes(subCategory)){
+        return res.status(401).json({
+            msg: `La sub-categoria ${ subCategory } no existe en nuestra base de datos`
+        })
     }
+
+    next();
 
 }
 

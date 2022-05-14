@@ -8,6 +8,7 @@ const subCategorySchema = new Schema({
     subCategory: {
         type: String,
         required: true,
+        unique: true
     },
     imgSubCategory: {
         required: true,

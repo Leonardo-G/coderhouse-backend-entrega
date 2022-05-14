@@ -3,7 +3,8 @@ const { check } = require("express-validator");
 
 const { getProductsByCategory, newProduct } = require("../../controllers/api/products");
 const validateCategory = require("../../middlewares/validateCategory");
-const { validateBody } = require("../../middlewares/validationBody");
+const validateSubCategory = require("../../middlewares/validateSubCategory");
+const { validateBody } = require("../../middlewares/validateBody");
 
 const router = Router();
 
@@ -16,7 +17,8 @@ router.post( "/", [
     check("subCategory", "La propiedad 'subCategory' es requerido").notEmpty(),
     check("characteristics", "La propiedad 'characteristics' es requerido y tiene que ser un 'Array'"),
     validateBody,
-    validateCategory
+    validateCategory,
+    validateSubCategory
 ], newProduct );
 
 module.exports = router;

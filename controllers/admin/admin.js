@@ -12,7 +12,7 @@ const newCategory = async ( req = request, res = response ) => {
             })
     }
 
-    const category = new Category({ category: req.body.category })
+    const category = new Category({ category: req.body.category, subCategory: req.body.subCategory })
 
     await category.save();
 
@@ -21,14 +21,14 @@ const newCategory = async ( req = request, res = response ) => {
     })
 }
 
-const newSubcategory = async ( req = request, res = response ) => {
+const addImgSubCategory = async ( req = request, res = response ) => {
     const { category, subCategory, admin } = req.body;
     const imgUrl = req.files.imgSubCategory.tempFilePath;
 
     if(!admin){
         return res.status(401).json({
             msg: "No tienes permisos de administrador"
-        })
+        });
     }
 
     const { secure_url } = await cloudinary.uploader.upload( imgUrl, { folder: `mercado-libre/${category}/${subCategory}`});
@@ -44,12 +44,12 @@ const newSubcategory = async ( req = request, res = response ) => {
     await newSubCategory.save()
     
     res.json({
-        check: "Nueva Sub Categoria creada"
+        check: "Imagen de la Sub Categoria creada"
     })
 
 }
 
 module.exports = {
     newCategory,
-    newSubcategory
+    addImgSubCategory
 }
