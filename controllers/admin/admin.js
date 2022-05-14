@@ -47,7 +47,6 @@ const newSubcategory = async ( req = request, res = response ) => {
         check: "Nueva Sub Categoria creada"
     })
 
-
 }
 
 module.exports = {

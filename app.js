@@ -34,10 +34,11 @@ app.set("view engine", "pug");
 
 app.use("/", require("./routes/view"));
 app.use("/auth", require("./routes/auth"));
+app.use( "/admin", require("./routes/admin/admin"));
 
 //API
-app.use( "/api/products", require("./routes/api/products"));
-app.use( "/api/admin", require("./routes/api/admin"));
+app.use( "/api/categories", require("./routes/api/category"));
+app.use( "/api/products", require("./routes/api/products" ));
 
 app.listen(port, () => {
     console.log("Servidor iniciado en", port);

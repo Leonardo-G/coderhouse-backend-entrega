@@ -1,6 +1,6 @@
 const { Router } = require("express");
 const { check } = require("express-validator");
-const { newCategory, newSubcategory } = require("../../controllers/api/admin");
+const { newCategory, newSubcategory } = require("../../controllers/admin/admin");
 const validateCategory = require("../../middlewares/validateCategory");
 const { validationBody } = require("../../middlewares/validationBody");
 
