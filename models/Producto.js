@@ -6,19 +6,18 @@ const ProductoSchema = new Schema({
         required: true
     },
     price: {
-        type: Number,
+        type: String,
         required: true
     },
     imgProduct: {
+        type: [ String ],
+        default: []
+    },
+    category: {
         type: String,
         required: true
     },
-    type: {
-        type: String,
-        required: true,
-        enum: ["Tecnologia, Herramientas"]
-    },
-    subtype: {
+    subCategory: {
         type: String,
         required: true
     },

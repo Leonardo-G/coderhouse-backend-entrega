@@ -15,6 +15,8 @@ const getSubCategories = async ( req = request, res = response ) => {
     res.status(200).json(subCategories);
 }
 
+
+
 module.exports = {
     getCategories,
     getSubCategories
