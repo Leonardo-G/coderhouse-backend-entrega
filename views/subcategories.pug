@@ -1,0 +1,38 @@
+doctype html
+html(lang="en")
+    head
+        meta(charset="UTF-8")
+        meta(http-equiv="X-UA-Compatible", content="IE=edge")
+        meta(name="viewport", content="width=device-width, initial-scale=1.0")
+        link(href="http://fonts.cdnfonts.com/css/proxima-nova-2?styles=44819,44817,44821,44813,44815", rel="stylesheet")
+        link(rel="stylesheet", href="../css/subcategories.css")
+        script(src="https://kit.fontawesome.com/fe5071cad1.js", crossorigin="anonymous")
+        title Document
+    body 
+    include components/nav.pug
+    main(class="contenedor") 
+        h2.title Los mejores productos
+        section(class="subcategories")
+            div(class="subcategories__card")
+                div 
+                    img(src=`${enlace}/img/images.jpg`, alt="Logo Mercado Libre")
+                div.card--title
+                    p Electricas 
+            div(class="subcategories__card")
+                div 
+                    img(src=`${enlace}/img/images.jpg`, alt="Logo Mercado Libre")
+                div.card--title
+                    p Electricas 
+            div(class="subcategories__card")
+                div 
+                    img(src=`${enlace}/img/images.jpg`, alt="Logo Mercado Libre")
+                div.card--title
+                    p Electricas 
+            div(class="subcategories__card")
+                div 
+                    img(src=`${enlace}/img/images.jpg`, alt="Logo Mercado Libre")
+                div.card--title
+                    p Electricas 
+                    
+    
+    script(src="../js/subCategories.js") 

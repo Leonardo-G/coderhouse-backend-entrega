@@ -1,14 +1,15 @@
+-var enlace = "http://localhost:8000"
 header(class="header")
     div(class="navegacion")
         div(class="contenedor")
             div(class="navegacion__superior")
                 a(href="/home")
-                    img(src="img/logo.png", alt="Logo Mercado Libre")
+                    img(src=`${enlace}/img/logo.png`, alt="Logo Mercado Libre")
                 form(class="busqueda")
                     input(type="text", placeholder="Buscar productos, marcas y más")
                     i(class="fa-solid fa-magnifying-glass iconInput")
                 div 
-                    img(src="img/D_NQ_877425-MLA47306668299_082021-OO.webp" class="imgHeight" alt="subscripcion disney")
+                    img(src=`${enlace}/img/D_NQ_877425-MLA47306668299_082021-OO.webp` class="imgHeight" alt="subscripcion disney")
             div(class="navegacion__inferior")
                 div(class="inferior--menu")
                     a(href="/") Categorías 

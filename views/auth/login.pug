@@ -24,7 +24,7 @@ html(lang="en")
                         label(for="password") Contraseña
                         input(type="password" name="password")   
                     if ( error )
-                        p()=type
+                        p(style={color: "red", "font-size": "1.6rem"}) #{type}
                     input(type="submit", value="Continuar", class="btn--auth") 
                 hr(class="line")
                 div(class="form-help")

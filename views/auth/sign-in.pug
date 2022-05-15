@@ -6,6 +6,7 @@ html(lang="en")
         meta(name="viewport", content="width=device-width, initial-scale=1.0")
         link(href="http://fonts.cdnfonts.com/css/proxima-nova-2?styles=44819,44817,44821,44813,44815", rel="stylesheet")
         link(rel="stylesheet", href="../css/auth.css")
+        script(src="https://kit.fontawesome.com/fe5071cad1.js", crossorigin="anonymous")
         title Regístro
     body 
         header 
@@ -27,8 +28,10 @@ html(lang="en")
                         label(for="password") Contraseña
                         input(type="password" name="password")   
                     div(class="form__campo")
-                        label(for="password-repeat") Repetir contraseña
-                        input(type="password" name="password-repeat")  
+                        label(for="password_repeat") Repetir contraseña
+                        input(type="password" name="password_repeat")  
+                    if ( error )
+                        p(style={color: "red", "font-size": "12.5px"}) #{type}
                     input(type="submit", value="Continuar" class="btn--auth") 
                 hr(class="line")
                 div(class="form-help")

@@ -1,0 +1,58 @@
+@import "../base/variables";
+@import "../base/base";
+@import "../components/nav";
+
+.title{
+    font-size: 1.6rem;
+    color: $col-back-grey-4;
+    text-align: center;
+    margin: 3rem 0 2rem 0;
+    text-transform: uppercase;
+    letter-spacing: 0.6rem;
+    font-weight: 400;
+}
+
+.subcategories{
+    display: grid;
+    grid-template-columns: repeat(12, minmax(3rem,10rem));
+    justify-content: center;
+    grid-auto-rows: auto;
+    gap: 1.5rem;
+    margin: 1rem 0 1rem 0;
+    .subcategories__card{
+        height: 30rem;
+        border-radius: 6px;
+        overflow: hidden;
+        grid-column: auto / span 3;
+        position: relative;
+        box-shadow: 0 1px 2px 0 rgb(0 0 0 / 12%);
+        transition: all .2s ease-in-out;
+        &:hover{
+            box-shadow: 0 8px 16px 0 rgb(0 0 0 / 10%);
+        }
+        img{
+            height: 28rem;
+            width: 100%;
+            object-fit: cover;
+            object-position: center center;
+        }
+        .card--title{
+            padding: 1.5rem 2.5rem;
+            width: 100%;
+            background-color: #fff;
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            p{
+                height: 100%;
+                font-size: 1.4rem;
+                color: $col-back-grey-4;
+                font-weight: 600;
+                letter-spacing: 1px;
+                text-transform: uppercase;
+                text-align: center;
+
+            }
+        }
+    }
+}

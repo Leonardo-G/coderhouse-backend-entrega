@@ -16,7 +16,17 @@ const loginVista = ( req = request, res = response ) => {
 
 const createUser = async ( req = request, res = response ) => {
 
-    const { username, password, email } = req.body;
+    const { username, password, email, password_repeat } = req.body;
+
+    if( password !== password_repeat){
+        res.render("auth/sign-in", { error: true, type: "No coinciden las contraseñas"});
+        return;
+    }
+
+    if( !(username && password && email) ){
+        res.render("auth/sign-in", { error: true, type: "Todos los campos son requeridos"});
+        return;
+    }
 
     const salt = bcrypt.genSaltSync(10);
     const hashPassword = bcrypt.hashSync(password, salt);
@@ -52,7 +62,7 @@ const createUser = async ( req = request, res = response ) => {
         name: email
     };
 
-    res.redirect("../home");
+    res.redirect("../");
 }
 
 const loginUser = async ( req = request, res = response ) => {
@@ -76,7 +86,7 @@ const loginUser = async ( req = request, res = response ) => {
         name: email
     };
 
-    res.redirect("../home");
+    res.redirect("../");
 }
 
 module.exports = {

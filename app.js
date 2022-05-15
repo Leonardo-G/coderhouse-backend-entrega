@@ -19,9 +19,9 @@ app.use(session({
     saveUninitialized: false
 }));
 
-app.use(express.json())
+app.use(express.json());
 app.use(bodyParser.urlencoded({ extended: false }));
-app.use(express.static("public"));
+app.use(express.static("public"))
 
 app.use(fileUpload({
     useTempFiles : true,
@@ -32,8 +32,8 @@ app.use(fileUpload({
 app.set("views", path.join("./views"));
 app.set("view engine", "pug");
 
-app.use("/", require("./routes/view"));
-app.use("/auth", require("./routes/auth"));
+app.use( "/", require("./routes/view"));
+app.use( "/auth", require("./routes/auth"));
 app.use( "/admin", require("./routes/admin/admin"));
 
 //API
