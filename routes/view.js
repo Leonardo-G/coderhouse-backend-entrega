@@ -6,8 +6,12 @@ router.get( "/", ( req, res ) => {
     res.render("home")
 })
 
-router.get( "/subcategories/:subcategories", ( req, res ) => {
+router.get( "/category/:subcategories", ( req, res ) => {
     res.render("subcategories");
+})
+
+router.get( "/products/:subcategory", ( req, res ) => {
+    res.render("products")
 })
 
 

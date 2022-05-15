@@ -12,7 +12,7 @@ router.get( "/", getProducts );
 
 router.get( "/:category", getProductsByCategory );
 
-router.get( "/:category/:subcategory", getProductsBySubCategory );
+router.get( "/subcategory/:subcategory", getProductsBySubCategory );
 
 router.post( "/", [
     check("title", "La propiedad 'title' es requerido").notEmpty(),

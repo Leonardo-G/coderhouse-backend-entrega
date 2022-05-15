@@ -1,6 +1,7 @@
 const { response } = require("express");
 const { request } = require("express");
 const SubCategory = require("../../models/subCategory");
+const Category = require("../../models/Category");
 
 const getCategories = async ( req = request, res = response ) => {
     const category = await Category.find({});

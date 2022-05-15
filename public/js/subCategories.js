@@ -13,14 +13,14 @@ const getSubCategory = async () => {
     const cajaSubCategorie = document.querySelector(".subcategories");
 
     try {
-        const res = await fetch(`http://localhost:8000/api/categories/${category}/subcategories`, {
+        const res = await fetch(`http://localhost:8000/api/categories/subcategories/${category}`, {
             method: "GET",
         })
         const resp = await res.json();
 
         resp.forEach( subCategory => {
             cajaSubCategorie.innerHTML += `
-                <a href='/category/${ subCategory.category }' class="subcategories__card">
+                <a href='/products/${ subCategory.subCategory }' class="subcategories__card">
                     <div>
                         <img src=${ subCategory.imgSubCategory } alt=${ subCategory }/>
                     </div>
@@ -30,17 +30,6 @@ const getSubCategory = async () => {
                 </a>
             `
         })
-        // const htmlCardSubCategorie = `
-        //     <div class="subcategories__card">
-        //         <div> 
-        //             img(src=`${enlace}/img/images.jpg`, alt="Logo Mercado Libre")
-        //         </div>
-        //         <div class="card--title">
-        //             <p> Electricas </p>
-        //         </div>
-        //     </div>
-        //         `
-                console.log(resp);
     } catch (error) {
         console.log(error);
     }

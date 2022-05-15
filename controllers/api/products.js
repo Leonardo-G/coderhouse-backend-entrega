@@ -38,12 +38,12 @@ const getProductsByCategory = async ( req = request, res = response ) => {
 }
 
 const getProductsBySubCategory = async ( req = request, res = response ) => {
-    const { subcategory, category } = req.params;
-    const { skip, limit } = req.params;
+    const { subcategory,  } = req.params;
+    const { skip, limit } = req.query;
     
     const [total, products] = await Promise.all([ 
-        Product.find({ category, subCategory: subcategory }).count(),
-        Product.find({ category, subCategory: subcategory })
+        Product.find({ subCategory: subcategory }).count(),
+        Product.find({ subCategory: subcategory })
             .skip( Number(skip) || 0 )
             .limit( Number(limit) || 6 )
         ]);
