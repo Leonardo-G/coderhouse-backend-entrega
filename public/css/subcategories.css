@@ -115,7 +115,8 @@ a {
   margin: 1rem 0 1rem 0;
 }
 .subcategories .subcategories__card {
-  height: 30rem;
+  cursor: pointer;
+  height: 26.5rem;
   border-radius: 6px;
   overflow: hidden;
   grid-column: auto/span 3;
@@ -127,7 +128,7 @@ a {
   box-shadow: 0 8px 16px 0 rgba(0, 0, 0, 0.1);
 }
 .subcategories .subcategories__card img {
-  height: 28rem;
+  height: 24rem;
   width: 100%;
   object-fit: cover;
   object-position: center center;
