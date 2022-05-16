@@ -16,19 +16,27 @@
     }
     .product__card{
         display: flex;
-        height: 28rem;
         padding: 2rem 3rem 2rem 0;
+        border-top: 1px solid #eee;
+        column-gap: 2rem;
+        a{
+            text-decoration: none;
+        }
         .card--img{
             flex-basis: 20rem;
             padding: 1rem 2rem 3rem 2rem;
+            width: 100%;
+            flex-basis: 20rem;
+            height: 16rem;
             img{
-                width: 100%;
+                object-fit: contain;
                 height: 100%;
-                object-fit: cover;
+                width: 100%;
             }
         }
         .card--info{
             flex: 1;
+            padding-right: 6rem;
             .title{
                 color: $col-back-grey-2;
                 font-size: 2rem;

@@ -111,20 +111,28 @@ a {
 }
 .main-box .product__card {
   display: flex;
-  height: 28rem;
   padding: 2rem 3rem 2rem 0;
+  border-top: 1px solid #eee;
+  column-gap: 2rem;
+}
+.main-box .product__card a {
+  text-decoration: none;
 }
 .main-box .product__card .card--img {
   flex-basis: 20rem;
   padding: 1rem 2rem 3rem 2rem;
+  width: 100%;
+  flex-basis: 20rem;
+  height: 16rem;
 }
 .main-box .product__card .card--img img {
-  width: 100%;
+  object-fit: contain;
   height: 100%;
-  object-fit: cover;
+  width: 100%;
 }
 .main-box .product__card .card--info {
   flex: 1;
+  padding-right: 6rem;
 }
 .main-box .product__card .card--info .title {
   color: #333;
