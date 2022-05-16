@@ -14,5 +14,9 @@ router.get( "/products/:subcategory", ( req, res ) => {
     res.render("products")
 })
 
+router.get( "/product/:id", ( req, res ) => {
+    res.render("product");
+})
+
 
 module.exports = router;

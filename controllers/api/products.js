@@ -54,6 +54,20 @@ const getProductsBySubCategory = async ( req = request, res = response ) => {
     })
 }
 
+const getProductById = async ( req = request, res = response ) => {
+    const { id } = req.params;
+
+    if(!id){
+        return res.status(401).json({
+            msg: "se requiere un id"
+        })
+    }
+
+    const product = await Product.findById(id);
+    
+    res.status(200).json(product);
+}
+
 const newProduct = async ( req = request, res = response ) => {
     const { title, price, subCategory, category, characteristics } = req.body;
 
@@ -80,5 +94,6 @@ module.exports = {
     getProducts,
     getProductsByCategory,
     getProductsBySubCategory,
+    getProductById,
     newProduct,
 }
