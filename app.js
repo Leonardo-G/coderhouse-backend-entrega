@@ -39,6 +39,7 @@ app.use( "/admin", require("./routes/admin/admin"));
 //API
 app.use( "/api/categories", require("./routes/api/category"));
 app.use( "/api/products", require("./routes/api/products" ));
+app.use( "/api/cart/")
 
 app.listen(port, () => {
     console.log("Servidor iniciado en", port);

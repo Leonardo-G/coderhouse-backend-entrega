@@ -1,7 +1,7 @@
 const { Router } = require("express");
 const { check } = require("express-validator");
 
-const { getProductsByCategory, newProduct, getProductsBySubCategory, getProducts, getProductById } = require("../../controllers/api/products");
+const { getProductsByCategory, newProduct, getProductsBySubCategory, getProducts, getProductById, sendSMS } = require("../../controllers/api/products");
 const validateCategory = require("../../middlewares/validateCategory");
 const validateSubCategory = require("../../middlewares/validateSubCategory");
 const { validateBody } = require("../../middlewares/validateBody");
@@ -15,6 +15,8 @@ router.get( "/:category", getProductsByCategory );
 router.get( "/subcategory/:subcategory", getProductsBySubCategory );
 
 router.get( "/product/:id", getProductById );
+
+router.post( "/tel/send", sendSMS );
 
 router.post( "/", [
     check("title", "La propiedad 'title' es requerido").notEmpty(),

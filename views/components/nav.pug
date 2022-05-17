@@ -1,25 +1,32 @@
--var enlace = "http://localhost:8000"
-header(class="header")
-    div(class="navegacion")
-        div(class="contenedor")
-            div(class="navegacion__superior")
-                a(href="/home")
-                    img(src=`${enlace}/img/logo.png`, alt="Logo Mercado Libre")
-                form(class="busqueda")
-                    input(type="text", placeholder="Buscar productos, marcas y más")
-                    i(class="fa-solid fa-magnifying-glass iconInput")
-                div 
-                    img(src=`${enlace}/img/D_NQ_877425-MLA47306668299_082021-OO.webp` class="imgHeight" alt="subscripcion disney")
-            div(class="navegacion__inferior")
-                div(class="inferior--menu")
-                    a(href="/") Categorías 
-                    a(href="/") Ofertas
-                    a(href="/") Historial
-                    a(href="/") Supermercado
-                    a(href="/") Moda
-                    a(href="/") Ayuda 
-                div(class="inferior--cuenta")
-                    a(href="/") Creá tu cuenta 
-                    a(href="/") Ingresá
-                    a(href="/") Mis compras
-                    i(class="fa-solid fa-cart-shopping iconShop")
+mixin nav( user=false )
+    -var enlace = "http://localhost:8000"
+    .header
+    header(class="header")
+        div(class="navegacion")
+            div(class="contenedor")
+                div(class="navegacion__superior")
+                    a(href="/home")
+                        img(src=`${enlace}/img/logo.png`, alt="Logo Mercado Libre")
+                    form(class="busqueda")
+                        input(type="text", placeholder="Buscar productos, marcas y más")
+                        i(class="fa-solid fa-magnifying-glass iconInput")
+                    div 
+                        img(src=`${enlace}/img/D_NQ_877425-MLA47306668299_082021-OO.webp` class="imgHeight" alt="subscripcion disney")
+                div(class="navegacion__inferior")
+                    div(class="inferior--menu")
+                        a(href="/") Categorías 
+                        a(href="/") Ofertas
+                        a(href="/") Historial
+                        a(href="/") Supermercado
+                        a(href="/") Moda
+                        a(href="/") Ayuda 
+                    div(class="inferior--cuenta")
+                        if (user.isLogged)
+                            a(href="$") #{user.user.username}
+                            form(action="/auth/sign-off", method="post") 
+                                input(type="submit", value="Cerrar") 
+                        else    
+                            a(href="/auth/sign-in") Creá tu cuenta 
+                            a(href="/auth/login") Ingresá
+                        a(href="/") Mis compras
+                        i(class="fa-solid fa-cart-shopping iconShop")

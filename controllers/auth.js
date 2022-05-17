@@ -57,9 +57,11 @@ const createUser = async ( req = request, res = response ) => {
         html: "<h1>Nuevo usuario registrado</h1>", // html body
     });
 
+    const user = await Usuario.findOne({ email })
+
     req.session.user = {
         isLogged: true,
-        name: email
+        user
     };
 
     res.redirect("../");
@@ -69,7 +71,6 @@ const loginUser = async ( req = request, res = response ) => {
     const { email, password } = req.body;
 
     const getPassword = await Usuario.findOne({ email });
-    console.log(getPassword)
     if( !getPassword ){
         res.render("auth/login", { error: true, type: "No hay un usuario registrado con este email"});
         return;
@@ -83,15 +84,22 @@ const loginUser = async ( req = request, res = response ) => {
 
     req.session.user = {
         isLogged: true,
-        name: email
+        user: getPassword
     };
 
     res.redirect("../");
+}
+
+const signOffUser = ( req = request, res = response ) => {
+    req.session.destroy();
+
+    res.redirect("../auth/login")
 }
 
 module.exports = {
     signInVista,
     createUser,
     loginVista,
-    loginUser
+    loginUser,
+    signOffUser
 }

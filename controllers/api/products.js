@@ -4,6 +4,7 @@ const cloudinary = require("cloudinary").v2;
 cloudinary.config(process.env.CLOUDINARY_URL);
 
 const Product = require("../../models/Producto");
+const twilio = require("twilio");
 
 const getProducts = async ( req = request, res = response ) => {
     const { skip, limit } = req.params;
@@ -90,10 +91,32 @@ const newProduct = async ( req = request, res = response ) => {
 
 }
 
+const sendSMS = async ( req, res ) => {
+    const sid = "ACb738cc0e66915be7c05e53f5d937260b";
+    const twilioToken = "ba9681d64cb819d353d4f6bb9f7d3402";
+
+    const client = twilio(sid, twilioToken);
+    console.log("HOLA")
+
+    try {
+        const message = await client.messages.create({
+            messagingServiceSid: 'MG040fae6b301fbc5c644fd9de46dcc409',
+            body: 'Soy leo, si te llega este mensaje avisame',
+            to: '+541173654878'
+        })
+        res.json({message})
+        console.log(message)
+     } catch (error) {
+        console.log(error)
+     }
+     
+}
+
 module.exports = {
     getProducts,
     getProductsByCategory,
     getProductsBySubCategory,
     getProductById,
     newProduct,
+    sendSMS
 }
