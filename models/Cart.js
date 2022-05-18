@@ -18,12 +18,7 @@ const SchemaCart = new Schema({
     createCart: {
         type: String,
         default: Date.now()
-    },
-    adress: {
-        type: String,
-        required: true
     }
-
 })
 
 module.exports = model("Cart", SchemaCart);
