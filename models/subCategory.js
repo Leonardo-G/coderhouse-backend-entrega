@@ -1,6 +1,6 @@
 const { Schema, model } = require("mongoose");
 
-const subCategorySchema = new Schema({
+const SubCategorySchema = new Schema({
     category: {
         type:String,
         required: true
@@ -16,5 +16,5 @@ const subCategorySchema = new Schema({
     }
 })
 
-module.exports = model( "subCategory", subCategorySchema );
+module.exports = model( "subCategory", SubCategorySchema );
 

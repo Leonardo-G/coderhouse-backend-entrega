@@ -3,7 +3,7 @@ const { request } = require("express");
 const cloudinary = require("cloudinary").v2;
 cloudinary.config(process.env.CLOUDINARY_URL);
 const Category = require("../../models/Category");
-const SubCategory = require("../../models/subCategory");
+const SubCategory = require("../../models/SubCategory");
 
 const newCategory = async ( req = request, res = response ) => {
     if( !req.body.admin ){

@@ -1,10 +1,13 @@
 const { response } = require("express");
 const { request } = require("express");
-const SubCategory = require("../../models/subCategory");
-const Category = require("../../models/Category");
+const SubCategoryDao = require("../../DAOs/DAO/SubCategoryDAO");
+const CategoryDAO = require("../../DAOs/DAO/CategoryDAO");
+
+const Category = new CategoryDAO();
+const SubCategory = new SubCategoryDao();
 
 const getCategories = async ( req = request, res = response ) => {
-    const category = await Category.find({});
+    const category = await Category.findAll();
     
     res.status(200).json(category);
 }
@@ -12,11 +15,17 @@ const getCategories = async ( req = request, res = response ) => {
 const getSubCategories = async ( req = request, res = response ) => {
     const { category } = req.params;
 
-    const subCategories = await SubCategory.find({ category });
-    res.status(200).json(subCategories);
+    try {
+        const subCategories = await SubCategory.findDocuments({ category });
+        res.status(200).json(subCategories);
+        
+    } catch (error) {
+        console.log(error)
+        res.status(500).json({
+            msg: "Error en pasar el tipo de dato. Funcion 'getSubCategories'"
+        });
+    }
 }
-
-
 
 module.exports = {
     getCategories,

@@ -15,7 +15,7 @@ class Server {
         this.routes = {
             auth : "/auth",
             admin: "/admin",
-            categories: "/api/products",
+            categories: "/api/category",
             products: "/api/products",
             cart: "/api/cart"
         };
@@ -23,6 +23,7 @@ class Server {
         this.connect();
         this.middlewares();
         this.views();
+        this.router();
     }
 
     async connect(){
