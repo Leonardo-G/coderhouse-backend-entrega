@@ -5,6 +5,15 @@ class ContenedorMongo{
         this.colection = colection;
     }
 
+    async documentsCount(filter){
+        if(typeof filter != "object"){
+            throw new Error("El parametro de busqueda tiene que ser de tipo 'OBJECT'");
+        }
+
+        const documentsCount = await this.colection.find(filter).count();
+        return documentsCount;
+    }
+
     async findAll(){
         const documents = await this.colection.find({})
         return documents;
@@ -24,13 +33,23 @@ class ContenedorMongo{
         return document;
     }
 
-    async findDocuments(filter){
+    async findDocuments(filter, query){
         if(typeof filter != "object"){
             throw new Error("El parametro de busqueda tiene que ser de tipo 'OBJECT'");
         }
 
-        const documents = await this.colection.find(filter);
-        return documents;
+        if(!query){
+            const documents = await this.colection.find(filter);
+            return documents;
+        }else{
+            const { skip = 0, limit = 6 } = query;
+            
+            const documents = await this.colection.find(filter)
+                                    .skip( Number(skip) )
+                                    .limit( Number(limit) )
+                    
+            return documents;
+        }
     }
 
     async createDocument(object){

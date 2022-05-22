@@ -2,18 +2,17 @@ const { response } = require("express");
 const { request } = require("express");
 const cloudinary = require("cloudinary").v2;
 cloudinary.config(process.env.CLOUDINARY_URL);
-
-const Product = require("../../models/Producto");
 const twilio = require("twilio");
+
+const ProductDao = require("../../DAOs/DAO/ProductDAO");
+const Product = new ProductDao();
 
 const getProducts = async ( req = request, res = response ) => {
     const { skip, limit } = req.params;
     
     const [total, products] = await Promise.all([ 
-        Product.find({}).count(),
-        Product.find({})
-            .skip( Number(skip) || 0 )
-            .limit( Number(limit) || 6 )
+            Product.documentsCount({}),
+            Product.findDocuments({}, { skip, limit })
         ]);
 
     res.status(200).json({
@@ -27,11 +26,10 @@ const getProductsByCategory = async ( req = request, res = response ) => {
     const { skip, limit } = req.query; 
     
     const [total, products] = await Promise.all([ 
-                        Product.find({category}).count(),
-                        Product.find({ category })
-                            .skip( Number(skip) || 0 )
-                            .limit( Number(limit) || 6 )
+                            Product.documentsCount({ category }),
+                            Product.findDocuments({ category }, { skip, limit })
                         ]);
+
     res.status(200).json({
         totalProductsOfCategory: total,
         products
@@ -43,10 +41,8 @@ const getProductsBySubCategory = async ( req = request, res = response ) => {
     const { skip, limit } = req.query;
     
     const [total, products] = await Promise.all([ 
-        Product.find({ subCategory: subcategory }).count(),
-        Product.find({ subCategory: subcategory })
-            .skip( Number(skip) || 0 )
-            .limit( Number(limit) || 6 )
+            Product.documentsCount( { subcategory } ),
+            Product.findDocuments( { subcategory }, { skip, limit } )
         ]);
 
     res.status(200).json({
@@ -64,7 +60,7 @@ const getProductById = async ( req = request, res = response ) => {
         })
     }
 
-    const product = await Product.findById(id);
+    const product = await Product.findDocumentById(id);
     
     res.status(200).json(product);
 }
@@ -84,10 +80,9 @@ const newProduct = async ( req = request, res = response ) => {
         imgProduct: [secure_url]
     }
 
-    const product = new Product(obj);
-    await product.save();
+    const product = await Product.createDocument(obj);
 
-    res.status(201).json(obj);
+    res.status(201).json(product);
 
 }
 
