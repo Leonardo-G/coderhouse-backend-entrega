@@ -1,11 +1,14 @@
 const { request, response } = require("express");
-const Cart = require("../../models/Cart");
-const Usuario = require("../../models/Usuario");
+const CartDao = require("../../DAOs/DAO/CartDAO");
+const UsuarioDao = require("../../DAOs/DAO/UsuarioDAO");
+
+const Cart = new CartDao();
+const Usuario = new UsuarioDao();
 
 const getCart = async ( req = request, res = response ) => {
     const { id } = req.params;
 
-    const cart = await Cart.findById(id);
+    const cart = await Cart.findDocumentById(id);
     
     if(!cart){
         return res.status(401).json({
@@ -20,31 +23,38 @@ const createCart = async ( req = request, res = response ) => {
     
     const { cartUser } = req.body;
 
-    const user = await Usuario.findById(cartUser);
-
-    if(!user){
-        return res.status(404).json({
-            msg: `No se encontro un usuario con el 'id' ${ cartUser }`
+    try {
+        const user = await Usuario.findDocumentById(cartUser);
+        
+        if(!user){
+            return res.status(404).json({
+                msg: `No se encontro un usuario con el 'id' ${ cartUser }`
+            })
+        }
+        
+        const isExistCart = await Cart.findOneDocument({ cartUser });
+        
+        if(isExistCart){
+            return res.status(401).json({
+                msg: `Ya existe un carrito del usuario con el ID ${cartUser}`
+            })
+        }
+        
+        const cart = Cart.createDocument({cartUser, productsCart: []});
+        res.status(201).json(cart)
+    } catch (error) {
+        console.log(error);
+        res.status(500).json({
+            msg: "Error en el servidor. Funcion 'createCart"
         })
     }
 
-    const isExistCart = await Cart.findOne({ cartUser })
-
-    if(isExistCart){
-        return res.status(401).json({
-            msg: `Ya existe un carrito del usuario con el ID ${cartUser}`
-        })
-    }
-
-    const cart = new Cart({cartUser, productsCart: []});
-    const save = await cart.save()
-    res.json(save)
 }
 
 const updateCart = async ( req = request, res = response ) => {
     const { id } = req.params;
 
-    const isExistCart = await Cart.findOne({ id });
+    const isExistCart = await Cart.findOneDocument({ id });
     if( !isExistCart ){
         return res.status(401).json({
             msg: `No existe un carrito del usuario ${ id }. Primero crear el carrito en /api/cart/:id con el método POST`
@@ -61,19 +71,9 @@ const updateCart = async ( req = request, res = response ) => {
 const clearCart = async ( req = request, res = response ) => {
     const { id } = req.params;
 
-    Cart.findOneAndUpdate( { cartUser: id}, { $set: { productsCart: [] }}, { new: true }, ( err, obj ) => {
-        if( err ){
-            return console.log(err)
-        }
-
-        if(!obj){
-            return res.status(404).json({
-                msg: `No se encontro el carrito del usuario con el id ${ id }`
-            })
-        }
-
-        res.json(obj);
-    })
+    const cart = await Cart.findDocumentAndUpdate({ cartUser: id}, { productsCart: [] })
+    
+    res.json(cart);
 }
 
 module.exports = {
