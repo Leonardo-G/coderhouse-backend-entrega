@@ -57,11 +57,11 @@ const createUser = async ( req = request, res = response ) => {
     res.cookie("auth", {
         token,
         user: {
-            name: user._id,
-            correo: user.email,
-            img: user.imgUrl
+            username: user.username,
+            email: user.email,
+            imgUrl: user.imgUrl
         }
-    }, { expire: new Date() + 12000}).redirect("../../");
+    }, { maxAge: 3600000} ).json({token})
 }
 
 const loginUser = async ( req = request, res = response ) => {
@@ -86,16 +86,19 @@ const loginUser = async ( req = request, res = response ) => {
     }
 
     const token = await generateJWT({id: getPassword._id});
-    res.cookie("auth", token, { maxAge: 12000}).json({
+    res.cookie("auth", {
         token,
-        user: getPassword
-    })
+        user: {
+            username: getPassword.username,
+            email: getPassword.email,
+            imgUrl: getPassword.imgUrl
+        }
+    }, { maxAge: 3600000}).json({token})
 }
 
 const signOffUser = ( req = request, res = response ) => {
-    req.session.destroy();
 
-    res.redirect("../auth/login");
+    res.clearCookie("auth").redirect("../../auth/login");
 }
 
 module.exports = {

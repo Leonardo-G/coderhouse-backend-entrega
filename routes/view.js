@@ -26,7 +26,7 @@ router.get( "/auth/login", ( req = request, res = response ) => {
 router.get( "/", ( req, res ) => {
     const user = req.cookies?.auth;
     
-    res.render("home", { user })
+    res.render("home", { user });
 })
 
 router.get( "/category/:subcategories", ( req, res ) => {
@@ -37,7 +37,7 @@ router.get( "/category/:subcategories", ( req, res ) => {
 
 router.get( "/products/:subcategory", ( req, res ) => {
     const user = req.cookies.auth;
-
+    console.log(user)
     res.render("products", { user })
 })
 

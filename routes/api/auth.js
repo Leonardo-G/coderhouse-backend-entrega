@@ -10,8 +10,5 @@ router.post( "/sign-in-create", createUser );
 
 router.post( "/sign-off", signOffUser );
 
-router.get( "../home", ( req, res ) => {
-    res.render("home");
-})
 
 module.exports = router;
