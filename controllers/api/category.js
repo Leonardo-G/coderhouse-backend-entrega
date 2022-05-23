@@ -1,7 +1,7 @@
 const { response } = require("express");
 const { request } = require("express");
-const SubCategoryDao = require("../../DAOs/DAO/SubCategoryDAO");
-const CategoryDAO = require("../../DAOs/DAO/CategoryDAO");
+const SubCategoryDao = require("../../service/DAO/SubCategoryDAO");
+const CategoryDAO = require("../../service/DAO/CategoryDAO");
 
 const Category = new CategoryDAO();
 const SubCategory = new SubCategoryDao();

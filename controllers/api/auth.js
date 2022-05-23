@@ -2,17 +2,11 @@ const { response, request } = require("express");
 const bcrypt = require("bcryptjs");
 const cloudinary = require("cloudinary").v2;
 cloudinary.config( process.env.CLOUDINARY_URL );
-const transporter = require("../helpers/configNodemailer");
+const transporter = require("../../helpers/configNodemailer");
 
-const Usuario = require("../models/Usuario");
+const Usuario = require("../../models/Usuario");
+const generateJWT = require("../../helpers/generateJWT");
 
-const signInVista = ( req = request, res = response ) => {
-    res.status(200).render("auth/sign-in");
-}
-
-const loginVista = ( req = request, res = response ) => {
-    res.status(200).render("auth/login");
-}
 
 const createUser = async ( req = request, res = response ) => {
 
@@ -57,49 +51,55 @@ const createUser = async ( req = request, res = response ) => {
         html: "<h1>Nuevo usuario registrado</h1>", // html body
     });
 
-    const user = await Usuario.findOne({ email })
+    const user = await Usuario.findOne({ email });
 
-    req.session.user = {
-        isLogged: true,
-        user
-    };
-
-    res.redirect("../");
+    const token = await generateJWT({ id: user._id });
+    res.cookie("auth", {
+        token,
+        user: {
+            name: user._id,
+            correo: user.email,
+            img: user.imgUrl
+        }
+    }, { expire: new Date() + 12000}).redirect("../../");
 }
 
 const loginUser = async ( req = request, res = response ) => {
     const { email, password } = req.body;
 
     const getPassword = await Usuario.findOne({ email });
+
     if( !getPassword ){
-        res.render("auth/login", { error: true, type: "No hay un usuario registrado con este email"});
+        res.status(401).json({
+            msg: "No hay un usuario registrado con este email"
+        })
         return;
     }
+
     const comparePassword = bcrypt.compareSync( password, getPassword.password );
 
     if(!comparePassword){
-        res.render("auth/login", { error: true, type: "Email/Contraseña Incorrecta"});
+        res.status(401).json({
+            msg: "Email/Contraseña Incorrecta"
+        })
         return;
     }
 
-    req.session.user = {
-        isLogged: true,
+    const token = await generateJWT({id: getPassword._id});
+    res.cookie("auth", token, { maxAge: 12000}).json({
+        token,
         user: getPassword
-    };
-
-    res.redirect("../");
+    })
 }
 
 const signOffUser = ( req = request, res = response ) => {
     req.session.destroy();
 
-    res.redirect("../auth/login")
+    res.redirect("../auth/login");
 }
 
 module.exports = {
-    signInVista,
     createUser,
-    loginVista,
     loginUser,
     signOffUser
 }

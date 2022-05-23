@@ -1,6 +1,6 @@
 const { request, response } = require("express");
-const CartDao = require("../../DAOs/DAO/CartDAO");
-const UsuarioDao = require("../../DAOs/DAO/UsuarioDAO");
+const CartDao = require("../../service/DAO/CartDAO");
+const UsuarioDao = require("../../service/DAO/UsuarioDAO");
 
 const Cart = new CartDao();
 const Usuario = new UsuarioDao();

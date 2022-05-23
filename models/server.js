@@ -1,11 +1,10 @@
 const express = require("express");
-const session = require("express-session");
-const MongoStore = require("connect-mongo");
 const path = require("path");
 const connectMongo = require("../db/config");
 const bodyParser = require("body-parser");
 const fileUpload = require("express-fileupload");
 const dotenv = require("dotenv");
+const cookieParser = require("cookie-parser");
 
 class Server {
     constructor(){
@@ -13,8 +12,8 @@ class Server {
         this.app = express();
         this.port = process.env.PORT || 8000;
         this.routes = {
-            auth : "/auth",
             admin: "/admin",
+            auth : "/api/auth",
             categories: "/api/category",
             products: "/api/products",
             cart: "/api/cart"
@@ -31,14 +30,9 @@ class Server {
     }
 
     middlewares(){
-        this.app.use(session({
-            store: MongoStore.create({ mongoUrl: process.env.MONGO_URL_DATABASE, ttl: 60 * 10}),
-            secret: "SECRET",
-            resave: true,
-            saveUninitialized: false
-        }));
 
         this.app.use(express.json());
+        this.app.use(cookieParser());
         this.app.use(bodyParser.urlencoded({ extended: false }));
         this.app.use(express.static("public"));
         this.app.use(fileUpload({
@@ -54,7 +48,7 @@ class Server {
 
     router(){
         this.app.use("/", require("../routes/view"));
-        this.app.use(this.routes.auth, require("../routes/auth"));
+        this.app.use(this.routes.auth, require("../routes/api/auth"));
         this.app.use(this.routes.admin, require("../routes/admin/admin"));
 
         //api

@@ -4,7 +4,7 @@ const cloudinary = require("cloudinary").v2;
 cloudinary.config(process.env.CLOUDINARY_URL);
 const twilio = require("twilio");
 
-const ProductDao = require("../../DAOs/DAO/ProductDAO");
+const ProductDao = require("../../service/DAO/ProductDAO");
 const Product = new ProductDao();
 
 const getProducts = async ( req = request, res = response ) => {
