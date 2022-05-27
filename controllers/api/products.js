@@ -37,12 +37,12 @@ const getProductsByCategory = async ( req = request, res = response ) => {
 }
 
 const getProductsBySubCategory = async ( req = request, res = response ) => {
-    const { subcategory,  } = req.params;
+    const { subcategory } = req.params;
     const { skip, limit } = req.query;
     
     const [total, products] = await Promise.all([ 
-            Product.documentsCount( { subcategory } ),
-            Product.findDocuments( { subcategory }, { skip, limit } )
+            Product.documentsCount( { subCategory: subcategory } ),
+            Product.findDocuments( { subCategory: subcategory }, { skip, limit } )
         ]);
 
     res.status(200).json({
@@ -79,7 +79,7 @@ const newProduct = async ( req = request, res = response ) => {
         characteristics: JSON.parse(characteristics),
         imgProduct: [secure_url]
     }
-
+    
     const product = await Product.createDocument(obj);
 
     res.status(201).json(product);

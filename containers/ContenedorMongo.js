@@ -53,7 +53,7 @@ class ContenedorMongo{
     }
 
     async createDocument(object){
-        if(typeof filter != "object"){
+        if(typeof object != "object"){
             throw new Error("El tipo de dato tiene que ser de tipo 'OBJECT'");
         }
 

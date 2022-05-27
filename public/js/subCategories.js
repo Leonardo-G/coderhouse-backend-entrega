@@ -13,16 +13,16 @@ const getSubCategory = async () => {
     const cajaSubCategorie = document.querySelector(".subcategories");
 
     try {
-        const res = await fetch(`http://localhost:8000/api/categories/subcategories/${category}`, {
+        const res = await fetch(`http://localhost:8000/api/category/subcategories/${category}`, {
             method: "GET",
         })
         const resp = await res.json();
-
+        console.log(resp)
         resp.forEach( subCategory => {
             cajaSubCategorie.innerHTML += `
                 <a href='/products/${ subCategory.subCategory }' class="subcategories__card">
                     <div>
-                        <img src=${ subCategory.imgSubCategory } alt=${ subCategory }/>
+                        <img src=${ subCategory.imgSubCategory } alt=${ subCategory.subCategory }/>
                     </div>
                     <div class="card--title">
                         <p>${ subCategory.subCategory }</p>

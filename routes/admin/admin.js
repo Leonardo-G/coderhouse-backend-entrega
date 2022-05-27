@@ -8,9 +8,9 @@ const validateSubCategory = require("../../middlewares/validateSubCategory");
 const router = Router();
 
 router.post( "/category", [
-    check("category", "Se requiere el campo CATEGORY").notEmpty(),
-    check("subCategory", "Se requiere el campo 'subCategory'").notEmpty(),
-    validateBody
+    check("category", "Se requiere el campo 'category'").notEmpty(),
+    check("subCategory", "Se requiere el campo 'subCategory'").notEmpty().isArray(),
+    validateBody,
 ], newCategory );
 
 router.post( "/subcategory", [
