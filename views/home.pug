@@ -6,15 +6,38 @@ html(lang="en")
         meta(http-equiv="X-UA-Compatible", content="IE=edge")
         meta(name="viewport", content="width=device-width, initial-scale=1.0")
         script(src="https://kit.fontawesome.com/fe5071cad1.js", crossorigin="anonymous")
+        link(href="http://fonts.cdnfonts.com/css/proxima-nova-2?styles=44819,44817,44821,44813,44815", rel="stylesheet")
         link(rel="stylesheet", href="../css/home.css")
         title Mercado Libre | Home
     body 
     include components/nav.pug
     +nav(user)
-    form()
-        input(type="file" name="imgSubCategory" id="myFile")
-        input(type="text" name="category" id="type")
-        input(type="button", class="form")
-    
+    main
+        div(id="carouselExampleIndicators" class="carousel slide carousel--personality" data-bs-ride="true")
+            div(class="carousel-indicators")
+                button(type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="0" class="active" aria-current="true" aria-label="Slide 1")
+                button(type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="1" aria-label="Slide 2")
+                button(type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="2" aria-label="Slide 3")
+            div(class="carousel-inner")
+                div(class="carousel-item active")
+                    img(src="/img/portada/portada-1.webp" class="d-block w-100" alt="...")
+                div(class="carousel-item")
+                    img(src="/img/portada/portada-2.webp" class="d-block w-100" alt="...")
+                div(class="carousel-item")
+                    img(src="/img/portada/portada-3.webp" class="d-block w-100" alt="...")
+            button(class="carousel-control-prev" type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide="prev")
+                span(class="carousel-control-prev-icon" aria-hidden="true")
+                span(class="visually-hidden")
+            button(class="carousel-control-next" type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide="next")
+                span(class="carousel-control-next-icon" aria-hidden="true")
+                span(class="visually-hidden")
+        div.contenedor
+            section(class="products")
+                h2(class="section-title") Basado en tu ultima visita
+                    span Ver historial
+                div.products__item
+                    div.flex-item
 
     script(src="js/home.js" type="module")
+    script(src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0-beta1/dist/js/bootstrap.bundle.min.js") 
+    

@@ -42,7 +42,7 @@ class ContenedorMongo{
             const documents = await this.colection.find(filter);
             return documents;
         }else{
-            const { skip = 0, limit = 6 } = query;
+            const { skip = 0, limit = 5 } = query;
             
             const documents = await this.colection.find(filter)
                                     .skip( Number(skip) )

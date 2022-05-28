@@ -1,6 +1,5 @@
 mixin nav( user=false )
     -var enlace = "http://localhost:8000"
-    .header
     header(class="header")
         div(class="navegacion")
             div(class="contenedor")
@@ -12,7 +11,7 @@ mixin nav( user=false )
                         i(class="fa-solid fa-magnifying-glass iconInput")
                     div 
                         img(src=`${enlace}/img/D_NQ_877425-MLA47306668299_082021-OO.webp` class="imgHeight" alt="subscripcion disney")
-                div(class="navegacion__inferior")
+                nav(class="navegacion__inferior")
                     div(class="inferior--menu")
                         a(href="/", id="category") Categorías 
                         a(href="/") Ofertas

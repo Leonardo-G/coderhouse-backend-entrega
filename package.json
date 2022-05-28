@@ -5,7 +5,7 @@
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "sass": "sass --watch ./public/sass/pages/product.scss ./public/css/product.css"
+    "sass": "sass --watch ./public/sass/pages/home.scss ./public/css/home.css"
   },
   "keywords": [],
   "author": "",
@@ -27,5 +27,8 @@
     "nodemailer": "^6.7.5",
     "pug": "^3.0.2",
     "twilio": "^3.77.0"
+  },
+  "devDependencies": {
+    "bootstrap": "^5.2.0-beta1"
   }
 }
