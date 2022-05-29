@@ -17,8 +17,9 @@ body{
     height: auto;
 }
 
-legend, input, label, p, a, h1, h2, h3, button{
+legend, input, label, p, a, h1, h2, h3, button, li{
     font-family: "Proxima Nova", sans-serif;
+    letter-spacing: 0.1px;
 }
 
 a{

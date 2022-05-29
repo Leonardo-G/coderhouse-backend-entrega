@@ -17,8 +17,9 @@ body {
   height: auto;
 }
 
-legend, input, label, p, a, h1, h2, h3, button {
+legend, input, label, p, a, h1, h2, h3, button, li {
   font-family: "Proxima Nova", sans-serif;
+  letter-spacing: 0.1px;
 }
 
 a {
@@ -29,6 +30,7 @@ a {
 .contenedor {
   width: min(120rem, 98%);
   margin: 0 auto;
+  overflow: hidden;
 }
 
 .navegacion {
@@ -126,7 +128,7 @@ a {
 .page .product .product__img img {
   width: 100%;
   height: 100%;
-  object-fit: cover;
+  object-fit: contain;
 }
 .page .product .product__info {
   margin-top: 3rem;
@@ -139,9 +141,33 @@ a {
   color: rgba(0, 0, 0, 0.9);
 }
 .page .product .product__info .price {
-  margin: 1.5rem 0;
+  margin-top: 1.5rem;
   font-weight: 300;
   font-size: 3.6rem;
+}
+.page .product .product__info .cuota {
+  font-weight: 300;
+  font-size: 1.8rem;
+  font-family: "Proxima Nova", sans-serif;
+  color: rgba(0, 0, 0, 0.9);
+}
+.page .product .product__info .characteristics {
+  color: rgba(0, 0, 0, 0.9);
+  margin: 2rem 0;
+}
+.page .product .product__info .characteristics__title {
+  font-weight: 600;
+  font-size: 1.4rem;
+  margin-bottom: 2rem;
+}
+.page .product .product__info ul {
+  margin-left: 1.5rem;
+  padding: 0;
+}
+.page .product .product__info li {
+  font-size: 1.4rem;
+  font-weight: 400;
+  margin-top: 1rem;
 }
 .page .aside {
   flex: 1;

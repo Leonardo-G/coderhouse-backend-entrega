@@ -27,7 +27,7 @@ const getProducts = async () => {
 
     resp.products.forEach( product => {
         products.innerHTML += `
-            <a href="/" class='item'>
+            <a href='product/${product._id}' class='item'>
                 <div>
                     <img src= ${ product.imgProduct } class="img-item"/>
                 </div>
