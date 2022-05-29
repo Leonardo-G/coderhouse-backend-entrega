@@ -1,6 +1,7 @@
 const { response } = require("express");
 const { request } = require("express");
 const { Router } = require("express");
+const Server = require("../models/server");
 
 const router = Router();
 
@@ -45,6 +46,11 @@ router.get( "/product/:id", ( req, res ) => {
     const user = req.cookies.user;
     
     res.render("product", { user });
+})
+
+router.get( "/chat", ( req, res ) => {
+    const user = req.cookies.auth;
+    res.render("chat", { user });
 })
 
 

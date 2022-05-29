@@ -53,7 +53,7 @@ const createUser = async ( req = request, res = response ) => {
 
     const user = await Usuario.findOne({ email });
 
-    const token = await generateJWT({ id: user._id });
+    const token = await generateJWT({ id: user._id, username: user.username, email: user.email });
     res.cookie("auth", {
         token,
         user: {
@@ -85,7 +85,7 @@ const loginUser = async ( req = request, res = response ) => {
         return;
     }
 
-    const token = await generateJWT({id: getPassword._id});
+    const token = await generateJWT({id: getPassword._id, username: getPassword.username, email: getPassword.email});
     res.cookie("auth", {
         token,
         user: {

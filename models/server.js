@@ -10,6 +10,7 @@ class Server {
     constructor(){
         this.dotenvConfig = dotenv.config();
         this.app = express();
+        this.server = require('http').createServer(this.app);
         this.port = process.env.PORT || 8000;
         this.routes = {
             admin: "/admin",
@@ -48,17 +49,21 @@ class Server {
 
     router(){
         this.app.use("/", require("../routes/view"));
-        this.app.use(this.routes.auth, require("../routes/api/auth"));
         this.app.use(this.routes.admin, require("../routes/admin/admin"));
-
+        
         //api
+        this.app.use(this.routes.auth, require("../routes/api/auth"));
         this.app.use(this.routes.categories, require("../routes/api/category"));
         this.app.use(this.routes.products, require("../routes/api/products"));
         this.app.use(this.routes.cart, require("../routes/api/cart"));
     }
 
+    ioServer(){
+        return require('socket.io')(this.server)
+    }
+
     listen(){
-        this.app.listen(this.port, () => {
+        this.server.listen(this.port, () => {
             console.log("Servidor iniciado en", this.port);
         });
     }
