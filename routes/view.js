@@ -49,7 +49,10 @@ router.get( "/product/:id", ( req, res ) => {
 })
 
 router.get( "/chat", ( req, res ) => {
-    const user = req.cookies.auth;
+    const user = req.cookies?.auth;
+    if(!user){
+        return res.redirect("/auth/login");
+    }
     res.render("chat", { user });
 })
 

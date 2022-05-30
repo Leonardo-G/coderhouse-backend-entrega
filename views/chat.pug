@@ -4,11 +4,23 @@ html(lang="en")
         meta(charset="UTF-8")
         meta(http-equiv="X-UA-Compatible", content="IE=edge")
         meta(name="viewport", content="width=device-width, initial-scale=1.0")
+        link(href="http://fonts.cdnfonts.com/css/proxima-nova-2?styles=44819,44817,44821,44813,44815", rel="stylesheet")
+        script(src="https://kit.fontawesome.com/fe5071cad1.js", crossorigin="anonymous")
+        link(rel="stylesheet", href="./css/chat.css")
         title Document
     body 
-    h1 Chat
-    input(type="text", id="mensaje")
-    button(value="Enviar")
-    div.mensajes
+        include components/nav.pug
+        +nav(user)
+        main 
+            div.chat
+                div.chat__cabecera
+                    div.cebecera--nombre
+                        h2 Chat General 
+                            span Sacate las dudas entre los usuarios
+                div.mensajes
+                div.chat__input
+                    textarea(name="mensaje", placeholder="Escriba un mensaje...", id="mensaje")
+                    div(class="input--boton", id="mensaje__input") 
+                        i(class="fa-solid fa-paper-plane")
     script(src="/socket.io/socket.io.js")  
     script(src="/js/chat.js")

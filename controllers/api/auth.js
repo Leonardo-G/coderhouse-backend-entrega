@@ -57,8 +57,8 @@ const createUser = async ( req = request, res = response ) => {
     res.cookie("auth", {
         token,
         user: {
+            id: user._id,
             username: user.username,
-            email: user.email,
             imgUrl: user.imgUrl
         }
     }, { maxAge: 3600000} ).json({token})
@@ -89,8 +89,8 @@ const loginUser = async ( req = request, res = response ) => {
     res.cookie("auth", {
         token,
         user: {
+            id: getPassword._id,
             username: getPassword.username,
-            email: getPassword.email,
             imgUrl: getPassword.imgUrl
         }
     }, { maxAge: 3600000}).json({token})
