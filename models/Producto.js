@@ -25,6 +25,10 @@ const ProductoSchema = new Schema({
         type: [ String ],
         default: []
     },
+    stock:{
+        type: Number,
+        default: 0
+    },
     recommended: {
         type: Boolean,
         default: false

@@ -2,6 +2,8 @@ const { response } = require("express");
 const { request } = require("express");
 const cloudinary = require("cloudinary").v2;
 cloudinary.config(process.env.CLOUDINARY_URL);
+const ProductDTO = require("../../classes/ProductDTO"); 
+
 const twilio = require("twilio");
 
 const ProductDao = require("../../service/DAO/ProductDAO");
@@ -15,9 +17,13 @@ const getProducts = async ( req = request, res = response ) => {
             Product.findDocuments({}, { skip, limit })
         ]);
 
+    const productsDTO = products.map( product => {
+        return new ProductDTO(product);
+    })
+    
     res.status(200).json({
         totalProducts: total,
-        products
+        products: productsDTO.map( p => p.obj)
     })
 }
 
@@ -66,7 +72,7 @@ const getProductById = async ( req = request, res = response ) => {
 }
 
 const newProduct = async ( req = request, res = response ) => {
-    const { title, price, subCategory, category, characteristics } = req.body;
+    const { title, price, subCategory, category, characteristics, stock } = req.body;
 
     const img = req.files.imgProduct;
     const { secure_url } = await cloudinary.uploader.upload( img.tempFilePath, { file: `mercado-libre/${category}/${subCategory}`} );
@@ -76,6 +82,7 @@ const newProduct = async ( req = request, res = response ) => {
         price,
         subCategory,
         category,
+        stock,
         characteristics: JSON.parse(characteristics),
         imgProduct: [secure_url]
     }
@@ -87,23 +94,23 @@ const newProduct = async ( req = request, res = response ) => {
 }
 
 const sendSMS = async ( req, res ) => {
-    const sid = "ACb738cc0e66915be7c05e53f5d937260b";
-    const twilioToken = "ba9681d64cb819d353d4f6bb9f7d3402";
+    // const sid = "ACb738cc0e66915be7c05e53f5d937260b";
+    // const twilioToken = "ba9681d64cb819d353d4f6bb9f7d3402";
 
-    const client = twilio(sid, twilioToken);
-    console.log("HOLA")
+    // const client = twilio(sid, twilioToken);
+    // console.log("HOLA")
 
-    try {
-        const message = await client.messages.create({
-            messagingServiceSid: 'MG040fae6b301fbc5c644fd9de46dcc409',
-            body: 'Soy leo, si te llega este mensaje avisame',
-            to: '+541173654878'
-        })
-        res.json({message})
-        console.log(message)
-     } catch (error) {
-        console.log(error)
-     }
+    // try {
+    //     const message = await client.messages.create({
+    //         messagingServiceSid: 'MG040fae6b301fbc5c644fd9de46dcc409',
+    //         body: 'Soy leo, si te llega este mensaje avisame',
+    //         to: '+541173654878'
+    //     })
+    //     res.json({message})
+    //     console.log(message)
+    //  } catch (error) {
+    //     console.log(error)
+    //  }
      
 }
 
