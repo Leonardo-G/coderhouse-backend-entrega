@@ -37,6 +37,27 @@
         .product__info{
             margin-top: 3rem;
             flex: 1;
+            .info--head{
+                display: flex;
+                justify-content: space-between;
+                align-items: center;
+                .sold{
+                    color: rgba(0,0,0,0.55);
+                    font-size: 1.4rem;
+                    font-weight: 400;
+                    white-space: pre-wrap;
+                }
+                .icon--fav{
+                    font-size: 2.4rem;
+                    color: $col-blue;
+                    cursor: pointer;
+                    transition: .2s ease-in-out all;
+                    &:hover{
+                        color: $col-black-1;
+                        transition: .2s ease-in-out all;
+                    }
+                }
+            }
             h1{
                 font-size: 2.2rem;
                 margin: 1rem 0rem;
@@ -44,15 +65,28 @@
                 color: rgba(0,0,0,.9);
             }
             .price{
-                margin-top: 1.5rem;
                 font-weight: 300;
                 font-size: 3.6rem;
+                display: flex;
+                align-items: center;
+                column-gap: 0.7rem;
+                line-height: 1;
+            }
+            .price--old{
+                font-size: 1.6rem;
+                color: rgba(0,0,0,.55);
+                text-decoration: dashed;
+                text-decoration: line-through;
+            }
+            .descuento{
+                font-size: 1.8rem;
+                color: $col-green;
             }
             .cuota{
-                font-weight: 300;
+                font-weight: 400;
                 font-size: 1.8rem;
                 font-family: "Proxima Nova", sans-serif;
-                color: rgba(0,0,0,.9);
+                color: $col-green;
             }
             .characteristics{
                 color: $col-black-1;

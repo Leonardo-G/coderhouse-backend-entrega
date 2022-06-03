@@ -20,7 +20,7 @@ const getProducts = async ( req = request, res = response ) => {
     const productsDTO = products.map( product => {
         return new ProductDTO(product);
     })
-    
+    console.log(productsDTO);
     res.status(200).json({
         totalProducts: total,
         products: productsDTO.map( p => p.obj)
@@ -67,8 +67,8 @@ const getProductById = async ( req = request, res = response ) => {
     }
 
     const product = await Product.findDocumentById(id);
-    
-    res.status(200).json(product);
+    const { obj } = new ProductDTO(product)
+    res.status(200).json(obj);
 }
 
 const newProduct = async ( req = request, res = response ) => {

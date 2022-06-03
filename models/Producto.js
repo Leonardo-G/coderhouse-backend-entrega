@@ -5,9 +5,15 @@ const ProductoSchema = new Schema({
         type: String,
         required: true
     },
-    price: {
-        type: String,
-        required: true
+    typePrice: {
+        current: {
+            type: Number,
+            required: true
+        },
+        old: {
+            type: Number,
+            default: 0      // Si el valor es 0, significa que no tenemos precio anterior o no hay descuento
+        }
     },
     imgProduct: {
         type: [ String ],
@@ -29,9 +35,18 @@ const ProductoSchema = new Schema({
         type: Number,
         default: 0
     },
+    delivery: {                 //Tipo de entrega -- DELIVERY
+        type: Number,           //   0  --- El producto no dispone de envío por Mercado Libre,
+        enum: [0, 1, 2],        //   1  --- El producto dispone de envio gratis.
+        default: 0              //   2  --- El producto dispone de envio gratis - FULL 
+    },
     recommended: {
         type: Boolean,
         default: false
+    },
+    sold: {
+        type: Number,
+        default: 0
     }
 })
 

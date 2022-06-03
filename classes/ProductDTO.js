@@ -1,8 +1,11 @@
 class ProductDTO{
     constructor({ _v, ...obj }){
         this.obj = {
-            priceFormat: Number(obj._doc.price).toLocaleString("es-AR"),
-            ...obj._doc
+            ...obj._doc,
+            typePrice: {
+                ...obj._doc.typePrice,
+                priceFormat: Number(obj._doc.typePrice.current).toLocaleString("es-AR"),
+            }
         }
     }
 }
