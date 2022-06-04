@@ -1,6 +1,5 @@
 const { Router } = require("express");
 const { signInVista, createUser, loginVista, loginUser, signOffUser } = require("../../controllers/api/auth");
-const { authSession } = require("../../middlewares/sessions");
 
 const router = Router();
 

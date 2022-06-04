@@ -60,7 +60,7 @@ const getSubCategory = async () => {
                 : noBlock
             }
             <button class="payment__button button--buy">Comprar ahora</button>
-            <button class="payment__button button--add">Agregar al carrito</button>
+            <button class="payment__button button--add" onClick='addProduct()'>Agregar al carrito</button>
             <div class="payment_info">
                 <div class="info--p">
                     <i class="fa-solid fa-share"></i>
@@ -92,8 +92,23 @@ const dayDelivery = (day) => {
         deliveryDay = new Date(dayNext2).toLocaleDateString("es-AR", {weekday: 'long'});
     }
     if( day === 2 ){
-        deliveryDay = "mañana"
+        deliveryDay = "mañana";
     }
     
     return deliveryDay;
+}
+
+const addProduct = async () => {
+    let cookie = (decodeURIComponent(document.cookie).split("auth=j:")[1])
+    if(!cookie){
+        window.location.href = "/auth/login";
+    }
+    console.log(cookie)
+    cookie = JSON.parse(cookie).token;
+    console.log(cookie);
+
+    // const res = fetch("http://localhost:8000/api/cart", {
+
+    // })
+
 }

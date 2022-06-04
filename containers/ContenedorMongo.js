@@ -67,17 +67,14 @@ class ContenedorMongo{
             throw new Error("El tipo de dato tiene que ser de tipo 'OBJECT'");
         }
 
-        const document = await this.colection.findOneAndUpdate(filter, {$set: object}, { new: true }, (err, obj) => {
-            if( err ){
-                return new Error(err);
-            }
-    
-            if(!obj){
-                return new Error("No se encontro el carrito del usuario");
-            }    
+        try {
+            const document = await this.colection.findOneAndUpdate(filter, {$set: object}, { new: true });
+            
             return document
-        })
-        return document
+        
+        } catch (error) {
+            console.log(error)    
+        }
     }
 }
 

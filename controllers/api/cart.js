@@ -20,27 +20,18 @@ const getCart = async ( req = request, res = response ) => {
 }
 
 const createCart = async ( req = request, res = response ) => {
+    //Si se llega al controller, es porque existe un usuario que se válido en el middleware 'validateJWT'
     
-    const { cartUser } = req.body;
-
     try {
-        const user = await Usuario.findDocumentById(cartUser);
-        
-        if(!user){
-            return res.status(404).json({
-                msg: `No se encontro un usuario con el 'id' ${ cartUser }`
-            })
-        }
-        
-        const isExistCart = await Cart.findOneDocument({ cartUser });
+        const isExistCart = await Cart.findOneDocument({ cartUser: req.id });
         
         if(isExistCart){
             return res.status(401).json({
-                msg: `Ya existe un carrito del usuario con el ID ${cartUser}`
+                msg: `Ya existe un carrito del usuario con el ID ${req.id}`
             })
         }
         
-        const cart = Cart.createDocument({cartUser, productsCart: []});
+        const cart = await Cart.createDocument({cartUser: req.id, productsCart: []});
         res.status(201).json(cart)
     } catch (error) {
         console.log(error);
@@ -52,26 +43,32 @@ const createCart = async ( req = request, res = response ) => {
 }
 
 const updateCart = async ( req = request, res = response ) => {
-    const { id } = req.params;
 
-    const isExistCart = await Cart.findOneDocument({ id });
+    const isExistCart = await Cart.findOneDocument({ cartUser: req.id });
+    
     if( !isExistCart ){
         return res.status(401).json({
-            msg: `No existe un carrito del usuario ${ id }. Primero crear el carrito en /api/cart/:id con el método POST`
+            msg: `No existe un carrito del usuario ${ req.id }. Primero crear el carrito en /api/cart con el método POST`
         })
     }
 
     const { productsCart } = req.body;
-    const cart = await Cart.findOneAndUpdate({ userCart: id }, { $set: { productsCart } }, { new: true });
+    let cart;
+
+    const cartProducts = isExistCart.productsCart.filter( c => c.idProduct != productsCart[0].idProduct );
+    
+    if( productsCart[0].quantity === 0 ){
+        //si el producto modificado tiene como 'quantity' == 0, se eliminara del carrito
+        cart = await Cart.findDocumentAndUpdate({ cartUser: req.id }, { productsCart: [...cartProducts] });
+    }else {
+        cart = await Cart.findDocumentAndUpdate({ cartUser: req.id }, { productsCart: [...cartProducts, ...productsCart] });
+    }
     
     res.status(201).json(cart);
-
 }
 
 const clearCart = async ( req = request, res = response ) => {
-    const { id } = req.params;
-
-    const cart = await Cart.findDocumentAndUpdate({ cartUser: id}, { productsCart: [] })
+    const cart = await Cart.findDocumentAndUpdate({ cartUser: req.id}, { productsCart: [] })
     
     res.json(cart);
 }
