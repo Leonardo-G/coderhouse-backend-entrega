@@ -25,6 +25,7 @@ legend, input, textarea, label, p, a, h1, h2, h3, button, li, span {
 a {
   font-size: 1.4rem;
   text-decoration: none;
+  color: rgba(0, 0, 0, 0.9);
 }
 
 .contenedor {
@@ -109,6 +110,7 @@ a {
   flex: 2.5;
   display: flex;
   column-gap: 3rem;
+  padding-bottom: 4rem;
 }
 .page .product img {
   width: 100%;
@@ -307,6 +309,27 @@ a {
 }
 .page .aside .payment_info .info--p p {
   color: rgba(0, 0, 0, 0.55);
+}
+.page .description {
+  padding: 4rem 3rem;
+}
+.page .description .descripion__title {
+  font-size: 2.4rem;
+  font-weight: 400;
+}
+.page .description .pre {
+  white-space: pre-wrap;
+  font-size: 2rem;
+  color: #666;
+  margin-top: 2.5rem;
+  line-height: 1.35;
+}
+
+hr {
+  margin: 0rem 3rem;
+  border-top: 1px solid rgba(0, 0, 0, 0.1);
+  border-bottom: none;
+  height: 1px;
 }
 
 /*# sourceMappingURL=product.css.map */

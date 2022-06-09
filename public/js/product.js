@@ -1,10 +1,11 @@
+const pathProduct = window.location.href.split("/");
+const product = pathProduct[pathProduct.length - 1]; 
+
 document.addEventListener("DOMContentLoaded", () => {
     getSubCategory();
 })
 
 const getSubCategory = async () => {
-    const pathProduct = window.location.href.split("/");
-    const product = pathProduct[pathProduct.length - 1]; 
     const divBoxProduct = document.querySelector(".product");
     const divPayment = document.querySelector(".payment");
     try {
@@ -78,6 +79,7 @@ const getSubCategory = async () => {
         `;
 
         document.title = resp.title;
+        description(resp.description);
     } catch (error) {
         console.log(error);
     }
@@ -99,16 +101,48 @@ const dayDelivery = (day) => {
 }
 
 const addProduct = async () => {
-    let cookie = (decodeURIComponent(document.cookie).split("auth=j:")[1])
+    let cookie = (decodeURIComponent(document.cookie).split("auth=j:")[1]);
+    const quantityProduct = document.querySelector(".payment__select input").value;
+
     if(!cookie){
         window.location.href = "/auth/login";
     }
-    console.log(cookie)
+    
     cookie = JSON.parse(cookie).token;
-    console.log(cookie);
+    try {
+        const res = await fetch("http://localhost:8000/api/cart/modify", {
+            method: "PUT",
+            body: JSON.stringify({
+                productsCart: [{
+                    idProduct: product,
+                    quantity: Number(quantityProduct)
+                }]
+            }),
+            headers: {
+                "auth-token": cookie,
+                "Content-Type": "application/json"
+            }
+        })
+    
+        const resp = await res.json();
 
-    // const res = fetch("http://localhost:8000/api/cart", {
+        if(res.status !== 201){
+            throw new Error(resp)
+        }
+        
+        window.location.href = "/cart"
+    } catch (error) {
+        window.location.href = "/auth/login";
+        console.log(error)
+    }
 
-    // })
+}
 
+const description = (desc) => {
+    const divDescription = document.querySelector(".description");
+
+    divDescription.innerHTML += `
+        <h2 class="descripion__title">Descripción</h2>
+        <p class="pre">${ desc }</p>
+    `
 }

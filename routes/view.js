@@ -1,7 +1,7 @@
 const { response } = require("express");
 const { request } = require("express");
 const { Router } = require("express");
-const Server = require("../models/server");
+const instanceFunction = require("../helpers/configAxios");
 
 const router = Router();
 
@@ -37,14 +37,21 @@ router.get( "/category/:subcategories", ( req, res ) => {
 })
 
 router.get( "/products/:subcategory", ( req, res ) => {
-    const user = req.cookies.auth;
+    const user = req.cookies?.auth;
     console.log(user)
     res.render("products", { user })
 })
 
 router.get( "/product/:id", ( req, res ) => {
-    const user = req.cookies.user;
-    
+    const user = req.cookies?.auth;
+
+    instanceFunction().get("/api/products/product/627f26a7f17b38028ead80e6")
+    .then( r => {
+        const resp = r.data;
+        console.log("Funciona la API");
+    })
+    .catch( err => console.log("No funciona la API", err))
+
     res.render("product", { user });
 })
 

@@ -9,6 +9,9 @@ const twilio = require("twilio");
 const ProductDao = require("../../service/DAO/ProductDAO");
 const Product = new ProductDao();
 
+const UserDAO = require("../../service/DAO/UsuarioDAO");
+const User = new UserDAO();
+
 const getProducts = async ( req = request, res = response ) => {
     const { skip, limit } = req.params;
     
@@ -93,6 +96,28 @@ const newProduct = async ( req = request, res = response ) => {
 
 }
 
+const updateProduct = async ( req = request, res = response ) => {
+    const { id } = req.params;
+
+    const product = await Product.findOneDocument( { byUser: req.id, _id: id } ); //REQ.ID, proviene del VALIDATEJWT.js
+
+    if(!product){
+        res.status(404).json({
+            msg: "No se encontro el producto. "
+        })
+    }
+
+    if( product.byUser != req.id ){
+        res.status(404).json({
+            msg: "El usuario no puede acceder a un producto que no haya creado"
+        })
+    }
+    
+    const userUpdate = await Product.findDocumentAndUpdate({ byUser: req.id, _id: id }, req.body)
+   
+    res.status(201).json(userUpdate);
+}
+
 const sendSMS = async ( req, res ) => {
     // const sid = "ACb738cc0e66915be7c05e53f5d937260b";
     // const twilioToken = "ba9681d64cb819d353d4f6bb9f7d3402";
@@ -120,5 +145,6 @@ module.exports = {
     getProductsBySubCategory,
     getProductById,
     newProduct,
+    updateProduct,
     sendSMS
 }

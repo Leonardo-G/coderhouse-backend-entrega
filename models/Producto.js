@@ -1,6 +1,11 @@
 const { Schema, model } = require("mongoose");
 
 const ProductoSchema = new Schema({
+    //El id del usuario que publico el producto
+    byUser: {
+        type: Schema.Types.ObjectId,
+        ref: "Usuario"
+    },
     title: {
         type: String,
         required: true
@@ -47,6 +52,10 @@ const ProductoSchema = new Schema({
     sold: {
         type: Number,
         default: 0
+    },
+    description:{
+        type: String,
+        required: true
     }
 })
 

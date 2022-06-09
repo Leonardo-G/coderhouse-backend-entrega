@@ -33,8 +33,8 @@ const getProducts = async () => {
                 </div>
                 <div class='item__info'>
                     <div class='info-numero'>
-                        <p class='info-precio'> $ ${product.price} </p>
-                        <p class='info-descuento'>40% OFF</p>
+                        <p class='info-precio'> $ ${product.typePrice.priceFormat} </p>
+                        ${ product.typePrice.old !== 0 ? `<p class='info-descuento'> ${Math.round((product.typePrice.old - product.typePrice.current) / (product.typePrice.old / 100))} % OFF</p>` : "<p style={'display': 'none'}></p>" }
                     </div>
                     <p class='item-cuotas'>6x $ 999.83 sin interés</p>
                     <div class='item-envio'>
@@ -51,3 +51,17 @@ const getProducts = async () => {
         `
     })
 }
+
+const botonID = document.querySelector("#botonID");
+botonID.addEventListener("click", async () => {
+    const mensaje = document.querySelector("textarea").value;
+    const obj = {
+        mensaje
+    }
+
+    console.log(JSON.stringify(obj))
+    // const res = await fetch("http://localhost:8000/api/products/627f26a7f17b38028ead80e6", {
+    //     method: "PUT",
+    //     body: 
+    // })
+})
