@@ -15,7 +15,7 @@ html(lang="en")
         main
             div(class="box-color")
             div(class="box-form")
-                form(class="form" method="POST" action="http://localhost:8000/api/auth/login")
+                form(class="form" id="form")
                     legend(class="form__title") Hola! Complete los datos para ingresar   
                     div(class="form__campo")
                         label(for="email") email
@@ -23,13 +23,15 @@ html(lang="en")
                     div(class="form__campo")
                         label(for="password") Contraseña
                         input(type="password" name="password")   
-                    if ( error )
-                        p(style={color: "red", "font-size": "1.6rem"}) #{type}
+                    div(id="error" style={"display": "none"})
+                        //- p(style={color: "red", "font-size": "1.6rem"}) #{type}
                     input(type="submit", value="Continuar", class="btn--auth") 
                 hr(class="line")
                 div(class="form-help")
                     p Necesito ayuda para ingresar
         footer 
             p Entrega del curso de desarrollo Backend - Guanuco, Leonardo
+        
+    script(src="/js/auth/login.js") 
             
     

@@ -2,10 +2,12 @@ const { response, request } = require("express");
 const bcrypt = require("bcryptjs");
 const cloudinary = require("cloudinary").v2;
 cloudinary.config( process.env.CLOUDINARY_URL );
-const transporter = require("../../helpers/configNodemailer");
 
-const Usuario = require("../../models/Usuario");
+const transporter = require("../../helpers/configNodemailer");
 const generateJWT = require("../../helpers/generateJWT");
+
+const UsuarioDAO = require("../../service/DAO/UsuarioDAO");
+const Usuario = new UsuarioDAO();
 
 
 const createUser = async ( req = request, res = response ) => {
@@ -66,17 +68,17 @@ const createUser = async ( req = request, res = response ) => {
 
 const loginUser = async ( req = request, res = response ) => {
     const { email, password } = req.body;
-
-    const getPassword = await Usuario.findOne({ email });
-
-    if( !getPassword ){
+    
+    const getUser = await Usuario.findOneDocument({ email });
+    
+    if( !getUser ){
         res.status(401).json({
             msg: "No hay un usuario registrado con este email"
         })
         return;
     }
 
-    const comparePassword = bcrypt.compareSync( password, getPassword.password );
+    const comparePassword = bcrypt.compareSync( password, getUser.password );
 
     if(!comparePassword){
         res.status(401).json({
@@ -85,13 +87,13 @@ const loginUser = async ( req = request, res = response ) => {
         return;
     }
 
-    const token = await generateJWT({id: getPassword._id, username: getPassword.username, email: getPassword.email});
+    const token = await generateJWT({id: getUser._id, username: getUser.username, email: getUser.email});
     res.cookie("auth", {
         token,
         user: {
-            id: getPassword._id,
-            username: getPassword.username,
-            imgUrl: getPassword.imgUrl
+            id: getUser._id,
+            username: getUser.username,
+            imgUrl: getUser.imgUrl
         }
     }, { maxAge: 3600000}).json({token})
 }

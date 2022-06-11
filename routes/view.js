@@ -11,6 +11,12 @@ router.get( "/auth/sign-in", ( req = request, res = response ) => {
     if(token){
         res.redirect("/");
     }else{
+        instanceFunction().post("/api/auth/sign-in")
+            .then( resp => {
+                console.log(resp.json());
+            })
+            .catch( err => console.log(err))
+
         res.status(200).render("auth/sign-in");
     }
 })
