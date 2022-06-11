@@ -8,15 +8,10 @@ const router = Router();
 router.get( "/auth/sign-in", ( req = request, res = response ) => {
 
     const token = req.cookies?.auth;
+
     if(token){
         res.redirect("/");
     }else{
-        instanceFunction().post("/api/auth/sign-in")
-            .then( resp => {
-                console.log(resp.json());
-            })
-            .catch( err => console.log(err))
-
         res.status(200).render("auth/sign-in");
     }
 })
@@ -30,10 +25,13 @@ router.get( "/auth/login", ( req = request, res = response ) => {
     }
 });
 
-router.get( "/", ( req, res ) => {
+router.get( "/", async ( req, res ) => {
     const user = req.cookies?.auth;
+
+    const respuesta = await instanceFunction().get("/api/products");
+    const resp = await respuesta.data;
     
-    res.render("home", { user });
+    res.render("home", { user, resp });
 })
 
 router.get( "/category/:subcategories", ( req, res ) => {

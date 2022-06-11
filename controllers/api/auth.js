@@ -14,14 +14,32 @@ const createUser = async ( req = request, res = response ) => {
 
     const { username, password, email, password_repeat } = req.body;
 
+    if( !(username && password && email) ){
+        res.status(401).json({ 
+            msg: "Todos los campos son requeridos"
+        });
+        return;
+    }
+    
     if( password !== password_repeat){
-        res.render("auth/sign-in", { error: true, type: "No coinciden las contraseñas"});
+        res.status(401).json({ 
+            msg:"No coinciden las contraseñas"
+        })
         return;
     }
 
-    if( !(username && password && email) ){
-        res.render("auth/sign-in", { error: true, type: "Todos los campos son requeridos"});
-        return;
+    const isExistUsername = await Usuario.findOneDocument({ username });
+    if(isExistUsername){
+        return res.status(401).json({
+            msg: `El nombre de usuario ${ username } ya existe`
+        })
+    }
+
+    const isExistEmail = await Usuario.findOneDocument({ email });
+    if(isExistEmail){
+        return res.status(401).json({
+            msg: `El email ${email} ya existe`
+        })
     }
 
     const salt = bcrypt.genSaltSync(10);
@@ -33,13 +51,12 @@ const createUser = async ( req = request, res = response ) => {
         email,
         imgUrl: "https://res.cloudinary.com/dyxqlscek/image/upload/v1652413276/mercado-libre/general/perfil-vacio_tnctto.webp"
     }
-    
-    const usuario = new Usuario( obj );
-    await usuario.save();
 
-    //Envío de correo de bienvenida
+    const userCreate = await Usuario.createDocument(obj);
+
+    //Envío de correo de bienvenida al usuario registrado.
     await transporter.sendMail({
-        from: ' Bienvenido a MercadoLibre <foo@example.com>', // sender address
+        from: ' Bienvenido a MercadoLibre <${email}>', // sender address
         to: email, // list of receivers
         subject: "Se ha registrado MercadoLibre | clon ✔", // Subject line
         html: "<h1>Bienvenido a nuesto sitio</h1>", // html body
@@ -53,15 +70,13 @@ const createUser = async ( req = request, res = response ) => {
         html: "<h1>Nuevo usuario registrado</h1>", // html body
     });
 
-    const user = await Usuario.findOne({ email });
-
-    const token = await generateJWT({ id: user._id, username: user.username, email: user.email });
+    const token = await generateJWT({ id: userCreate._id, username: userCreate.username, email: userCreate.email });
     res.cookie("auth", {
         token,
         user: {
-            id: user._id,
-            username: user.username,
-            imgUrl: user.imgUrl
+            id: userCreate._id,
+            username: userCreate.username,
+            imgUrl: userCreate.imgUrl
         }
     }, { maxAge: 3600000} ).json({token})
 }

@@ -24,8 +24,9 @@ html(lang="en")
                         label(for="password") Contraseña
                         input(type="password" name="password")   
                     div(id="error" style={"display": "none"})
-                        //- p(style={color: "red", "font-size": "1.6rem"}) #{type}
                     input(type="submit", value="Continuar", class="btn--auth") 
+                    p(class="registro") No tiene cuenta? 
+                        a(href="/auth/sign-in") Registrate
                 hr(class="line")
                 div(class="form-help")
                     p Necesito ayuda para ingresar

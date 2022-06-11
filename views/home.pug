@@ -1,4 +1,6 @@
 -var enlace = "http://localhost:8000"
+include components/nav.pug
+include components/item-card.pug
 doctype html
 html(lang="en")
     head
@@ -10,7 +12,6 @@ html(lang="en")
         link(rel="stylesheet", href="../css/home.css")
         title Mercado Libre | Home
     body 
-    include components/nav.pug
     +nav(user)
     main
         div(id="carouselExampleIndicators" class="carousel slide carousel--personality" data-bs-ride="true")
@@ -33,13 +34,12 @@ html(lang="en")
                 span(class="visually-hidden")
         div.contenedor
             section(class="products")
-                h2(class="section-title") Basado en tu ultima visita
-                    span Ver historial
+                h2(class="section-title") Lo más seleccionado
                 div.products__item
                     div.flex-item
-    textarea(name="mensaje", cols="30", rows="10") 
-    button(value="ver mensaje" id="botonID") 
+                        for product in resp.products 
+                            +item-card(product)
 
-    script(src="js/home.js" type="module")
+    script(src="js/home.js")
     script(src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0-beta1/dist/js/bootstrap.bundle.min.js") 
     

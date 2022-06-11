@@ -27,6 +27,19 @@ nav{
     height: 23rem;
 }
 
+.registro, .login{
+    margin-top: 1rem;
+    font-size: 1.4rem;
+    color: rgba(0, 0, 0, 0.9);
+    a{
+        color: $col-blue;
+        font-weight: 400;
+        &:hover{
+            text-decoration: underline;
+        }
+    }
+}
+
 footer{
     background-color: #fff;
     width: 100%;

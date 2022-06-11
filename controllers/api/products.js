@@ -23,7 +23,7 @@ const getProducts = async ( req = request, res = response ) => {
     const productsDTO = products.map( product => {
         return new ProductDTO(product);
     })
-    console.log(productsDTO);
+    
     res.status(200).json({
         totalProducts: total,
         products: productsDTO.map( p => p.obj)
