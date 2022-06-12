@@ -1,0 +1,8 @@
+mixin card-subCategory(subCategory)
+    div(class="subCategory")
+        div(class="subCategory__info")
+            p(class="info") #{subCategory.subCategory}
+            h3(class="title") hasta 20% off y 12x sin interés 
+            a(class="btn--a" href=`/products/${subCategory.subCategory}`) Ver más
+        div(class="subCategory__img")
+            img(src=`${subCategory.imgSubCategory}`)

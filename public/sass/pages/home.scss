@@ -1,6 +1,7 @@
 @import "../base/variables";
 @import "../base/base";
 @import "../components/nav";
+@import "../components/cardSubCategory";
 
 //Bootstrap
 @import "../../../node_modules/bootstrap/scss/functions";
@@ -12,6 +13,20 @@
 
 
 @import "../../../node_modules/bootstrap/scss/carousel";
+
+.section-title{
+    font-family: $fue-1;
+    font-size: 2.6rem;
+    font-weight: 300;
+    color: #666;
+    margin: 2rem 0;
+    span{
+        margin-left: 2rem;
+        font-size: 1.6rem;
+        color: $col-blue;
+        font-weight: 300;
+    }
+}
 
 .carousel--personality{
     img{
@@ -25,20 +40,7 @@
     margin: 8rem 0;
     .products__item{
         position: relative;
-        height: 30rem;
-    }
-    .section-title{
-        font-family: $fue-1;
-        font-size: 2.6rem;
-        font-weight: 300;
-        color: #666;
-        margin: 2rem 0;
-        span{
-            margin-left: 2rem;
-            font-size: 1.6rem;
-            color: $col-blue;
-            font-weight: 300;
-        }
+        height: 35rem;
     }
 }
 
@@ -85,7 +87,7 @@
         font-size: 1.4rem;
     }
     .item-cuotas{
-        color: #333;
+        color: $col-green;
         font-size: 1.4rem;
         padding-top: 0.5rem;
     }
@@ -144,5 +146,112 @@
     &:hover{
         color: #000;
         transition: 0.2s;
+    }
+}
+
+.subscripcion{
+    background-color: #fff;
+    margin: 4rem 0;
+    border-radius: 6px;
+    p{
+        font-size: 1.4rem;
+    }
+    .subscripcion__costo{
+        background: linear-gradient(90deg,#a90f90 55%,#0c1a51);
+        display: flex;
+        align-items: center;
+        color: #fff;
+        justify-content: space-between;
+        padding: 1.6rem 2.4rem;
+        border-radius: 6px 6px 0 0;
+        .costo-nivel{
+            font-size: 2.6rem;
+            font-weight: 600;
+        }
+        .costo-info{
+            font-weight: 600;
+            .info-precio{
+                font-size: 2.4rem;
+            }
+        }
+    }
+    .subscripcion__sub{
+        padding: 2rem 2.4rem;
+        font-size: 1.8rem;
+    }
+    .costo-beneficios{
+        display: flex;
+        justify-content: space-between;
+        padding: 3rem 2.4rem;
+        .beneficios-info{
+            display: flex;
+            align-items: center;
+            column-gap: 2rem;
+            flex: 1;
+        }
+        img{
+            width: 7.2rem;
+        }
+    }
+    .subscripcion__btn{
+        padding: 1.5rem 2.4rem;
+        border-top: 1px solid #ededed;
+        .subscripcion-esp{
+            padding: 1.8rem 0;
+            text-align: right;
+        }
+        a{
+            margin-top: 10rem;
+            background-color: $col-blue;
+            color: #fff;
+            transition: background-color .2s ease-in;
+            padding: 1.2rem 2.4rem;
+            border-radius: 6px;
+            &:hover{
+                background-color:#2968c8;
+            }
+        }
+    }
+}
+
+.descubrir{
+    margin: 6rem 0;
+}
+
+.flex-container{
+    display: flex;
+    column-gap: 2.5rem;
+}
+
+//////GRID
+.grid-container{
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax( 20rem, 1fr ));
+}
+
+.categories{
+    margin: 5rem 0;
+}
+
+.category{
+    background-color: #fff;
+    text-align: center;
+    padding: 3rem 1rem;
+    border: 1px solid #eae6e6;
+    cursor: pointer;
+    .icon--category{
+        font-size: 4.4rem;
+        color: $col-blue;
+    }
+    .category__title{
+        font-size: 1.4rem;
+        margin-top: 1rem;
+        font-weight: 300
+    }
+    &:hover .icon--category, &:hover .category__title{
+        color: #fff;
+    }
+    &:hover{
+        background-color: $col-blue;
     }
 }

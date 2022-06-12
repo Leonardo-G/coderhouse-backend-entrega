@@ -5,6 +5,6 @@ const router = Router();
 
 router.get( "/", getCategories );
 
-router.get( "/subcategories/:category", getSubCategories);
+router.get( "/:category/subcategories", getSubCategories);
 
 module.exports = router;

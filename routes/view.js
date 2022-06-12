@@ -28,10 +28,15 @@ router.get( "/auth/login", ( req = request, res = response ) => {
 router.get( "/", async ( req, res ) => {
     const user = req.cookies?.auth;
 
-    const respuesta = await instanceFunction().get("/api/products");
-    const resp = await respuesta.data;
-    
-    res.render("home", { user, resp });
+    const [ resp1, resp2 ] = await Promise.all([
+        instanceFunction().get("/api/products"),
+        instanceFunction().get("api/category/herramientas/subcategories?limit=2")
+    ])
+
+    const productsAll = await resp1.data;
+    const subCategories = await resp2.data;
+
+    res.render("home", { user, productsAll, subCategories });
 })
 
 router.get( "/category/:subcategories", ( req, res ) => {

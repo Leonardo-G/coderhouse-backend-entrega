@@ -1,6 +1,7 @@
 -var enlace = "http://localhost:8000"
 include components/nav.pug
 include components/item-card.pug
+include components/card-subCategory
 doctype html
 html(lang="en")
     head
@@ -37,9 +38,43 @@ html(lang="en")
                 h2(class="section-title") Lo más seleccionado
                 div.products__item
                     div.flex-item
-                        for product in resp.products 
+                        for product in productsAll.products 
                             +item-card(product)
-
-    script(src="js/home.js")
+            section(class='subscripcion')
+                div(class='subscripcion__costo')
+                    p(class='costo-nivel') Subscribite al nivel 2
+                    div(class='costo-info')
+                        p Desde
+                        span(class='info-precio') $ 599 /mes
+                        p Según tu nivel
+                p(class='subscripcion__sub') Conseguí los mejores beneficios en Mercado Libre y Mercado Pago
+                div(class='costo-beneficios')
+                    div(class='beneficios-info')
+                        img(src="/img/subscripcion/d+.svg" alt="beneficio-1 disney")
+                        p Disney+ sin cargo
+                    div(class='beneficios-info')
+                        img(src="/img/subscripcion/star+.svg" alt="beneficio-2 star")
+                        p Star+ sin cargo
+                    div(class='beneficios-info')
+                        img(src="/img/subscripcion/sub-3.png" alt="beneficio-3 envios")
+                        p Envíos gratis y rápidos desde $ 4.000 y 45% OFF en envíos de menos de $ 4.000
+                div(class='subscripcion__btn')
+                    div(class='subscripcion-esp')
+                        a(href="/") Subscribete
+            section(class="descubrir")
+                h2(class="section-title") Descubrí
+                div(class="flex-container")
+                    for subCategory in subCategories 
+                        +card-subCategory(subCategory)
+            section(class="categories")
+                h2(class="section-title") Categorías populares
+                div(class="grid-container")
+                    div(class="category")
+                        i(class="fa-solid fa-car icon--category")
+                        p(class="category__title") Autos, Motos y Otros
+                    div(class="category")
+                        i(class="fa-solid fa-display icon--category")
+                        p(class="category__title") Computación 
+    //- script(src="js/home.js")
     script(src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0-beta1/dist/js/bootstrap.bundle.min.js") 
     

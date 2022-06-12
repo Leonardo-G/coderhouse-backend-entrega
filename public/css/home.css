@@ -17,13 +17,15 @@ body {
   height: auto;
 }
 
-legend, input, label, p, a, h1, h2, h3, button {
+legend, input, textarea, label, p, a, h1, h2, h3, button, li, span {
   font-family: "Proxima Nova", sans-serif;
+  letter-spacing: 0.1px;
 }
 
 a {
   font-size: 1.4rem;
   text-decoration: none;
+  color: rgba(0, 0, 0, 0.9);
 }
 
 .contenedor {
@@ -95,6 +97,55 @@ a {
 }
 .navegacion .iconKart {
   font-size: 1.6rem;
+}
+
+.subCategory {
+  flex: 1;
+  display: flex;
+  column-gap: 3rem;
+  height: 25rem;
+  border-radius: 6px;
+  background-color: #fff;
+  align-items: center;
+  padding: 0.5rem 0.5rem 0.5rem 2rem;
+  text-transform: capitalize;
+}
+.subCategory .subCategory__info {
+  flex: 1;
+  text-transform: uppercase;
+  color: #4b4b4b;
+}
+.subCategory .subCategory__info .info {
+  margin-bottom: 1.5rem;
+  font-size: 1.4rem;
+  letter-spacing: 3px;
+}
+.subCategory .subCategory__info .title {
+  font-size: 2.8rem;
+  margin-bottom: 1.5rem;
+}
+.subCategory .subCategory__img {
+  flex: 0.6;
+}
+.subCategory img {
+  width: 100%;
+  object-fit: cover;
+  height: 100%;
+}
+.subCategory .btn--a {
+  font-size: 1.4rem;
+  background-color: #3483fa;
+  display: inline-block;
+  padding: 1rem 2.5rem;
+  color: #fff;
+  font-weight: 600;
+  border-radius: 2px;
+  font-size: 1.4rem;
+  transition: background-color 0.2s ease-in;
+}
+.subCategory .btn--a:hover {
+  background-color: #1259c3;
+  transition: background-color 0.2s ease-in;
 }
 
 :root {
@@ -373,6 +424,20 @@ a {
   color: #000;
 }
 
+.section-title {
+  font-family: "Proxima Nova", sans-serif;
+  font-size: 2.6rem;
+  font-weight: 300;
+  color: #666;
+  margin: 2rem 0;
+}
+.section-title span {
+  margin-left: 2rem;
+  font-size: 1.6rem;
+  color: #3483fa;
+  font-weight: 300;
+}
+
 .carousel--personality img {
   width: 100%;
   height: 34rem;
@@ -384,20 +449,7 @@ a {
 }
 .products .products__item {
   position: relative;
-  height: 30rem;
-}
-.products .section-title {
-  font-family: "Proxima Nova", sans-serif;
-  font-size: 2.6rem;
-  font-weight: 300;
-  color: #666;
-  margin: 2rem 0;
-}
-.products .section-title span {
-  margin-left: 2rem;
-  font-size: 1.6rem;
-  color: #3483fa;
-  font-weight: 300;
+  height: 35rem;
 }
 
 .flex-item {
@@ -444,7 +496,7 @@ a {
   font-size: 1.4rem;
 }
 .item .item-cuotas {
-  color: #333;
+  color: #00a650;
   font-size: 1.4rem;
   padding-top: 0.5rem;
 }
@@ -503,6 +555,112 @@ a {
 .icon-fav:hover {
   color: #000;
   transition: 0.2s;
+}
+
+.subscripcion {
+  background-color: #fff;
+  margin: 4rem 0;
+  border-radius: 6px;
+}
+.subscripcion p {
+  font-size: 1.4rem;
+}
+.subscripcion .subscripcion__costo {
+  background: linear-gradient(90deg, #a90f90 55%, #0c1a51);
+  display: flex;
+  align-items: center;
+  color: #fff;
+  justify-content: space-between;
+  padding: 1.6rem 2.4rem;
+  border-radius: 6px 6px 0 0;
+}
+.subscripcion .subscripcion__costo .costo-nivel {
+  font-size: 2.6rem;
+  font-weight: 600;
+}
+.subscripcion .subscripcion__costo .costo-info {
+  font-weight: 600;
+}
+.subscripcion .subscripcion__costo .costo-info .info-precio {
+  font-size: 2.4rem;
+}
+.subscripcion .subscripcion__sub {
+  padding: 2rem 2.4rem;
+  font-size: 1.8rem;
+}
+.subscripcion .costo-beneficios {
+  display: flex;
+  justify-content: space-between;
+  padding: 3rem 2.4rem;
+}
+.subscripcion .costo-beneficios .beneficios-info {
+  display: flex;
+  align-items: center;
+  column-gap: 2rem;
+  flex: 1;
+}
+.subscripcion .costo-beneficios img {
+  width: 7.2rem;
+}
+.subscripcion .subscripcion__btn {
+  padding: 1.5rem 2.4rem;
+  border-top: 1px solid #ededed;
+}
+.subscripcion .subscripcion__btn .subscripcion-esp {
+  padding: 1.8rem 0;
+  text-align: right;
+}
+.subscripcion .subscripcion__btn a {
+  margin-top: 10rem;
+  background-color: #3483fa;
+  color: #fff;
+  transition: background-color 0.2s ease-in;
+  padding: 1.2rem 2.4rem;
+  border-radius: 6px;
+}
+.subscripcion .subscripcion__btn a:hover {
+  background-color: #2968c8;
+}
+
+.descubrir {
+  margin: 6rem 0;
+}
+
+.flex-container {
+  display: flex;
+  column-gap: 2.5rem;
+}
+
+.grid-container {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(20rem, 1fr));
+}
+
+.categories {
+  margin: 5rem 0;
+}
+
+.category {
+  background-color: #fff;
+  text-align: center;
+  padding: 3rem 1rem;
+  border: 1px solid #eae6e6;
+  cursor: pointer;
+}
+.category .icon--category {
+  font-size: 4.4rem;
+  color: #3483fa;
+}
+.category .category__title {
+  font-size: 1.4rem;
+  margin-top: 1rem;
+  font-weight: 300;
+}
+.category:hover .icon--category, .category:hover .category__title {
+  color: #fff;
+}
+.category:hover {
+  background-color: #3483fa;
 }
 
 /*# sourceMappingURL=home.css.map */

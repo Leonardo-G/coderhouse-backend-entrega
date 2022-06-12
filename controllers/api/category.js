@@ -14,9 +14,10 @@ const getCategories = async ( req = request, res = response ) => {
 
 const getSubCategories = async ( req = request, res = response ) => {
     const { category } = req.params;
+    const { skip = 0, limit = 5 } = req.query;
 
     try {
-        const subCategories = await SubCategory.findDocuments({ category });
+        const subCategories = await SubCategory.findDocuments({ category }, { skip, limit });
         res.status(200).json(subCategories);
         
     } catch (error) {
