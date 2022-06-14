@@ -2,7 +2,6 @@
 
 .navegacion{
     width: 100%;
-    height: 10rem;
     background-color: $col-yellow-prim;
     .navegacion__superior{
         display: flex;
@@ -49,7 +48,6 @@
         display: flex;
         align-items: center;
         column-gap: 2rem;
-        padding-top: 1.5rem;
         a{
             color: rgba(51,51,51,.6);
             &:hover{
@@ -63,4 +61,58 @@
     .iconKart{
         font-size: 1.6rem;
     }
+}
+
+.cuenta{
+    display: flex;
+    align-items: center;
+    column-gap: 0.5rem;
+    position: relative;
+    z-index: 1000;
+    padding: 1rem 0;
+    .cuenta__img{
+        width: 2.5rem;
+        height: 2.5rem;
+        border-radius: 50%;
+    }
+    .cuenta__nav{
+        visibility: hidden;
+        position: absolute;
+        left: 50%;
+        top: 4rem;
+        background-color: #fff;
+        width: 25rem;
+        transform: translateX(-50%);
+        .cuenta__img{
+            width: 4rem;
+            height: 4rem;
+        }
+        .nav--user{
+            display: flex;
+            padding: 2rem;
+            align-items: center;
+            column-gap: 2rem;
+            color: rgba(0,0,0,.45);
+            font-size: 1.4rem;
+            border-bottom: 1px solid #e1e1e1;
+        }
+        .nav--options{
+            display: flex;
+            flex-direction: column;
+            a{
+                color: $col-back-grey-2;
+                padding: 1.5rem;
+                &:hover{
+                    background-color: #f4f3f3;
+                }
+            }
+        }
+    }
+    &:hover .cuenta__nav{
+        visibility: visible;
+    } 
+}
+
+.cuenta--login{
+    column-gap: 2rem;
 }

@@ -2,7 +2,7 @@ const { Schema, model } = require("mongoose");
 
 const ProductoSchema = new Schema({
     //El id del usuario que publico el producto
-    byUser: {
+    usuario: {
         type: Schema.Types.ObjectId,
         ref: "Usuario"
     },

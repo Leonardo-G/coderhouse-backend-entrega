@@ -31,12 +31,10 @@ a {
 .contenedor {
   width: min(120rem, 98%);
   margin: 0 auto;
-  overflow: hidden;
 }
 
 .navegacion {
   width: 100%;
-  height: 10rem;
   background-color: #fff059;
 }
 .navegacion .navegacion__superior {
@@ -84,7 +82,6 @@ a {
   display: flex;
   align-items: center;
   column-gap: 2rem;
-  padding-top: 1.5rem;
 }
 .navegacion .inferior--menu a, .navegacion .inferior--cuenta a {
   color: rgba(51, 51, 51, 0.6);
@@ -97,6 +94,101 @@ a {
 }
 .navegacion .iconKart {
   font-size: 1.6rem;
+}
+
+.cuenta {
+  display: flex;
+  align-items: center;
+  column-gap: 0.5rem;
+  position: relative;
+  z-index: 1000;
+  padding: 1rem 0;
+}
+.cuenta .cuenta__img {
+  width: 2.5rem;
+  height: 2.5rem;
+  border-radius: 50%;
+}
+.cuenta .cuenta__nav {
+  visibility: hidden;
+  position: absolute;
+  left: 50%;
+  top: 4rem;
+  background-color: #fff;
+  width: 25rem;
+  transform: translateX(-50%);
+}
+.cuenta .cuenta__nav .cuenta__img {
+  width: 4rem;
+  height: 4rem;
+}
+.cuenta .cuenta__nav .nav--user {
+  display: flex;
+  padding: 2rem;
+  align-items: center;
+  column-gap: 2rem;
+  color: rgba(0, 0, 0, 0.45);
+  font-size: 1.4rem;
+  border-bottom: 1px solid #e1e1e1;
+}
+.cuenta .cuenta__nav .nav--options {
+  display: flex;
+  flex-direction: column;
+}
+.cuenta .cuenta__nav .nav--options a {
+  color: #333;
+  padding: 1.5rem;
+}
+.cuenta .cuenta__nav .nav--options a:hover {
+  background-color: #f4f3f3;
+}
+.cuenta:hover .cuenta__nav {
+  visibility: visible;
+}
+
+.cuenta--login {
+  column-gap: 2rem;
+}
+
+.line-border {
+  border: 1px solid rgba(0, 0, 0, 0.1);
+  border-radius: 8px;
+}
+
+.payment__button {
+  margin: 0.5rem 0;
+  width: 100%;
+  background-color: #3483fa;
+  border: none;
+  color: #fff;
+  border-radius: 0.6rem;
+  font-size: 1.6rem;
+  font-weight: 600;
+  line-height: 4.8rem;
+  cursor: pointer;
+  transition: 0.2s all ease-in;
+}
+
+.button--buy {
+  background-color: #3483fa;
+}
+.button--buy:hover {
+  background-color: #2968c8;
+  transition: 0.2s all ease-in;
+}
+
+.button--add {
+  background-color: rgba(65, 137, 230, 0.15);
+  color: #3483fa;
+}
+.button--add:hover {
+  background-color: rgba(65, 137, 230, 0.22);
+  transition: 0.2s all ease-in;
+}
+
+.button--subscription {
+  font-size: 1.4rem;
+  line-height: 2.5;
 }
 
 .page {
@@ -227,34 +319,23 @@ a {
 }
 .page .aside .payment__delivery p span {
   font-weight: 600;
-}
-.page .aside .payment__button {
-  margin: 0.5rem 0;
-  width: 100%;
-  background-color: #3483fa;
-  border: none;
-  color: #fff;
-  border-radius: 0.6rem;
-  font-size: 1.6rem;
-  font-weight: 600;
-  line-height: 4.8rem;
   cursor: pointer;
-  transition: 0.2s all ease-in;
 }
-.page .aside .button--buy {
-  background-color: #3483fa;
+.page .aside .payment__username {
+  margin-top: 1rem;
+  font-size: 1.3rem;
 }
-.page .aside .button--buy:hover {
-  background-color: #2968c8;
-  transition: 0.2s all ease-in;
-}
-.page .aside .button--add {
-  background-color: rgba(65, 137, 230, 0.15);
+.page .aside .payment__username span {
   color: #3483fa;
 }
-.page .aside .button--add:hover {
-  background-color: rgba(65, 137, 230, 0.22);
-  transition: 0.2s all ease-in;
+.page .aside .payment__message {
+  font-size: 1.5rem;
+  color: #ff7733;
+  margin-top: 2rem;
+}
+.page .aside .payment__message:hover {
+  text-decoration: underline;
+  cursor: pointer;
 }
 .page .aside .stock_true {
   margin: 2rem 0;
@@ -323,6 +404,32 @@ a {
   color: #666;
   margin-top: 2.5rem;
   line-height: 1.35;
+}
+
+.subscription {
+  margin-top: 4rem;
+}
+.subscription .subscription__title {
+  font-size: 1.4rem;
+  color: rgba(0, 0, 0, 0.9);
+  font-weight: 600;
+}
+.subscription .subscription__info {
+  font-size: 1.6rem;
+}
+.subscription .subscription__info > * {
+  margin-bottom: 1rem;
+}
+.subscription .subscription__info p:last-child {
+  margin-top: 0.5rem;
+  color: rgba(0, 0, 0, 0.55);
+}
+.subscription > * {
+  border-bottom: 1px solid rgba(0, 0, 0, 0.1);
+  padding: 1.5rem;
+}
+.subscription:last-child {
+  border-bottom: none;
 }
 
 hr {

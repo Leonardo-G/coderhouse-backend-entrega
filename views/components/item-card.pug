@@ -1,21 +1,25 @@
 mixin item-card( product )
-    a(href=`product/${product._id}` class='item')
-        div
-            img(src=`${product.imgProduct}` class="img-item")
-        div(class='item__info')
-            div(class='info-numero')
-                p(class='info-precio') #{product.typePrice.priceFormat}
-                if (product.typePrice.old !== 0)
-                    p(class='info-descuento') #{Math.round((product.typePrice.old - product.typePrice.current) / (product.typePrice.old / 100))} % OFF
-                
-            p(class='item-cuotas') 6x $ #{(product.typePrice.current / 6).toFixed(2)} sin interés
-            div(class='item-envio')
-                if product.delivery === 1
-                    p Envío gratis
-                else if product.delivery === 2
-                    p Envío gratis
-                    p(class='envio-full') FULL
-                    i(class="icon-full fa-solid fa-bolt-lightning")
-            p(class='titulo-hover') #{ product.title }
-        div(class='icon-fav')
+    div(class="item")
+        a(href=`product/${product._id}`)
+            div
+                img(src=`${product.imgProduct}` class="img-item")
+            div(class='item__info')
+                div(class='info-numero')
+                    p(class='info-precio') #{product.typePrice.priceFormat}
+                    
+                    if (product.typePrice.old !== 0)
+                        p(class='info-descuento') #{Math.round((product.typePrice.old - product.typePrice.current) / (product.typePrice.old / 100))} % OFF
+                    
+                p(class='item-cuotas') 6x $ #{(product.typePrice.current / 6).toFixed(2)} sin interés
+                div(class='item-envio')
+
+                    if product.delivery === 1
+                        p Envío gratis
+                    else if product.delivery === 2
+                        p Envío gratis
+                        p(class='envio-full') FULL
+                        i(class="icon-full fa-solid fa-bolt-lightning")
+
+                p(class='titulo-hover') #{ product.title }
+        div(class='icon-fav' id="icon-fav")
             i(class="far fa-heart")

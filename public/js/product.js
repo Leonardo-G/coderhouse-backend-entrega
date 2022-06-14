@@ -1,8 +1,10 @@
 const pathProduct = window.location.href.split("/");
 const product = pathProduct[pathProduct.length - 1]; 
+const idProduct = (window.location.href).split("product/")[1];
+const buttonBuy = document.querySelector("#button-buy");
 
 document.addEventListener("DOMContentLoaded", () => {
-    getSubCategory();
+    // getSubCategory();
 })
 
 const getSubCategory = async () => {
@@ -146,3 +148,13 @@ const description = (desc) => {
         <p class="pre">${ desc }</p>
     `
 }
+
+buttonBuy.addEventListener("click", (e) => {
+    let cookie = (decodeURIComponent(document.cookie).split("auth=j:")[1]);
+
+    if(!cookie){
+        window.location.href = "/auth/login";
+    }
+
+    localStorage.setItem("productId", idProduct);
+})

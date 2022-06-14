@@ -28,8 +28,11 @@ class ContenedorMongo{
         return document;
     }
 
-    async findDocumentById(id){
-        const document = await this.colection.findById(id);
+    async findDocumentById(id, ref){
+        let document = await this.colection.findById(id);
+        if(ref){
+            document = document.populate(ref.ref, ref.key)
+        }
         return document;
     }
 

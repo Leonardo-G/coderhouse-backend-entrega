@@ -4,7 +4,7 @@ mixin nav( user=false )
         div(class="navegacion")
             div(class="contenedor")
                 div(class="navegacion__superior")
-                    a(href="/home")
+                    a(href="/")
                         img(src=`${enlace}/img/logo.png`, alt="Logo Mercado Libre")
                     form(class="busqueda")
                         input(type="text", placeholder="Buscar productos, marcas y más")
@@ -20,12 +20,24 @@ mixin nav( user=false )
                         a(href="/") Moda
                         a(href="/") Ayuda 
                     div(class="inferior--cuenta")
-                        if (user.user)
-                            a(href="$") #{user.user.username}
-                            form(action="/api/auth/sign-off", method="post") 
-                                input(type="submit", value="Cerrar") 
+                        if (user)
+                            div(class="cuenta")
+                                img(class="cuenta__img" src=`${user.imgUrl}`)
+                                a(href="$") #{user.username}
+                                i(class="fa-solid fa-angle-down")
+                                div(class="cuenta__nav") 
+                                    div(class="nav--user") 
+                                        img(class="cuenta__img" src=`${user.imgUrl}`)
+                                        p Hola #{user.username}
+                                    div(class="nav--options")
+                                        a(href="#") Compras
+                                        a(href="#") Mi Perfil
+                                        a(href="#") Salir
+                                        
                         else    
-                            a(href="/auth/sign-in") Creá tu cuenta 
-                            a(href="/auth/login") Ingresá
+                            div(class="cuenta cuenta--login")
+                                a(href="/auth/sign-in") Creá tu cuenta 
+                                a(href="/auth/login") Ingresá
                         a(href="/") Mis compras
-                        i(class="fa-solid fa-cart-shopping iconShop")
+                        a(href="/cart")
+                            i(class="fa-solid fa-cart-shopping iconShop")

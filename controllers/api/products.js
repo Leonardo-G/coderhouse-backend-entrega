@@ -69,7 +69,7 @@ const getProductById = async ( req = request, res = response ) => {
         })
     }
 
-    const product = await Product.findDocumentById(id);
+    const product = await Product.findDocumentById(id, { ref: "usuario", key: ["username"]});
     const { obj } = new ProductDTO(product)
     res.status(200).json(obj);
 }

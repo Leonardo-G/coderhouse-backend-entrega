@@ -2,6 +2,50 @@
 @import "../base/base";
 @import "../components/nav";
 
+.line-border{
+    border: 1px solid rgba(0,0,0,.1);
+    border-radius: 8px;
+}
+
+//////BOTONES//////
+.payment__button{
+    margin: 0.5rem 0;
+    width: 100%;
+    background-color: $col-blue;
+    border: none;
+    color: #fff;
+    border-radius: 0.6rem;
+    font-size: 1.6rem;
+    font-weight: 600;
+    line-height: 4.8rem;
+    cursor: pointer;
+    transition: .2s all ease-in;
+}
+
+.button--buy{
+    background-color: $col-blue;
+    &:hover{
+        background-color: #2968c8;
+        transition: .2s all ease-in;
+    }
+}
+
+.button--add{
+    background-color: rgba(65,137,230,.15);
+    color: $col-blue;
+    &:hover{
+        background-color: rgb(65 137 230 / 22%);
+        transition: .2s all ease-in;
+    }
+}
+
+.button--subscription{
+    font-size: 1.4rem;
+    line-height: 2.5;
+}
+
+//////BOTONES//////
+
 .page{
     display: flex;
     background-color: #fff;
@@ -128,35 +172,24 @@
                 color: $col-green;
                 span{
                     font-weight: 600;
+                    cursor: pointer;
                 }
             }
         }
-        .payment__button{
-            margin: 0.5rem 0;
-            width: 100%;
-            background-color: $col-blue;
-            border: none;
-            color: #fff;
-            border-radius: 0.6rem;
-            font-size: 1.6rem;
-            font-weight: 600;
-            line-height: 4.8rem;
-            cursor: pointer;
-            transition: .2s all ease-in;
-        }
-        .button--buy{
-            background-color: $col-blue;
-            &:hover{
-                background-color: #2968c8;
-                transition: .2s all ease-in;
+        .payment__username{
+            margin-top: 1rem;
+            font-size: 1.3rem;
+            span{
+                color: $col-blue;
             }
         }
-        .button--add{
-            background-color: rgba(65,137,230,.15);
-            color: $col-blue;
+        .payment__message{
+            font-size: 1.5rem;
+            color: #ff7733;
+            margin-top: 2rem;
             &:hover{
-                background-color: rgb(65 137 230 / 22%);
-                transition: .2s all ease-in;
+                text-decoration: underline;
+                cursor: pointer;
             }
         }
         .stock_true{
@@ -231,7 +264,29 @@
 }
 
 .subscription{
-    
+    margin-top: 4rem;
+    .subscription__title{
+        font-size: 1.4rem;
+        color: rgba(0,0,0,.9);
+        font-weight: 600;
+    }
+    .subscription__info{
+        font-size: 1.6rem;
+        & > * {
+            margin-bottom: 1rem;
+        }
+        p:last-child{
+            margin-top: 0.5rem;
+            color: rgba(0,0,0,.55);
+        }
+    }
+    & > *{
+        border-bottom: 1px solid rgba(0, 0, 0,.1);
+        padding: 1.5rem;
+    }
+    &:last-child{
+        border-bottom: none;
+    }
 }
 
 hr{

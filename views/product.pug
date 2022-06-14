@@ -1,3 +1,4 @@
+include components/nav.pug
 doctype html
 html(lang="en")
     head
@@ -7,26 +8,92 @@ html(lang="en")
         link(href="http://fonts.cdnfonts.com/css/proxima-nova-2?styles=44819,44818,44817,44821,44813,44815", rel="stylesheet")
         link(rel="stylesheet", href="../css/product.css")
         script(src="https://kit.fontawesome.com/fe5071cad1.js", crossorigin="anonymous")
-        title Document
+        title #{product.title}
     body 
-    include components/nav.pug
     +nav(user)
     main
         div.contenedor
             div.page
                 div.info
                     div.product
+                        div(class="product__galery")
+                            img(src=`${ product.imgProduct[0] }`)
+                        div(class="product__img")
+                            img(src=`${ product.imgProduct[0] }`)
+                        div(class="product__info")
+                            div(class="info--head")
+                                span(class="sold") Nuevo  |  #{ product.sold } vendidos
+                                i(class="fa-regular fa-heart icon--fav")
+                            h1 #{ product.title }
+                            if product.typePrice.old !== 0
+                                p(class="price--old") $ #{product.typePrice.old.toLocaleString("es-AR")}
+
+                            p(class="price") $ #{ product.typePrice.current.toLocaleString("es-AR") } 
+                                if product.typePrice.old !== 0 
+                                    span(class="descuento") #{Math.round((product.typePrice.old - product.typePrice.current) / (product.typePrice.old / 100))} % OFF 
+
+                            span(class="cuota") en 12x $ #{ (product.typePrice.current / 12).toLocaleString("es-AR", { maximumFractionDigits: "2", minimumFractionDigits: "2" }) } sin interés
+                            p Ver los medios de pago    
+                            div(class="characteristics")
+                                p(class="characteristics__title") Lo que tenes que saber de este producto
+                                ul
+                                    for c in product.characteristics
+                                        li #{c}
                     hr
                     div.description
+                        h2(class="descripion__title") Descripción
+                        p(class="pre") #{ product.description }
                     hr
                 div.aside
                     div.payment
-                    div.subscription
+                        div(class="payment__delivery")
+                            i(class="fa-solid fa-truck-fast icon--thunk")
+                            p Llega gratis 
+                                if product.delivery === 2
+                                    span mañana
+                                else if product.delivery === 1
+                                    span el #{new Date(new Date().setDate(new Date().getDate() + 3)).toLocaleDateString("es-AR", {weekday: 'long'})}
+                        
+                        p(class="payment__username") Vendido por 
+                            span #{product.usuario.username}
+                        
+                        p(class="payment__message") Acordar con el vendedor para la entrega 
+
+                        if product.stock > 0
+                            p(class='stock_true') Stock disponible
+
+                        if  product.stock > 0  
+                            div(class="payment__select")
+                                p Cantidad:
+                                input(type="number" name="cantidad" value="1")
+                                p unidad/es
+                                p(class="stock") #{ product.stock } disponibles
+
+                        button(class="payment__button button--buy" id="button-buy") Comprar ahora
+                        button(class="payment__button button--add" onClick='addProduct()') Agregar al carrito
+                        div(class="payment_info")
+                            div(class="info--p")
+                                i(class="fa-solid fa-share")
+                                p
+                                    span Devolución gratis.
+                                    #{"Tenés 30 dias desde que lo recibís"}
+                            div(class="info--p")
+                                i(class="fa-regular fa-circle-check")
+                                p
+                                    span Compra protegida. 
+                                    #{"recibrí el producto que esperabas o e devolvemos tu dinero."}
+                            div(class="info--p")
+                                i(class="fa-solid fa-award")
+                                p 12 meses de garantía de fábrica.
+                    div.subscription.line-border
+                        h3.subscription__title Subscribite al nivel 6 con 67% OFF! 
                         div.subscription__info
-                            h3 Subscribite al nivel 6 con 67% OFF! 
+                            img(src="/img/d+oferta.jpg")
                             p La oferta termina el 30 de junio 
                             p Tu subscripcion anual por $ 399/mes incluye Disney+, Start+, miles de descuentos en compras y muchos mas!
                         div.subscription__button
-                            button Suscribite al nivel 6
+                            button(class="payment__button button--add button--subscription") Suscribite al nivel 6
+            hr
+
 
     script(src="../js/product.js")

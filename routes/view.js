@@ -36,7 +36,7 @@ router.get( "/", async ( req, res ) => {
     const productsAll = await resp1.data;
     const subCategories = await resp2.data;
 
-    res.render("home", { user, productsAll, subCategories });
+    res.render("home", { user: user?.user, productsAll, subCategories });
 })
 
 router.get( "/category/:subcategories", ( req, res ) => {
@@ -47,21 +47,19 @@ router.get( "/category/:subcategories", ( req, res ) => {
 
 router.get( "/products/:subcategory", ( req, res ) => {
     const user = req.cookies?.auth;
-    console.log(user)
+    
     res.render("products", { user })
 })
 
-router.get( "/product/:id", ( req, res ) => {
+router.get( "/product/:id", async ( req, res ) => {
     const user = req.cookies?.auth;
+    const { id } = req.params;
 
-    instanceFunction().get("/api/products/product/627f26a7f17b38028ead80e6")
-    .then( r => {
-        const resp = r.data;
-        console.log("Funciona la API");
-    })
-    .catch( err => console.log("No funciona la API", err))
+    const respuesta = await instanceFunction().get(`/api/products/product/${id}`);
+    const product = await respuesta.data;
+    console.log(respuesta)
 
-    res.render("product", { user });
+    res.render("product", { user: user?.user, product });
 })
 
 router.get( "/chat", ( req, res ) => {
@@ -69,7 +67,7 @@ router.get( "/chat", ( req, res ) => {
     if(!user){
         return res.redirect("/auth/login");
     }
-    res.render("chat", { user });
+    res.render("chat", { user: user?.user });
 })
 
 
