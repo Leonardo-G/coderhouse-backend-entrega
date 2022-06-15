@@ -5,6 +5,9 @@ const bodyParser = require("body-parser");
 const fileUpload = require("express-fileupload");
 const dotenv = require("dotenv");
 const cookieParser = require("cookie-parser");
+const { buildSchema } = require("graphql");
+const productDB = require("../DB");
+const { graphqlHTTP } = require("express-graphql");
 
 class Server {
     constructor(){
@@ -19,8 +22,27 @@ class Server {
             products: "/api/products",
             cart: "/api/cart"
         };
+        this.schema = new buildSchema(`
+            type Product {
+                id: String!,
+                title: String,
+                price: Int,
+                stock: Int,
+                description: String
+            }
 
-        this.connect();
+            type Query{
+                findProduct(id: String): Product
+            }
+        `);
+        this.root = {
+            findProduct: ({ id }) =>{
+                const products = productDB.find( prod => prod.id === id )
+                return products;
+            }
+        }
+
+        // this.connect();
         this.middlewares();
         this.views();
         this.router();
@@ -40,6 +62,11 @@ class Server {
             useTempFiles : true,
             tempFileDir : '/tmp/'
         }));
+        this.app.use("/graphql", graphqlHTTP({
+            schema: this.schema,
+            rootValue: this.root,
+            graphiql: true
+        }))
     }
 
     views(){
