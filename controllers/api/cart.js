@@ -6,13 +6,12 @@ const Cart = new CartDao();
 const Usuario = new UsuarioDao();
 
 const getCart = async ( req = request, res = response ) => {
-    const { id } = req.params;
 
-    const cart = await Cart.findDocumentById(id);
+    const cart = await Cart.findOneDocument({cartUser: req.id});
     
     if(!cart){
         return res.status(401).json({
-            msg: `No se encontro un 'Cart' coincidente con el id ${ id }`
+            msg: `No se encontro un 'Cart' coincidente con el id ${ req.id }`
         })
     }
 

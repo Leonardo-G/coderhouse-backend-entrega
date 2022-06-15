@@ -57,9 +57,22 @@ router.get( "/product/:id", async ( req, res ) => {
 
     const respuesta = await instanceFunction().get(`/api/products/product/${id}`);
     const product = await respuesta.data;
-    console.log(respuesta)
 
     res.render("product", { user: user?.user, product });
+})
+
+router.get("/cart", async ( req, res ) => {
+    const user = req.cookies?.auth;
+
+    if(!user){
+        return res.redirect("/auth/login");
+    }
+
+    const respuesta = await instanceFunction(user.token).get(`/api/cart/`);
+    const cart = await respuesta.data;
+    console.log(cart)
+
+    res.render("cart", { user: user?.user });
 })
 
 router.get( "/chat", ( req, res ) => {

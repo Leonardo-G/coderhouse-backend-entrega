@@ -6,15 +6,10 @@ const validateJWT = require("../../middlewares/validateJWT");
 
 const router = Router();
 
+//Se requiere pasarle el TOKEN, para obtener el cart del usuario
 router.get( "/", [
-    check("id", "Se necesita un id para obtener el Cart").notEmpty(),
-    validateBody,
-])
-
-router.get( "/:id", [
-    check("id", "Se requiere un ID valido").isMongoId(),
-    validateBody
-],getCart );
+    validateJWT
+], getCart );
 
 //Ruta para crear un nuevo carrito para el usuario
 router.post( "/", [
