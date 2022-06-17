@@ -3,18 +3,17 @@ const CartDao = require("../../service/DAO/CartDAO");
 const UsuarioDao = require("../../service/DAO/UsuarioDAO");
 
 const Cart = new CartDao();
-const Usuario = new UsuarioDao();
 
 const getCart = async ( req = request, res = response ) => {
 
-    const cart = await Cart.findOneDocument({cartUser: req.id});
+    const cart = await Cart.findOneDocument({cartUser: req.id}, { ref: "productsCart.idProduct", key: ["title", "imgProduct", "typePrice", "stock"]});
     
     if(!cart){
         return res.status(401).json({
             msg: `No se encontro un 'Cart' coincidente con el id ${ req.id }`
         })
     }
-
+    
     res.status(200).json(cart);
 }
 

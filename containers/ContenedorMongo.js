@@ -19,12 +19,19 @@ class ContenedorMongo{
         return documents;
     }
 
-    async findOneDocument(filter){
+    async findOneDocument(filter, ref){
         if(typeof filter != "object"){
             throw new Error("El parametro de busqueda tiene que ser de tipo 'OBJECT'");
         }
+        
+        let document;
 
-        const document = await this.colection.findOne(filter);
+        if( ref ){
+            document = await this.colection.findOne(filter).populate(ref.ref, ref.key)
+        }else{
+            document = await this.colection.findOne(filter);
+        }
+        
         return document;
     }
 

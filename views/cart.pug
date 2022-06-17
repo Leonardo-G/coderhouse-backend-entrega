@@ -1,3 +1,6 @@
+include components/card-cart.pug
+-var priceForm = ( price ) => price.toLocaleString("es-AR", { style: "currency", currency: "ARS" })
+
 doctype html
 html(lang="en")
     head
@@ -5,9 +8,41 @@ html(lang="en")
         meta(http-equiv="X-UA-Compatible", content="IE=edge")
         meta(name="viewport", content="width=device-width, initial-scale=1.0")
         link(href="http://fonts.cdnfonts.com/css/proxima-nova-2?styles=44819,44818,44817,44821,44813,44815", rel="stylesheet")
-        link(rel="stylesheet", href="../css/product.css")
+        link(rel="stylesheet", href="../css/cart.css")
         script(src="https://kit.fontawesome.com/fe5071cad1.js", crossorigin="anonymous")
-        title Document
+        title Carrito de compras
     body 
-    include components/nav.pug
-    +nav(user)
+        include components/nav.pug
+        +nav(user)
+        main.contenedor
+            section.cart
+                div.cart__options
+                    a(class=`options--a ${ path !== "save" && "options--unselected"  }` href="/cart/save") Carrito  (#{cart.productsCart.length})
+                    a(class=`options--a ${ path !== "favorites" && "options--unselected"  }` id="favorites" href="/cart/favorites") Guardados  (#{cart.productsCart.length})
+                
+                if path === "save"
+                    div.cart__products
+                        if cart.productsCart.length === 0
+                            p.cart__products--empty Tu carrito está vacío
+                                span ¿No sabés qué comprar? Miles de productos te esperan!
+                        else
+                            for productCart in cart.productsCart
+                                +productCart(productCart)
+                    div.cart__total
+                        p Total con envío 
+                            span #{priceForm(cart.productsCart.reduce( (prev, c) => prev + c.idProduct.typePrice.current, 0 ))}
+                    div.cart__send
+                        button(class="btn--sendBuy") Continuar compra
+                
+                if path === "favorites"
+                    div.cart__products
+                        if !favorites
+                            p.cart__products--empty No tenés productos guardados
+                                span Si aún no estas decidido en comprar algún producto de tu carrito, podés dejarlo aquí.
+                        else
+                            for productCart in cart.productsCart
+                                +productCart(productCart)
+
+    script(src="/js/cart.js") 
+
+

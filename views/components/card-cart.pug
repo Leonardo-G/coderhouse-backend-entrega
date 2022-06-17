@@ -1,0 +1,18 @@
+mixin productCart(product={})
+    -var { imgProduct, title, typePrice, quantity, stock } = product.idProduct
+    -var priceForm = ( price ) => price.toLocaleString("es-AR", { style: "currency", currency: "ARS" })
+    div.productCart
+        div.productCart__img
+            img(src=`${imgProduct}`)
+        div.productCart__info
+            a #{title}
+            div.info--buttons
+                p(id="delete") Eliminar
+        div.productCart__quantity
+            p.quantity--ava #{product.quantity} 
+            p.quantity--stock #{stock} disponibles
+        div.productCart__price
+            if typePrice.old !== 0
+                p.price--old -#{ Math.round((typePrice.old - typePrice.current) / (typePrice.old / 100))}%
+                    span #{ priceForm(typePrice.old) }
+            p #{priceForm(typePrice.current)}

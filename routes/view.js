@@ -61,18 +61,18 @@ router.get( "/product/:id", async ( req, res ) => {
     res.render("product", { user: user?.user, product });
 })
 
-router.get("/cart", async ( req, res ) => {
+router.get("/cart/:path", async ( req, res ) => {
     const user = req.cookies?.auth;
-
+    
     if(!user){
         return res.redirect("/auth/login");
     }
 
     const respuesta = await instanceFunction(user.token).get(`/api/cart/`);
     const cart = await respuesta.data;
-    console.log(cart)
-
-    res.render("cart", { user: user?.user });
+    const { path } = req.params
+    
+    res.render("cart", { user: user?.user, cart, path });
 })
 
 router.get( "/chat", ( req, res ) => {
