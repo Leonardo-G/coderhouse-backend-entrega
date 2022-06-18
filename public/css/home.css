@@ -604,10 +604,14 @@ a {
   opacity: 0;
   font-size: 1.5rem;
   cursor: pointer;
+  color: #3483fa;
 }
 .icon-fav:hover {
-  color: #000;
   transition: 0.2s;
+}
+
+.icon--favOn {
+  opacity: 1;
 }
 
 .subscripcion {

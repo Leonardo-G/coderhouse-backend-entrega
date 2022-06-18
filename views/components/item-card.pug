@@ -1,4 +1,4 @@
-mixin item-card( product )
+mixin item-card( product, favorites )
     div(class="item")
         a(href=`product/${product._id}`)
             div
@@ -21,5 +21,13 @@ mixin item-card( product )
                         i(class="icon-full fa-solid fa-bolt-lightning")
 
                 p(class='titulo-hover') #{ product.title }
-        div(class='icon-fav' id="icon-fav")
-            i(class="far fa-heart")
+        if favorites
+            if favorites.includes(product._id)
+                div(class='icon-fav icon--favOn' id="icon-fav" data-product-id=`${product._id}`)
+                    i(class="far fa-solid fa-heart")
+            else 
+                div(class='icon-fav' id="icon-fav" data-product-id=`${product._id}`)
+                    i(class="far fa-heart")
+        if !favorites
+            div(class='icon-fav' id="icon-fav" data-product-id=`${product._id}`)
+                i(class="far fa-heart")

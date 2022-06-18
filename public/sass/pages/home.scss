@@ -147,10 +147,14 @@
     opacity: 0;
     font-size: 1.5rem;
     cursor: pointer;
+    color: $col-blue;
     &:hover{
-        color: #000;
         transition: 0.2s;
     }
+}
+
+.icon--favOn{
+    opacity: 1;
 }
 
 .subscripcion{

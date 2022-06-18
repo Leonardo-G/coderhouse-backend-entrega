@@ -17,7 +17,8 @@ class Server {
             auth : "/api/auth",
             categories: "/api/category",
             products: "/api/products",
-            cart: "/api/cart"
+            cart: "/api/cart",
+            favorite: "/api/favorite"
         };
 
         this.connect();
@@ -56,6 +57,7 @@ class Server {
         this.app.use(this.routes.categories, require("../routes/api/category"));
         this.app.use(this.routes.products, require("../routes/api/products"));
         this.app.use(this.routes.cart, require("../routes/api/cart"));
+        this.app.use(this.routes.favorite, require("../routes/api/favorite"));
     }
 
     ioServer(){

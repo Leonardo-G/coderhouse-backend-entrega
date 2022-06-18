@@ -27,16 +27,22 @@ router.get( "/auth/login", ( req = request, res = response ) => {
 
 router.get( "/", async ( req, res ) => {
     const user = req.cookies?.auth;
+    let favorite;
 
     const [ resp1, resp2 ] = await Promise.all([
         instanceFunction().get("/api/products"),
-        instanceFunction().get("api/category/herramientas/subcategories?limit=2")
+        instanceFunction().get("/api/category/herramientas/subcategories?limit=2"),
     ])
 
+    if(user){
+        const resp = await instanceFunction(user.token).get("/api/favorite");
+        favorite = resp.data
+    }
+    
     const productsAll = await resp1.data;
     const subCategories = await resp2.data;
 
-    res.render("home", { user: user?.user, productsAll, subCategories });
+    res.render("home", { user: user?.user, productsAll, subCategories, favorites: favorite?.prodFavorites });
 })
 
 router.get( "/category/:subcategories", ( req, res ) => {

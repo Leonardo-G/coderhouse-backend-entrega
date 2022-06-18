@@ -1,4 +1,4 @@
-const Server = require("./models/server");
+const Server = require("./server/server");
 const socketFunctions = require("./socket");
 
 const server = new Server();

@@ -39,7 +39,7 @@ html(lang="en")
                 div.products__item
                     div.flex-item
                         for product in productsAll.products 
-                            +item-card(product)
+                            +item-card(product, favorites)
             section(class='subscripcion')
                 div(class='subscripcion__costo')
                     p(class='costo-nivel') Subscribite al nivel 2
