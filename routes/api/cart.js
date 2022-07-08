@@ -18,9 +18,8 @@ router.post( "/", [
 
 //Agregar, modificar producto del carrito
 router.put( "/modify", [
-    check("productsCart", "Se necesita un array con productos en el campo 'productsCart'").isArray().notEmpty(),
-    check("productsCart.*.idProduct", "el campo idProduct Tiene que ser un ID válido de Mongo").notEmpty().isMongoId(),
-    check("productsCart.*.quantity", "Se necesita indicar la cantidad en 'quantity'").notEmpty().isNumeric().withMessage("El campo 'quantity', tiene que ser un dato númerico"),
+    check("idProduct", "el campo idProduct Tiene que ser un ID válido de Mongo").notEmpty().isMongoId(),
+    check("quantity", "Se necesita indicar la cantidad en 'quantity'").notEmpty().isNumeric().withMessage("El campo 'quantity', tiene que ser un dato númerico"),
     validateBody,
     validateJWT
 ], updateCart );

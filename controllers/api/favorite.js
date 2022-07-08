@@ -3,12 +3,11 @@ const { Types } = require("mongoose");
 const FavoriteDAO = require("../../service/DAO/FavoriteDAO");
 const Favorite = new FavoriteDAO();
 
-
 const getfavorite = async ( req = request, res = response ) => {
     //Proviene de la validacion del token
     const idUser = req.id;
 
-    const favorite = await Favorite.findOneDocument({favUser: idUser});
+    const favorite = await Favorite.findOneDocument({favUser: idUser}, { ref: "prodFavorites", key: ["title", "imgProduct", "typePrice", "stock"]});
 
     return res.status(200).json(favorite);
 }

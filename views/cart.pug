@@ -17,8 +17,8 @@ html(lang="en")
         main.contenedor
             section.cart
                 div.cart__options
-                    a(class=`options--a ${ path !== "save" && "options--unselected"  }` href="/cart/save") Carrito  (#{cart.productsCart.length})
-                    a(class=`options--a ${ path !== "favorites" && "options--unselected"  }` id="favorites" href="/cart/favorites") Guardados  (#{cart.productsCart.length})
+                    a(class=`options--a ${ path !== "save" && "options--unselected" }` href="/cart/save") Carrito  (#{cart.productsCart.length})
+                    a(class=`options--a ${ path !== "favorites" && "options--unselected" }` id="favorites" href="/cart/favorites") Guardados  (#{favorites.length})
                 
                 if path === "save"
                     div.cart__products
@@ -27,22 +27,20 @@ html(lang="en")
                                 span ¿No sabés qué comprar? Miles de productos te esperan!
                         else
                             for productCart in cart.productsCart
-                                +productCart(productCart)
-                    div.cart__total
-                        p Total con envío 
-                            span #{priceForm(cart.productsCart.reduce( (prev, c) => prev + c.idProduct.typePrice.current, 0 ))}
+                                +productCart(productCart, path)
                     div.cart__send
                         button(class="btn--sendBuy") Continuar compra
                 
                 if path === "favorites"
                     div.cart__products
-                        if !favorites
+                        if favorites.length == 0
                             p.cart__products--empty No tenés productos guardados
-                                span Si aún no estas decidido en comprar algún producto de tu carrito, podés dejarlo aquí.
+                                span Si aún no estas decidido en comprar algún producto de tu carrito, podés guardarlo como favorito.
                         else
-                            for productCart in cart.productsCart
-                                +productCart(productCart)
-
-    script(src="/js/cart.js") 
-
-
+                            for product in favorites
+                                +productCart(product, path)
+                                
+    if path === "save"
+        script(src="/js/cart.js") 
+    else
+        script(src="/js/favorite.js") 

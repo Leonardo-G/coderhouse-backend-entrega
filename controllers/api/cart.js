@@ -50,16 +50,16 @@ const updateCart = async ( req = request, res = response ) => {
         })
     }
 
-    const { productsCart } = req.body;
+    const productCart = req.body;
     let cart;
-
-    const cartProducts = isExistCart.productsCart.filter( c => c.idProduct != productsCart[0].idProduct );
     
-    if( productsCart[0].quantity === 0 ){
+    const cartProducts = isExistCart.productsCart.filter( c => c.idProduct != productCart.idProduct );
+
+    if( productCart.quantity === 0 ){
         //si el producto modificado tiene como 'quantity' == 0, se eliminara del carrito
         cart = await Cart.findDocumentAndUpdate({ cartUser: req.id }, { productsCart: [...cartProducts] });
     }else {
-        cart = await Cart.findDocumentAndUpdate({ cartUser: req.id }, { productsCart: [...cartProducts, ...productsCart] });
+        cart = await Cart.findDocumentAndUpdate({ cartUser: req.id }, { productsCart: [...cartProducts, productCart] });
     }
     
     res.status(201).json(cart);

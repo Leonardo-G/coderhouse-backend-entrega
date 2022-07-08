@@ -69,16 +69,20 @@ router.get( "/product/:id", async ( req, res ) => {
 
 router.get("/cart/:path", async ( req, res ) => {
     const user = req.cookies?.auth;
+    const { path } = req.params
     
     if(!user){
         return res.redirect("/auth/login");
     }
 
-    const respuesta = await instanceFunction(user.token).get(`/api/cart/`);
-    const cart = await respuesta.data;
-    const { path } = req.params
+    const [ resp1, resp2 ] = await Promise.all([
+        instanceFunction(user.token).get(`/api/cart/`),
+        instanceFunction(user.token).get(`/api/favorite/`)
+    ])
+    const cart = await resp1.data;
+    const favorite = await resp2.data;
     
-    res.render("cart", { user: user?.user, cart, path });
+    res.render("cart", { user: user?.user, cart, path, favorites: favorite.prodFavorites });
 })
 
 router.get( "/chat", ( req, res ) => {

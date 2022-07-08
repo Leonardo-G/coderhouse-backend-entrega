@@ -1,15 +1,24 @@
 mixin productCart(product={})
-    -var { imgProduct, title, typePrice, quantity, stock } = product.idProduct
     -var priceForm = ( price ) => price.toLocaleString("es-AR", { style: "currency", currency: "ARS" })
+    if path === "save" 
+        -var { imgProduct, title, typePrice, quantity, stock } = product.idProduct
+    else 
+        -var { imgProduct, title, typePrice, stock } = product
     div.productCart
         div.productCart__img
             img(src=`${imgProduct}`)
         div.productCart__info
             a #{title}
             div.info--buttons
-                p(id="delete") Eliminar
+                if path !== "favorites"
+                    p(id="delete-cart" data-id=product.idProduct._id) Eliminar
+                else 
+                    p(id="delete-cart" data-id=product._id) Eliminar
         div.productCart__quantity
-            p.quantity--ava #{product.quantity} 
+            
+            if path !== "favorites"
+                p.quantity--ava #{product.quantity} 
+            
             p.quantity--stock #{stock} disponibles
         div.productCart__price
             if typePrice.old !== 0

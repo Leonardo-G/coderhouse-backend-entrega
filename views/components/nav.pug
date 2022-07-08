@@ -20,6 +20,7 @@ mixin nav( user=false )
                         a(href="/") Moda
                         a(href="/") Ayuda 
                     div(class="inferior--cuenta")
+                    
                         if (user)
                             div(class="cuenta")
                                 img(class="cuenta__img" src=`${user.imgUrl}`)
@@ -38,6 +39,7 @@ mixin nav( user=false )
                             div(class="cuenta cuenta--login")
                                 a(href="/auth/sign-in") Creá tu cuenta 
                                 a(href="/auth/login") Ingresá
+
                         a(href="/") Mis compras
-                        a(href="/cart")
+                        a(href="/cart/save")
                             i(class="fa-solid fa-cart-shopping iconShop")
