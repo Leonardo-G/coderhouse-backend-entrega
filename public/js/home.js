@@ -9,6 +9,7 @@ const addFavorite = async (icon) => {
 
     const token = JSON.parse(cookie[1]).token;
     const productID = icon.getAttribute("data-product-id");
+    console.log(token);
 
     const res = await fetch( `http://localhost:8000/api/favorite/${productID}`, {
         method: "PUT",

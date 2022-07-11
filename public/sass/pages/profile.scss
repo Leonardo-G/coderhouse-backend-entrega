@@ -1,0 +1,81 @@
+@import "../base/variables";
+@import "../base/base";
+@import "../components/nav";
+
+.profile{
+    margin: 5rem 0;
+}
+
+.b-profile{
+    box-shadow: 0 1px 2px 0 rgb(0 0 0 / 15%);
+    border-radius: 6px;
+}
+
+.profile__name{
+    background-color: #fff;
+    padding: 2rem 2.5rem;
+    display: flex;
+    align-items: center;
+    column-gap: 5rem;
+    .name--img img{
+        width: 6rem;
+        height: 6rem;
+        object-fit: cover;
+        border-radius: 50%;
+        border: 2.6px solid $col-blue;
+        padding: 0.5rem;
+    }
+    .name--info p{
+        font-size: 2.4rem;
+    }
+}
+
+.profile__account{
+    background-color: #fff;
+    margin-top: 2rem;
+    .account--info{
+        padding: 2rem 1.5rem;
+        font-size: 1.6rem;
+        color: rgba(0,0,0,.8);
+        font-weight: 300;
+        display: flex;
+        p{
+            flex: 1;
+        }
+        span{
+            flex: 2;
+            color: rgba(0,0,0,.45);
+        }
+        input{
+            flex: 2;
+            border: none;
+            border-bottom: 1px solid $col-blue;
+            outline: none;
+        }
+    }
+}
+
+.profile__button{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-top: 4rem;
+}
+
+.btn--modify, .btn--save{
+    width: auto;
+    text-align: center;
+    background-color: $col-blue;
+    border: none;
+    color: #fff;
+    border-radius: 0.6rem;
+    font-size: 1.6rem;
+    font-weight: 600;
+    cursor: pointer;
+    transition: .2s all ease-in;
+    padding: 1rem;
+    &:hover{
+        background-color: #2968c8;
+        transition: .2s all ease-in;
+    }
+}

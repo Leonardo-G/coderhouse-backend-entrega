@@ -1,0 +1,39 @@
+-var enlace = "http://localhost:8000"
+include components/nav.pug
+
+doctype html
+html(lang="en")
+    head
+        meta(charset="UTF-8")
+        meta(http-equiv="X-UA-Compatible", content="IE=edge")
+        meta(name="viewport", content="width=device-width, initial-scale=1.0")
+        script(src="https://kit.fontawesome.com/fe5071cad1.js", crossorigin="anonymous")
+        link(href="http://fonts.cdnfonts.com/css/proxima-nova-2?styles=44819,44817,44821,44813,44815", rel="stylesheet")
+        link(rel="stylesheet", href="../css/profile.css")
+        title Mercado Libre | Perfil
+    body 
+        +nav(user)
+        main 
+            section.contenedor
+                div.profile
+                    div.profile__name
+                        div.name--img
+                            img(src=`${ user.imgUrl }`, alt="perfil")
+                        div.name--info
+                            p #{ user.username }
+                    div.profile__button
+                        h2  Datos de cuenta
+                        button.btn--modify Modificar Perfil
+                    div.profile__account
+                        div.account--info
+                            p Usuario
+                            span(data-name="username") #{ user.username }
+                        div.account--info
+                            p Email 
+                            span(data-name="email") #{ user.email }
+                        div.account--info
+                            p Nombre Completo
+                            span(data-name="name")
+
+    
+    script(src="../js/profile.js") 

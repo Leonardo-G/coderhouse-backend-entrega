@@ -93,5 +93,17 @@ router.get( "/chat", ( req, res ) => {
     res.render("chat", { user: user?.user });
 })
 
+router.get("/profile", async ( req, res ) => {
+    const user = req.cookies?.auth;
+    if(!user){
+        return res.redirect("/auth/login");
+    }
+
+    const resp = await instanceFunction(user.token).get(`/api/auth/`)
+    const userInfo = await resp.data
+
+    res.render("profile", { user: userInfo });
+})
+
 
 module.exports = router;

@@ -25,6 +25,7 @@ const validateJWT = async ( req = request, res = response, next) => {
         }
 
         req.id = tokenVerify.id;
+        console.log(req.id)
 
         next();
 

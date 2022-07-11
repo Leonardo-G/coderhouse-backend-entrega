@@ -1,8 +1,9 @@
 const { Router } = require("express");
 const { check } = require("express-validator");
 
-const { createUser, loginUser, signOffUser } = require("../../controllers/api/auth");
+const { createUser, loginUser, signOffUser, getInfoUser, updateUser } = require("../../controllers/api/auth");
 const { validateBody } = require("../../middlewares/validateBody");
+const validateJWT = require("../../middlewares/validateJWT");
 
 const router = Router();
 
@@ -13,7 +14,10 @@ router.post( "/sign-in-create", [
     validateBody
 ], createUser );
 
-router.post( "/sign-off", signOffUser );
+router.post( "/sign-off", signOffUser )
 
+router.get( "/", validateJWT, getInfoUser )
+
+router.put( "/profile", validateJWT, updateUser )
 
 module.exports = router;

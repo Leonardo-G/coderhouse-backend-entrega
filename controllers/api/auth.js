@@ -118,8 +118,22 @@ const signOffUser = ( req = request, res = response ) => {
     res.clearCookie("auth").redirect("../../auth/login");
 }
 
+const getInfoUser = async ( req = request, res = response ) => {
+    const usuario = await Usuario.findDocumentById(req.id);
+
+    res.status(200).json(usuario)
+}
+
+const updateUser = async ( req = request, res = response ) => {
+    const usuario = await Usuario.findDocumentAndUpdate({_id: req.id}, req.body)
+
+    res.status(201).json(usuario)
+}
+
 module.exports = {
     createUser,
     loginUser,
-    signOffUser
+    signOffUser,
+    getInfoUser,
+    updateUser
 }

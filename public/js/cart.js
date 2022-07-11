@@ -1,6 +1,6 @@
 const buttonDelete = document.querySelector("#delete-cart");
 const priceProduct = document.querySelectorAll("#priceProduct");
-console.log(buttonDelete.getAttribute("data-id"))
+
 buttonDelete.addEventListener( "click", async () => {
     const idProduct = buttonDelete.getAttribute("data-id");
     

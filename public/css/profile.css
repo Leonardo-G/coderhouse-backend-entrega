@@ -1,0 +1,231 @@
+*, *::before, *::after {
+  margin: 0;
+  box-sizing: inherit;
+}
+
+html {
+  font-size: 62.5%;
+  box-sizing: border-box;
+}
+
+body {
+  background-color: rgba(0, 0, 0, 0.075);
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+  height: auto;
+}
+
+legend, input, textarea, label, p, a, h1, h2, h3, button, li, span {
+  font-family: "Proxima Nova", sans-serif;
+  letter-spacing: 0.1px;
+}
+
+a {
+  font-size: 1.4rem;
+  text-decoration: none;
+  color: rgba(0, 0, 0, 0.9);
+}
+
+.contenedor {
+  width: min(120rem, 98%);
+  margin: 0 auto;
+}
+
+.navegacion {
+  width: 100%;
+  background-color: #fff059;
+}
+.navegacion .navegacion__superior {
+  display: flex;
+  justify-content: space-around;
+  column-gap: 5.5rem;
+  padding: 0.8rem 0.25rem;
+  align-items: center;
+}
+.navegacion .navegacion__superior .imgHeight {
+  max-height: 4rem;
+}
+.navegacion .busqueda {
+  width: 100%;
+  display: flex;
+  background-color: #fff;
+  border-radius: 2.5px;
+  box-shadow: 0 1px 2px 0 rgba(0, 0, 0, 0.2);
+}
+.navegacion .busqueda input {
+  width: 100%;
+  padding: 1rem 1.6rem;
+  outline: none;
+  border: 0.5px solid #eee;
+  border-radius: 2.5px;
+  font-size: 1.6rem;
+  letter-spacing: 0.2px;
+}
+.navegacion .busqueda input::placeholder {
+  color: rgb(221, 215, 215);
+}
+.navegacion .busqueda .iconInput {
+  margin: 1.2rem;
+  font-size: 1.5rem;
+}
+.navegacion .navegacion__inferior {
+  display: flex;
+  justify-content: space-between;
+  background-color: #fff059;
+}
+.navegacion .navegacion__inferior .iconShop {
+  font-size: 1.5rem;
+}
+.navegacion .inferior--menu, .navegacion .inferior--cuenta {
+  display: flex;
+  align-items: center;
+  column-gap: 2rem;
+}
+.navegacion .inferior--menu a, .navegacion .inferior--cuenta a {
+  color: rgba(51, 51, 51, 0.6);
+}
+.navegacion .inferior--menu a:hover, .navegacion .inferior--cuenta a:hover {
+  color: #333;
+}
+.navegacion .inferior--cuenta a {
+  color: #333;
+}
+.navegacion .iconKart {
+  font-size: 1.6rem;
+}
+
+.cuenta {
+  display: flex;
+  align-items: center;
+  column-gap: 0.5rem;
+  position: relative;
+  z-index: 1000;
+  padding: 1rem 0;
+}
+.cuenta .cuenta__img {
+  width: 2.5rem;
+  height: 2.5rem;
+  border-radius: 50%;
+}
+.cuenta .cuenta__nav {
+  visibility: hidden;
+  position: absolute;
+  left: 50%;
+  top: 4rem;
+  background-color: #fff;
+  width: 25rem;
+  transform: translateX(-50%);
+}
+.cuenta .cuenta__nav .cuenta__img {
+  width: 4rem;
+  height: 4rem;
+}
+.cuenta .cuenta__nav .nav--user {
+  display: flex;
+  padding: 2rem;
+  align-items: center;
+  column-gap: 2rem;
+  color: rgba(0, 0, 0, 0.45);
+  font-size: 1.4rem;
+  border-bottom: 1px solid #e1e1e1;
+}
+.cuenta .cuenta__nav .nav--options {
+  display: flex;
+  flex-direction: column;
+}
+.cuenta .cuenta__nav .nav--options a {
+  color: #333;
+  padding: 1.5rem;
+}
+.cuenta .cuenta__nav .nav--options a:hover {
+  background-color: #f4f3f3;
+}
+.cuenta:hover .cuenta__nav {
+  visibility: visible;
+}
+
+.cuenta--login {
+  column-gap: 2rem;
+}
+
+.profile {
+  margin: 5rem 0;
+}
+
+.b-profile {
+  box-shadow: 0 1px 2px 0 rgba(0, 0, 0, 0.15);
+  border-radius: 6px;
+}
+
+.profile__name {
+  background-color: #fff;
+  padding: 2rem 2.5rem;
+  display: flex;
+  align-items: center;
+  column-gap: 5rem;
+}
+.profile__name .name--img img {
+  width: 6rem;
+  height: 6rem;
+  object-fit: cover;
+  border-radius: 50%;
+  border: 2.6px solid #3483fa;
+  padding: 0.5rem;
+}
+.profile__name .name--info p {
+  font-size: 2.4rem;
+}
+
+.profile__account {
+  background-color: #fff;
+  margin-top: 2rem;
+}
+.profile__account .account--info {
+  padding: 2rem 1.5rem;
+  font-size: 1.6rem;
+  color: rgba(0, 0, 0, 0.8);
+  font-weight: 300;
+  display: flex;
+}
+.profile__account .account--info p {
+  flex: 1;
+}
+.profile__account .account--info span {
+  flex: 2;
+  color: rgba(0, 0, 0, 0.45);
+}
+.profile__account .account--info input {
+  flex: 2;
+  border: none;
+  border-bottom: 1px solid #3483fa;
+  outline: none;
+}
+
+.profile__button {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-top: 4rem;
+}
+
+.btn--modify, .btn--save {
+  width: auto;
+  text-align: center;
+  background-color: #3483fa;
+  border: none;
+  color: #fff;
+  border-radius: 0.6rem;
+  font-size: 1.6rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: 0.2s all ease-in;
+  padding: 1rem;
+}
+.btn--modify:hover, .btn--save:hover {
+  background-color: #2968c8;
+  transition: 0.2s all ease-in;
+}
+
+/*# sourceMappingURL=profile.css.map */
