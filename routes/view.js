@@ -106,4 +106,17 @@ router.get("/profile", async ( req, res ) => {
 })
 
 
+router.get("/order", async ( req, res ) => {
+    const user = req.cookies?.auth;
+    
+    if(!user){
+        return res.redirect("/auth/login");
+    }
+    
+    const respuesta = await instanceFunction(user.token).get(`/api/cart/`);
+    const cart = await respuesta.data;
+    
+    res.render("order", { user: user?.user, cart });
+})
+
 module.exports = router;

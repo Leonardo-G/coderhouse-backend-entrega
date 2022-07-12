@@ -69,8 +69,8 @@ html(lang="en")
                                 p unidad/es
                                 p(class="stock") #{ product.stock } disponibles
 
-                        button(class="payment__button button--buy" id="button-buy") Comprar ahora
-                        button(class="payment__button button--add" onClick=`addProduct()`) Agregar al carrito
+                        button(class="payment__button button--buy" id="button-buy" onClick='newOrder()') Comprar ahora
+                        button(class="payment__button button--add" onClick=`addCart()`) Agregar al carrito
                         div(class="payment_info")
                             div(class="info--p")
                                 i(class="fa-solid fa-share")

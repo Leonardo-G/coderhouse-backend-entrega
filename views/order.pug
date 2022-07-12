@@ -1,0 +1,57 @@
+include components/nav.pug
+-var priceForm = ( price ) => price.toLocaleString("es-AR", { style: "currency", currency: "ARS" })
+-var totalPrice = () => cart.productsCart.reduce( (pre, cur) => pre + cur.idProduct.typePrice.current * cur.quantity , 0 )
+
+doctype html
+html(lang="en")
+    head
+        meta(charset="UTF-8")
+        meta(http-equiv="X-UA-Compatible", content="IE=edge")
+        meta(name="viewport", content="width=device-width, initial-scale=1.0")
+        link(href="http://fonts.cdnfonts.com/css/proxima-nova-2?styles=44819,44818,44817,44821,44813,44815", rel="stylesheet")
+        link(rel="stylesheet", href="../css/order.css")
+        script(src="https://kit.fontawesome.com/fe5071cad1.js", crossorigin="anonymous")
+        title Mercado Libre | Orden
+    body 
+    +nav(user)
+    main
+        div.check
+            div.check__window
+                p Compra Realizada.
+        section.contenedor.section
+            div.section__product
+                h2 Opciones de envío a 
+                div.address
+                    div.address__icon
+                        i(class="fa-solid fa-location-dot")
+                    input(type="text" name="address" placeholder="Tu dirección de domicilio" class="address__input" required="true") 
+                p(id="error-input")
+                each product, index in cart.productsCart
+                    h3 Paquete #{ index + 1 }
+                    div.order(id="product-order" data-product=`${ JSON.stringify({idProduct: product.idProduct._id, quantity: product.quantity}) }`)
+                        div.order__header
+                            p.header--address Llega a tu domicilio
+                            p.header--free Gratis
+                        div.order__product
+                            img(src=`${ product.idProduct.imgProduct[0] }` class="product--img")
+                            div 
+                                p.product--title #{ product.idProduct.title }
+                                p.product--quantity Cantidad: #{ product.quantity }
+                                p.product--price $ #{ product.idProduct.typePrice.current } c / u
+                div.cart__send
+                    button(class="btn--sendBuy" onClick="newOrder()") Comprar
+            div.section__total
+                div.flex-t
+                    h2 Resumen de compra
+                    div.price 
+                        div.price__info
+                            p Productos ( #{ cart.productsCart.length } )
+                            p #{ priceForm(totalPrice()) }
+                        div.price__info
+                            p Envío
+                            p.info--free Gratis
+                    div.total
+                        p Total
+                        p(id="total-price" data-price=totalPrice()) #{ priceForm( totalPrice() ) }
+
+    script(src="../js/order.js") 

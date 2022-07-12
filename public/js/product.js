@@ -18,6 +18,9 @@ const dayDelivery = (day) => {
     return deliveryDay;
 }
 
+const redirectCart = () => window.location.href = "/cart/save"
+const redirectOrder = () => window.location.href = "/order"
+
 const addProduct = async () => {
     let cookie = (decodeURIComponent(document.cookie).split("auth=j:")[1]);
     const quantityProduct = document.querySelector(".payment__select input").value;
@@ -46,12 +49,20 @@ const addProduct = async () => {
             throw new Error(resp)
         }
         
-        window.location.href = "/cart/save"
     } catch (error) {
         window.location.href = "/auth/login";
         console.log(error)
     }
+}
 
+const addCart = async () => {
+    await addProduct();
+    redirectCart();
+}
+
+const newOrder = async () => {
+    await addProduct();
+    redirectOrder();
 }
 
 const description = (desc) => {
@@ -62,13 +73,3 @@ const description = (desc) => {
         <p class="pre">${ desc }</p>
     `
 }
-
-buttonBuy.addEventListener("click", (e) => {
-    let cookie = (decodeURIComponent(document.cookie).split("auth=j:")[1]);
-
-    if(!cookie){
-        window.location.href = "/auth/login";
-    }
-
-    localStorage.setItem("productId", idProduct);
-})
