@@ -13,9 +13,15 @@ const newOrder = async ( req = request, res = response ) => {
             msg: "Error en el servidor"
         });
     }
+}
 
+const getOrder = async ( req = request, res = response ) => {
+    const order = await Order.findDocuments({user: req.id}, { skip: 0, limit: 5}, { ref: "products.idProduct", key: ["title", "imgProduct", "typePrice", "stock"]})
+
+    res.status(200).json(order);
 }
 
 module.exports = {
-    newOrder
+    newOrder,
+    getOrder
 }

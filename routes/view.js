@@ -28,15 +28,20 @@ router.get( "/auth/login", ( req = request, res = response ) => {
 router.get( "/", async ( req, res ) => {
     const user = req.cookies?.auth;
     let favorite;
-
+    
     const [ resp1, resp2 ] = await Promise.all([
         instanceFunction().get("/api/products"),
         instanceFunction().get("/api/category/herramientas/subcategories?limit=2"),
     ])
 
     if(user){
-        const resp = await instanceFunction(user.token).get("/api/favorite");
-        favorite = resp.data
+        try {
+            const resp = await instanceFunction(user.token).get("/api/favorite");
+            favorite = resp.data
+            
+        } catch (error) {
+            console.log("Error")
+        }
     }
     
     const productsAll = await resp1.data;
@@ -117,6 +122,19 @@ router.get("/order", async ( req, res ) => {
     const cart = await respuesta.data;
     
     res.render("order", { user: user?.user, cart });
+})
+
+router.get("/myorder", async ( req = request, res = response ) => {
+    const user = req.cookies?.auth;
+    
+    if(!user){
+        return res.redirect("/auth/login");
+    }
+    
+    const respuesta = await instanceFunction(user.token).get(`/api/order/get`);
+    const orders = await respuesta.data;
+    console.log(orders)
+    res.render("myorder", { user: user?.user, orders });
 })
 
 module.exports = router;

@@ -22,12 +22,13 @@ mixin item-card( product, favorites )
 
                 p(class='titulo-hover') #{ product.title }
         if favorites
-            if favorites.includes(product._id)
-                div(class='icon-fav icon--favOn' id="icon-fav" data-product-id=`${product._id}`)
-                    i(class="far fa-solid fa-heart")
-            else 
-                div(class='icon-fav' id="icon-fav" data-product-id=`${product._id}`)
-                    i(class="far fa-heart")
+            for fav in favorites
+                if fav._id === product._id
+                    div(class='icon-fav icon--favOn' id="icon-fav" data-product-id=`${product._id}`)
+                        i(class="far fa-solid fa-heart")
+                else 
+                    div(class='icon-fav' id="icon-fav" data-product-id=`${product._id}`)
+                        i(class="far fa-heart")
         if !favorites
             div(class='icon-fav' id="icon-fav" data-product-id=`${product._id}`)
                 i(class="far fa-heart")

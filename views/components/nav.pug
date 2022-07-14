@@ -14,11 +14,7 @@ mixin nav( user=false )
                 nav(class="navegacion__inferior")
                     div(class="inferior--menu")
                         a(href="/", id="category") Categorías 
-                        a(href="/") Ofertas
                         a(href="/") Historial
-                        a(href="/") Supermercado
-                        a(href="/") Moda
-                        a(href="/") Ayuda 
                     div(class="inferior--cuenta")
                     
                         if (user)
@@ -31,7 +27,7 @@ mixin nav( user=false )
                                         img(class="cuenta__img" src=`${user.imgUrl}`)
                                         p Hola #{user.username}
                                     div(class="nav--options")
-                                        a(href="#") Compras
+                                        a(href="/myorder") Compras
                                         a(href="/profile") Mi Perfil
                                         a(href="#") Salir
                                         
@@ -40,6 +36,5 @@ mixin nav( user=false )
                                 a(href="/auth/sign-in") Creá tu cuenta 
                                 a(href="/auth/login") Ingresá
 
-                        a(href="/") Mis compras
                         a(href="/cart/save")
                             i(class="fa-solid fa-cart-shopping iconShop")

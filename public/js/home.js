@@ -1,15 +1,14 @@
 const iconFavDiv = document.querySelectorAll("#icon-fav");
 
 const addFavorite = async (icon) => {
-    const cookie = decodeURIComponent(document.cookie).split("auth=j:")
-    console.log(icon);
+    const cookie = decodeURIComponent(document.cookie).split("auth=j:");
+
     if(cookie.length <= 1){
         return window.location.href = "/auth/login";
     }
 
     const token = JSON.parse(cookie[1]).token;
     const productID = icon.getAttribute("data-product-id");
-    console.log(token);
 
     const res = await fetch( `http://localhost:8000/api/favorite/${productID}`, {
         method: "PUT",
@@ -19,8 +18,7 @@ const addFavorite = async (icon) => {
         }
     } )
 
-    const resp = await res.json();
-    console.log(resp);
+    await res.json();
 
     icon.classList.toggle("icon--favOn")
     icon.children[0].classList.toggle("fa-solid");

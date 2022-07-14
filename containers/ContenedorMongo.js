@@ -36,29 +36,34 @@ class ContenedorMongo{
     }
 
     async findDocumentById(id, ref){
-        let document = await this.colection.findById(id);
-        if(ref){
-            document = document.populate(ref.ref, ref.key)
+        
+        let document;
+
+        if( ref ){
+            document = await this.colection.findById(id).populate(ref.ref, ref.key)
+        }else{
+            document = await this.colection.findById(id);
         }
         return document;
     }
 
-    async findDocuments(filter, query){
+    async findDocuments(filter, query, ref){
         if(typeof filter != "object"){
             throw new Error("El parametro de busqueda tiene que ser de tipo 'OBJECT'");
         }
 
         if(!query){
             const documents = await this.colection.find(filter);
-            return documents;
+            return documents
         }else{
             const { skip = 0, limit = 5 } = query;
             
-            const documents = await this.colection.find(filter)
+            let documents = await this.colection.find(filter)
                                     .skip( Number(skip) )
                                     .limit( Number(limit) )
-                    
-            return documents;
+                                    .populate(ref?.ref, ref?.key)
+
+            return documents
         }
     }
 
