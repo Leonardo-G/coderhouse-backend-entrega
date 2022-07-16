@@ -1,0 +1,63 @@
+@import "../base/variables";
+@import "../base/base";
+@import "../components/nav";
+
+h1{
+    font-size: 2rem;
+    margin-top: 2rem;
+}
+
+.formulario{
+    margin: 5rem 0;
+    width: 100%;
+    background-color: #fff;
+    padding: 2rem;
+    display: flex;
+    flex-direction: column;
+    row-gap: 4rem;
+        label{
+            font-size: 1.5rem;
+            margin-bottom: 0.5rem;
+        }
+        input, textarea, option, select{
+            border: 1px solid $col-blue;
+            outline: none;
+            padding: 1rem;
+            border-radius: 6px;
+            width: 100%;
+        }
+        .formulario__campo{
+            p{
+                font-size: 1.4rem;
+                margin-bottom: 1rem;
+            }
+        }
+        .campo--2 input{
+            margin-left: 2rem;
+            width: min(50rem, 90%);
+            display: block;
+            margin-bottom: 1rem;
+        }
+        .icon--add{
+            margin-left: 1rem;
+            cursor: pointer;
+        }
+}
+
+.btn--create{
+    width: auto;
+    text-align: center;
+    background-color: $col-blue;
+    border: none;
+    color: #fff;
+    border-radius: 0.6rem;
+    font-size: 1.6rem;
+    font-weight: 600;
+    cursor: pointer;
+    transition: .2s all ease-in;
+    padding: 1rem;
+    &:hover{
+        background-color: #2968c8;
+        transition: .2s all ease-in;
+    }
+}

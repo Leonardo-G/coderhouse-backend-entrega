@@ -75,19 +75,19 @@ const getProductById = async ( req = request, res = response ) => {
 }
 
 const newProduct = async ( req = request, res = response ) => {
-    const { title, price, subCategory, category, characteristics, stock } = req.body;
-
-    const img = req.files.imgProduct;
-    const { secure_url } = await cloudinary.uploader.upload( img.tempFilePath, { file: `mercado-libre/${category}/${subCategory}`} );
+    const { title, typePrice, subCategory, category, characteristics, stock, description, delivery, imgProduct } = req.body;
 
     const obj = {
+        usuario: req.id,
         title,
-        price,
-        subCategory,
+        imgProduct,
         category,
+        subCategory,
+        characteristics,
+        typePrice,
         stock,
-        characteristics: JSON.parse(characteristics),
-        imgProduct: [secure_url]
+        description,
+        delivery
     }
     
     const product = await Product.createDocument(obj);

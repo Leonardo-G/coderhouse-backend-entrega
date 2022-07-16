@@ -16,6 +16,7 @@ class Server {
             admin: "/admin",
             auth : "/api/auth",
             categories: "/api/category",
+            image: "/api/image",
             products: "/api/products",
             cart: "/api/cart",
             favorite: "/api/favorite",
@@ -56,6 +57,7 @@ class Server {
         //api
         this.app.use(this.routes.auth, require("../routes/api/auth"));
         this.app.use(this.routes.categories, require("../routes/api/category"));
+        this.app.use(this.routes.image, require("../routes/api/image"));
         this.app.use(this.routes.products, require("../routes/api/products"));
         this.app.use(this.routes.cart, require("../routes/api/cart"));
         this.app.use(this.routes.favorite, require("../routes/api/favorite"));

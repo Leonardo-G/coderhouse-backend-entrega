@@ -27,7 +27,6 @@ const updateProfile = async (e) => {
     const cookie_token = JSON.parse(decodeURIComponent(document.cookie).split("auth=j:")[1]).token
     const username = document.querySelector("input[name='username']").value
     const email = document.querySelector("input[name='email']").value
-    const name = document.querySelector("input[name='name']").value
     
     const respuesta = await fetch("http://localhost:8000/api/auth/profile", {
         method: "PUT",
@@ -36,7 +35,7 @@ const updateProfile = async (e) => {
             "auth-token": cookie_token
         },
         body: JSON.stringify({
-            username, email, name
+            username, email
         })
     })
 

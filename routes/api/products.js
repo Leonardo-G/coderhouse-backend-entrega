@@ -21,13 +21,15 @@ router.post( "/tel/send", sendSMS );
 
 router.post( "/", [
     check("title", "La propiedad 'title' es requerido").notEmpty(),
-    check("price", "La propiedad 'category' es requerido").notEmpty(),
+    check("typePrice", "La propiedad 'typePrice' es requerido").notEmpty(),
     check("category", "La propiedad 'category' es requerido").notEmpty(),
     check("subCategory", "La propiedad 'subCategory' es requerido").notEmpty(),
     check("characteristics", "La propiedad 'characteristics' es requerido y tiene que ser un 'Array'"),
+    check("description", "La propiedad 'description' es requerido"),
     validateBody,
     validateCategory,
-    validateSubCategory
+    validateSubCategory,
+    validateJWT
 ], newProduct );
 
 router.put( "/:id", [

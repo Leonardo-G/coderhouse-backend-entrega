@@ -1,0 +1,54 @@
+include components/nav.pug
+
+doctype html
+html(lang="en")
+    head
+        meta(charset="UTF-8")
+        meta(http-equiv="X-UA-Compatible", content="IE=edge")
+        meta(name="viewport", content="width=device-width, initial-scale=1.0")
+        script(src="https://kit.fontawesome.com/fe5071cad1.js", crossorigin="anonymous")
+        link(href="http://fonts.cdnfonts.com/css/proxima-nova-2?styles=44819,44817,44821,44813,44815", rel="stylesheet")
+        link(rel="stylesheet", href="../css/newpost.css")
+        title Mercado Libre | Perfil
+    body 
+        +nav(user)
+        main.contenedor 
+            form(class="formulario" id="formulario")
+                h1 Ingrese todos los campos del producto
+                div.formulario__campo 
+                    p Seleccione una imagen del producto
+                    input(type="file", name="imgProduct" placeholder="Seleccione una imagen del producto" accept="image/*" required="true")
+                div.formulario__campo
+                    p Indique la categoría del producto
+                    select(name="category" id="select-category" required)
+                        option(value="" selected disabled) Seleccione un opción 
+                        option(value="herramientas") Herramientas
+                        option(value="construccion") Construcción
+                div.formulario__campo
+                    p Indique la subcategoría que más describa del producto
+                    select(name="subCategory" id="select-subcategory" required)
+                        option(value="" selected disabled) Seleccione un opción 
+                        option(value="electricas") Eléctricas
+                        option(value="manuales") Manuales
+                        option(value="jardin") Jardin
+                        option(value="jardin") Accesorios
+                div.formulario__campo
+                    p Indique el tipo de envío de su producto
+                    select(name="delivery" id="select-delivery" required)
+                        option(value="" selected disabled) Seleccione un opción 
+                        option(value="0") No dispongo de envío
+                        option(value="1") Envío gratis
+                        option(value="2") Envío Gratis (FULL)
+                div.formulario__campo.campo--2
+                    p Agregar caracteristicas del producto
+                        i(class="fa-solid fa-circle-plus icon--add")
+                    input(type="text" name="characteristics" placeholder="Agregue una catacteristica" required)
+                    
+                input(type="text" name="title" id="title" placeholder="Nombre del producto" required="true")  
+                input(type="number" name="current" placeholder="Precio del producto" required="true")
+                input(type="number" name="old" placeholder="Si su producto tiene descuento, coloca el precio sin descuento. En caso de no tener, deje el campo vacío")
+                textarea(name="description", cols="30", rows="10" id="description" placeholder="Descripción del producto" required="true")
+                input(type="number" id="stock" name="stock" placeholder="Stock del producto" required="true")
+                input(type="submit", value="Vender Producto" class="btn--create")
+    
+    script(src="../js/newpost.js")

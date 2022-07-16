@@ -137,4 +137,14 @@ router.get("/myorder", async ( req = request, res = response ) => {
     res.render("myorder", { user: user?.user, orders });
 })
 
+router.get("/newpost", async ( req = request, res = response ) => {
+    const user = req.cookies?.auth;
+    
+    if(!user){
+        return res.redirect("/auth/login");
+    }
+    
+    res.render("newpost", { user: user?.user });
+})
+
 module.exports = router;
