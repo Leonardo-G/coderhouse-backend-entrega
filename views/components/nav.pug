@@ -13,8 +13,7 @@ mixin nav( user=false )
                         img(src=`${enlace}/img/D_NQ_877425-MLA47306668299_082021-OO.webp` class="imgHeight" alt="subscripcion disney")
                 nav(class="navegacion__inferior")
                     div(class="inferior--menu")
-                        a(href="/", id="category") Categorías 
-                        a(href="/") Historial
+                        a(href="#categorias") Categorías
                         a(href="/newpost") Vender
                     div(class="inferior--cuenta")
                     
@@ -30,7 +29,7 @@ mixin nav( user=false )
                                     div(class="nav--options")
                                         a(href="/myorder") Compras
                                         a(href="/profile") Mi Perfil
-                                        a(href="#") Salir
+                                        a(href="/auth/sign-off") Salir
                                         
                         else    
                             div(class="cuenta cuenta--login")

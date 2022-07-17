@@ -1,1 +1,0 @@
-console.log(new Date((Number("1657604430911"))).toLocaleDateString("es-AR", { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' }))

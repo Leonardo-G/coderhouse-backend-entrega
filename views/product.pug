@@ -33,7 +33,7 @@ html(lang="en")
                                     span(class="descuento") #{Math.round((product.typePrice.old - product.typePrice.current) / (product.typePrice.old / 100))} % OFF 
 
                             span(class="cuota") en 12x $ #{ (product.typePrice.current / 12).toLocaleString("es-AR", { maximumFractionDigits: "2", minimumFractionDigits: "2" }) } sin interés
-                            p Ver los medios de pago    
+                            
                             div(class="characteristics")
                                 p(class="characteristics__title") Lo que tenes que saber de este producto
                                 ul
@@ -45,52 +45,58 @@ html(lang="en")
                         p(class="pre") #{ product.description }
                     hr
                 div.aside
-                    div.payment
-                        div(class="payment__delivery")
-                            i(class="fa-solid fa-truck-fast icon--thunk")
-                            p Llega gratis 
-                                if product.delivery === 2
-                                    span mañana
-                                else if product.delivery === 1
-                                    span el #{new Date(new Date().setDate(new Date().getDate() + 3)).toLocaleDateString("es-AR", {weekday: 'long'})}
-                        
-                        p(class="payment__username") Vendido por 
-                            span #{product.usuario.username}
-                        
+                    div.sticky
+                        div.payment
+                            div(class="payment__delivery")
+                                i(class="fa-solid fa-truck-fast icon--thunk")
+                                p Llega gratis 
+                                    if product.delivery === 2
+                                        span mañana
+                                    else if product.delivery === 1
+                                        span el #{new Date(new Date().setDate(new Date().getDate() + 3)).toLocaleDateString("es-AR", {weekday: 'long'})}
+                            
+                            p(class="payment__username") Vendido por 
+                                span #{product.usuario.username}
+                            
 
-                        if product.stock > 0
-                            p(class='stock_true') Stock disponible
+                            if product.stock > 0
+                                p(class='stock_true') Stock disponible
 
-                        if  product.stock > 0  
-                            div(class="payment__select")
-                                p Cantidad:
-                                input(type="number" name="cantidad" value="1")
-                                p unidad/es
-                                p(class="stock") #{ product.stock } disponibles
-
-                        button(class="payment__button button--buy" id="button-buy" onClick='newOrder()') Comprar ahora
-                        button(class="payment__button button--add" onClick=`addCart()`) Agregar al carrito
-                        div(class="payment_info")
-                            div(class="info--p")
-                                i(class="fa-solid fa-share")
-                                p
-                                    span Devolución gratis.
-                                    #{"Tenés 30 dias desde que lo recibís"}
-                            div(class="info--p")
-                                i(class="fa-regular fa-circle-check")
-                                p
-                                    span Compra protegida. 
-                            div(class="info--p")
-                                i(class="fa-solid fa-award")
-                                p 12 meses de garantía de fábrica.
-                    div.subscription.line-border
-                        h3.subscription__title Subscribite al nivel 6 con 67% OFF! 
-                        div.subscription__info
-                            img(src="/img/d+oferta.jpg")
-                            p La oferta termina el 30 de junio
-                            p Tu subscripcion anual por $ 399/mes incluye Disney+, Start+, miles de descuentos en compras y muchos mas!
-                        div.subscription__button
-                            button(class="payment__button button--add button--subscription") Suscribite al nivel 6
+                            if  product.stock > 0  
+                                div(class="payment__select")
+                                    p Cantidad:
+                                    input(type="number" name="cantidad" value="1")
+                                    p unidad/es
+                                    p(class="stock") #{ product.stock } disponibles
+                            if user
+                                if product.usuario._id === user.id
+                                    h2 Este producto es tuyo
+                                else
+                                    button(class="payment__button button--buy" id="button-buy" onClick='newOrder()') Comprar ahora
+                                    button(class="payment__button button--add" onClick=`addCart()`) Agregar al carrito
+                            else
+                                button(class="payment__button button--buy" id="button-buy" onClick='newOrder()') Comprar ahora
+                                button(class="payment__button button--add" onClick=`addCart()`) Agregar al carrito
+                            div(class="payment_info")
+                                div(class="info--p")
+                                    i(class="fa-solid fa-share")
+                                    p
+                                        span Devolución gratis.
+                                div(class="info--p")
+                                    i(class="fa-regular fa-circle-check")
+                                    p
+                                        span Compra protegida. 
+                                div(class="info--p")
+                                    i(class="fa-solid fa-award")
+                                    p 12 meses de garantía de fábrica.
+                        div.subscription.line-border
+                            h3.subscription__title Subscribite al nivel 6 con 67% OFF! 
+                            div.subscription__info
+                                img(src="/img/d+oferta.jpg")
+                                p La oferta termina el 30 de junio
+                                p Tu subscripcion anual por $ 399/mes incluye Disney+, Start+, miles de descuentos en compras y muchos mas!
+                            div.subscription__button
+                                button(class="payment__button button--add button--subscription") Suscribite al nivel 6
             hr
 
 

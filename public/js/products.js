@@ -27,7 +27,7 @@ const getSubCategory = async () => {
                         </a>
                         <a href="/product/${ product._id }">
                             <p class="price">
-                                $ ${ Number(product.price).toLocaleString('es-AR') }
+                                $ ${ Number(product.typePrice.current).toLocaleString('es-AR') }
                             </p>
                         </a>
                     </div>

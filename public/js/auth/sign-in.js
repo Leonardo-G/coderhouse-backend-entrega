@@ -23,6 +23,15 @@ form.addEventListener("submit", async (e) => {
             throw (JSON.stringify(resp));
         }
 
+        //Crear el carrito que sera para el usuario registrado
+        const cartUser = await fetch("http://localhost:8000/api/cart/", {
+            method: "POST",
+            headers: {
+                "auth-token": resp.token
+            }
+        })
+        console.log(cartUser)
+
         window.location.href = "/";
         
     } catch (err) {

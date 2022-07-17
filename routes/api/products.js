@@ -1,7 +1,7 @@
 const { Router } = require("express");
 const { check } = require("express-validator");
 
-const { getProductsByCategory, newProduct, getProductsBySubCategory, getProducts, getProductById, sendSMS, updateProduct } = require("../../controllers/api/products");
+const { getProductsByCategory, newProduct, getProductsBySubCategory, getProducts, getProductById, updateProduct, updateAndIncrement } = require("../../controllers/api/products");
 const validateCategory = require("../../middlewares/validateCategory");
 const validateSubCategory = require("../../middlewares/validateSubCategory");
 const { validateBody } = require("../../middlewares/validateBody");
@@ -16,8 +16,6 @@ router.get( "/:category", getProductsByCategory );
 router.get( "/subcategory/:subcategory", getProductsBySubCategory );
 
 router.get( "/product/:id", getProductById );
-
-router.post( "/tel/send", sendSMS );
 
 router.post( "/", [
     check("title", "La propiedad 'title' es requerido").notEmpty(),
@@ -37,6 +35,19 @@ router.put( "/:id", [
     validateBody,
     validateJWT
 ], updateProduct )
+
+router.put( "/:id/buy", [
+    check("id", "Se necesita el id del producto").isMongoId(),
+    validateBody,
+    validateJWT
+], updateAndIncrement )
+
+router.put( "/:id/visited", [
+    check("id", "Se necesita el id del producto").isMongoId(),
+    check("campo", "Ingrese el 'campo' que se requiere incrementar").notEmpty(),
+    validateBody,
+    validateJWT
+])
 
 module.exports = router;
 

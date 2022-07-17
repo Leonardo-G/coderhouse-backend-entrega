@@ -25,6 +25,10 @@ router.get( "/auth/login", ( req = request, res = response ) => {
     }
 });
 
+router.get( "/auth/sign-off", ( req, res ) => {
+    res.clearCookie("auth").redirect("../../auth/login");
+})
+
 router.get( "/", async ( req, res ) => {
     const user = req.cookies?.auth;
     let favorite;
@@ -50,16 +54,17 @@ router.get( "/", async ( req, res ) => {
     res.render("home", { user: user?.user, productsAll, subCategories, favorites: favorite?.prodFavorites });
 })
 
-router.get( "/category/:subcategories", ( req, res ) => {
-    const user = req.cookies.auth;
+router.get( "/:categories/subcategories", ( req, res ) => {
+    const user = req.cookies?.auth;
 
-    res.render("subcategories", { user });
+    console.log(user)
+    res.render("subcategories", { user: user?.user });
 })
 
 router.get( "/products/:subcategory", ( req, res ) => {
     const user = req.cookies?.auth;
-    
-    res.render("products", { user })
+    console.log(user)
+    res.render("products", { user: user?.user })
 })
 
 router.get( "/product/:id", async ( req, res ) => {
@@ -68,7 +73,7 @@ router.get( "/product/:id", async ( req, res ) => {
 
     const respuesta = await instanceFunction().get(`/api/products/product/${id}`);
     const product = await respuesta.data;
-
+    console.log(user?.user)
     res.render("product", { user: user?.user, product });
 })
 

@@ -113,11 +113,6 @@ const loginUser = async ( req = request, res = response ) => {
     }, { maxAge: 3600000}).json({token})
 }
 
-const signOffUser = ( req = request, res = response ) => {
-
-    res.clearCookie("auth").redirect("../../auth/login");
-}
-
 const getInfoUser = async ( req = request, res = response ) => {
     const usuario = await Usuario.findDocumentById(req.id);
 
@@ -133,7 +128,6 @@ const updateUser = async ( req = request, res = response ) => {
 module.exports = {
     createUser,
     loginUser,
-    signOffUser,
     getInfoUser,
     updateUser
 }

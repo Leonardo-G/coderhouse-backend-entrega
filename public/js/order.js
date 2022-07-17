@@ -5,12 +5,14 @@ const newOrder = async () => {
     const cookie_token = JSON.parse(decodeURIComponent(document.cookie).split("auth=j:")[1]).token;
     
     let products = [];
+    let idProducts = [];
     const address = document.querySelector("input[name='address']").value
     const totalPrice = Number(document.querySelector("#total-price").getAttribute("data-price"));
     const productsElement = document.querySelectorAll("#product-order");
     
     productsElement.forEach( p => {
         products.push(JSON.parse(p.getAttribute("data-product")))
+        idProducts.push(p.getAttribute("data-product-id"))
     })
 
     if(!cookie_token){
@@ -40,6 +42,17 @@ const newOrder = async () => {
 
     const resultado = await respuesta.json();
     console.log(resultado)
+    
+    //Incrementar el numero de la venta
+    idProducts.forEach( async (id) => {
+        await fetch(`http://localhost:8000/api/products/${id}/buy`, {
+            method: "PUT",
+            headers: {
+                "auth-token": cookie_token,
+                "Content-Type": "application/json"
+            }
+        })
+    })
 
     await fetch("http://localhost:8000/api/cart/empty", {
         method: "PUT",
@@ -47,6 +60,8 @@ const newOrder = async () => {
             "auth-token": cookie_token
         }
     }) 
+
+
 
     windowCheck.style.display = "inherit"
 

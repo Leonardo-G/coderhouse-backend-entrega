@@ -28,7 +28,7 @@ html(lang="en")
                 p(id="error-input")
                 each product, index in cart.productsCart
                     h3 Paquete #{ index + 1 }
-                    div.order(id="product-order" data-product=`${ JSON.stringify({idProduct: product.idProduct._id, quantity: product.quantity}) }`)
+                    div.order(id="product-order" data-product-id=`${product.idProduct._id}` data-product=`${ JSON.stringify({idProduct: product.idProduct._id, quantity: product.quantity}) }`)
                         div.order__header
                             p.header--address Llega a tu domicilio
                             p.header--free Gratis

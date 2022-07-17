@@ -1,6 +1,6 @@
 const url = window.location.href;
 const urlSplit = url.split("/");
-const category = urlSplit[urlSplit.length - 1];
+const category = urlSplit[urlSplit.length - 2];
 
 var subCategories;
 
@@ -13,7 +13,7 @@ const getSubCategory = async () => {
     const cajaSubCategorie = document.querySelector(".subcategories");
 
     try {
-        const res = await fetch(`http://localhost:8000/api/category/subcategories/${category}`, {
+        const res = await fetch(`http://localhost:8000/api/category/${category}/subcategories`, {
             method: "GET",
         })
         const resp = await res.json();

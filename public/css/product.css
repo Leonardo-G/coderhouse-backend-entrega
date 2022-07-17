@@ -218,6 +218,7 @@ a {
 .page .product .product__img {
   margin-top: 4rem;
   flex: 1;
+  height: 45rem;
 }
 .page .product .product__img img {
   width: 100%;
@@ -299,6 +300,10 @@ a {
 }
 .page .aside {
   flex: 1;
+}
+.page .aside .sticky {
+  position: sticky;
+  top: 2rem;
 }
 .page .aside .payment {
   padding: 2.5rem 1.6rem;

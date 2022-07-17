@@ -91,6 +91,21 @@ class ContenedorMongo{
             console.log(error)    
         }
     }
+
+    async findDocumentUpdateAndIncrement(filter, campo){   // "Campo" que se quiere incrementar, EJ: { "visitas": valorAIncrementar, ejemplo 1 }
+        if(typeof filter != "object" || typeof campo != "object"){
+            throw new Error("El tipo de dato tiene que ser de tipo 'OBJECT'");
+        }
+
+        try {
+            const document = await this.colection.findOneAndUpdate(filter, {$inc: campo}, { new: true });
+            
+            return document
+        
+        } catch (error) {
+            console.log(error)    
+        }
+    }
 }
 
 module.exports = ContenedorMongo;

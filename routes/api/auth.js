@@ -1,7 +1,7 @@
 const { Router } = require("express");
 const { check } = require("express-validator");
 
-const { createUser, loginUser, signOffUser, getInfoUser, updateUser } = require("../../controllers/api/auth");
+const { createUser, loginUser, getInfoUser, updateUser } = require("../../controllers/api/auth");
 const { validateBody } = require("../../middlewares/validateBody");
 const validateJWT = require("../../middlewares/validateJWT");
 
@@ -13,8 +13,6 @@ router.post( "/sign-in-create", [
     check("email", "No es un email válido").isEmail(),
     validateBody
 ], createUser );
-
-router.post( "/sign-off", signOffUser )
 
 router.get( "/", validateJWT, getInfoUser )
 

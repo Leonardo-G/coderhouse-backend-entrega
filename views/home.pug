@@ -66,15 +66,16 @@ html(lang="en")
                 div(class="flex-container")
                     for subCategory in subCategories 
                         +card-subCategory(subCategory)
-            section(class="categories")
+            section(class="categories" id="categorias")
                 h2(class="section-title") Categorías populares
                 div(class="grid-container")
-                    div(class="category")
-                        i(class="fa-solid fa-car icon--category")
-                        p(class="category__title") Autos, Motos y Otros
-                    div(class="category")
-                        i(class="fa-solid fa-display icon--category")
-                        p(class="category__title") Computación 
+                    a(class="category" href="/herramientas/subcategories")
+                        i(class="fa-solid fa-wrench icon--category")
+                        p(class="category__title") Herramientas
+                    a(class="category" href="/construccion/subcategories")
+                        i(class="fa-solid fa-building icon--category")
+                        p(class="category__title") Construcción 
+                        
     script(src="js/home.js")
     script(src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0-beta1/dist/js/bootstrap.bundle.min.js") 
     

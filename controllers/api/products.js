@@ -118,25 +118,12 @@ const updateProduct = async ( req = request, res = response ) => {
     res.status(201).json(userUpdate);
 }
 
-const sendSMS = async ( req, res ) => {
-    // const sid = "ACb738cc0e66915be7c05e53f5d937260b";
-    // const twilioToken = "ba9681d64cb819d353d4f6bb9f7d3402";
+const updateAndIncrement = async ( req = request, res = response ) => {
+    const { id } = req.params
 
-    // const client = twilio(sid, twilioToken);
-    // console.log("HOLA")
+    const incrementObj = await Product.findDocumentUpdateAndIncrement( { _id: id }, { stock: -1, sold: 1 } )
 
-    // try {
-    //     const message = await client.messages.create({
-    //         messagingServiceSid: 'MG040fae6b301fbc5c644fd9de46dcc409',
-    //         body: 'Soy leo, si te llega este mensaje avisame',
-    //         to: '+541173654878'
-    //     })
-    //     res.json({message})
-    //     console.log(message)
-    //  } catch (error) {
-    //     console.log(error)
-    //  }
-     
+    res.status(200).json(incrementObj);
 }
 
 module.exports = {
@@ -146,5 +133,5 @@ module.exports = {
     getProductById,
     newProduct,
     updateProduct,
-    sendSMS
+    updateAndIncrement
 }
