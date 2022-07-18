@@ -56,6 +56,10 @@ const ProductoSchema = new Schema({
     description:{
         type: String,
         required: true
+    },
+    visited: {
+        type: Number,
+        default: 0
     }
 })
 

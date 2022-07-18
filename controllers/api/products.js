@@ -126,6 +126,14 @@ const updateAndIncrement = async ( req = request, res = response ) => {
     res.status(200).json(incrementObj);
 }
 
+const updateVisited = async ( req = request, res = response ) => {
+    const { id } = req.params
+
+    const visitedObj = await Product.findDocumentUpdateAndIncrement( {_id: id }, { visited: 1 })
+
+    res.status(200).json(visitedObj);
+}
+
 module.exports = {
     getProducts,
     getProductsByCategory,
@@ -133,5 +141,6 @@ module.exports = {
     getProductById,
     newProduct,
     updateProduct,
-    updateAndIncrement
+    updateAndIncrement,
+    updateVisited
 }

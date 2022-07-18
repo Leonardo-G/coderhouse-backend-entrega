@@ -43,7 +43,7 @@ const newOrder = async () => {
     const resultado = await respuesta.json();
     console.log(resultado)
     
-    //Incrementar el numero de la venta
+    //Incrementar el numero de la venta y descontar el stock
     idProducts.forEach( async (id) => {
         await fetch(`http://localhost:8000/api/products/${id}/buy`, {
             method: "PUT",
@@ -60,8 +60,6 @@ const newOrder = async () => {
             "auth-token": cookie_token
         }
     }) 
-
-
 
     windowCheck.style.display = "inherit"
 

@@ -71,9 +71,12 @@ router.get( "/product/:id", async ( req, res ) => {
     const user = req.cookies?.auth;
     const { id } = req.params;
 
-    const respuesta = await instanceFunction().get(`/api/products/product/${id}`);
-    const product = await respuesta.data;
-    console.log(user?.user)
+    const [ resp1, resp2 ] = await Promise.all([
+        instanceFunction().get(`/api/products/product/${id}`),
+        instanceFunction().put(`/api/products/${ id }/visited`)
+    ])
+
+    const product = resp2.data;
     res.render("product", { user: user?.user, product });
 })
 

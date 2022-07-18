@@ -1,7 +1,7 @@
 const { Router } = require("express");
 const { check } = require("express-validator");
 
-const { getProductsByCategory, newProduct, getProductsBySubCategory, getProducts, getProductById, updateProduct, updateAndIncrement } = require("../../controllers/api/products");
+const { getProductsByCategory, newProduct, getProductsBySubCategory, getProducts, getProductById, updateProduct, updateAndIncrement, updateVisited } = require("../../controllers/api/products");
 const validateCategory = require("../../middlewares/validateCategory");
 const validateSubCategory = require("../../middlewares/validateSubCategory");
 const { validateBody } = require("../../middlewares/validateBody");
@@ -44,10 +44,7 @@ router.put( "/:id/buy", [
 
 router.put( "/:id/visited", [
     check("id", "Se necesita el id del producto").isMongoId(),
-    check("campo", "Ingrese el 'campo' que se requiere incrementar").notEmpty(),
-    validateBody,
-    validateJWT
-])
+], updateVisited)
 
 module.exports = router;
 

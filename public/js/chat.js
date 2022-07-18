@@ -46,7 +46,7 @@ socket.on("mensajes-base", (mensajes) => {
 
 
 boton.addEventListener("click", () => {
-    const mensaje = document.querySelector("#mensaje").value;
+    let mensaje = document.querySelector("#mensaje").value;
     
     socket.emit("chatGeneral", {token, mensaje: mensaje, fecha: Date.now(), usuario:{ imgUrl: cookie.user.imgUrl, username: cookie.user.username }});
 })

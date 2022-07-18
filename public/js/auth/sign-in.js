@@ -1,7 +1,11 @@
 const form = document.querySelector("#form");
 const errorDiv = document.querySelector("#error");
+const spinner = document.querySelector("#spinner");
 
 form.addEventListener("submit", async (e) => {
+
+    spinner.classList.toggle("hidden");
+
     e.preventDefault();
 
     const username = form["username"].value;
@@ -24,18 +28,24 @@ form.addEventListener("submit", async (e) => {
         }
 
         //Crear el carrito que sera para el usuario registrado
-        const cartUser = await fetch("http://localhost:8000/api/cart/", {
-            method: "POST",
-            headers: {
-                "auth-token": resp.token
-            }
-        })
-        console.log(cartUser)
-
+        await Promise.all([
+            fetch("http://localhost:8000/api/cart/", {
+                method: "POST",
+                headers: {
+                    "auth-token": resp.token
+                }
+            }),
+            fetch("http://localhost:8000/api/favorite/", {
+                method: "POST",
+                headers: {
+                    "auth-token": resp.token
+                }
+            })
+        ])
         window.location.href = "/";
         
     } catch (err) {
-
+        spinner.classList.toggle("hidden");
         if(errorDiv.firstChild){
             errorDiv.firstChild.remove();
         }
