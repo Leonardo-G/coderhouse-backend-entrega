@@ -4,8 +4,6 @@ const cloudinary = require("cloudinary").v2;
 cloudinary.config(process.env.CLOUDINARY_URL);
 const ProductDTO = require("../../classes/ProductDTO"); 
 
-const twilio = require("twilio");
-
 const ProductDao = require("../../service/DAO/ProductDAO");
 const Product = new ProductDao();
 

@@ -11,7 +11,7 @@ class Server {
         this.dotenvConfig = dotenv.config();
         this.app = express();
         this.server = require('http').createServer(this.app);
-        this.port = process.env.PORT || 8080;
+        this.port = process.env.PORT || 8000;
         this.routes = {
             admin: "/admin",
             auth : "/api/auth",
