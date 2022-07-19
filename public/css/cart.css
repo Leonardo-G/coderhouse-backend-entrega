@@ -269,9 +269,9 @@ a {
   text-align: right;
   margin: 5rem 0;
 }
-.cart__send button {
+.cart__send a {
   margin: 0.5rem 0;
-  width: 20rem;
+  padding: 1rem 2rem;
   background-color: #3483fa;
   border: none;
   color: #fff;
@@ -283,7 +283,7 @@ a {
   transition: 0.2s all ease-in;
   display: inline-block;
 }
-.cart__send button:hover {
+.cart__send a:hover {
   background-color: #2968c8;
   transition: 0.2s all ease-in;
 }

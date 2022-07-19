@@ -29,7 +29,7 @@ html(lang="en")
                             for productCart in cart.productsCart
                                 +productCart(productCart, path)
                     div.cart__send
-                        button(class="btn--sendBuy") Continuar compra
+                        a(class="btn--sendBuy" href="/order") Continuar compra
                 
                 if path === "favorites"
                     div.cart__products
